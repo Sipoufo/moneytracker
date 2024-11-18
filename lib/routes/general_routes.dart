@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:moneytracker/features/onboarding/onboarding.dart';
+import 'package:moneytracker/features/onboarding/page/onboarding.dart';
 import 'package:moneytracker/features/splash/splash.dart';
 
 Map<String, WidgetBuilder> get generalRoutes => <String, WidgetBuilder> {

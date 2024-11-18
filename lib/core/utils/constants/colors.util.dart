@@ -45,6 +45,9 @@ class ColorsUtils {
   static const Color grayscale_black_almost_black = Color.fromRGBO(17, 17, 17, 1);
   static const Color grayscale_black_black = Color.fromRGBO(0, 0, 0, 1);
 
+  // Text
+  static const Color text_white = Color.fromRGBO(255, 255, 255, 1);
+  static const Color text_black = Color.fromRGBO(51, 51, 51, 1);
   // Other
   static const Color malibu = Color.fromRGBO(74, 188, 252, 1);
   static const Color gossip = Color.fromRGBO(199, 249, 187, 1);

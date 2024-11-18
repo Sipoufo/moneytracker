@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:moneytracker/core/utils/colors.util.dart';
+import 'package:moneytracker/core/utils/constants/colors.util.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});

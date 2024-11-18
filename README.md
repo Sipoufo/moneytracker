@@ -15,3 +15,7 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 # moneytracker
+
+dark mode link :
+- https://medium.com/@frojho/flutter-projects-for-beginners-03-simpler-dark-and-light-mode-switching-bc9f110d9436
+- https://medium.com/@blup-tool/learn-how-to-implement-dark-mode-and-light-mode-in-your-flutter-app-f90df3f9cdc8

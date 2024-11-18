@@ -1,0 +1,3 @@
+link1 = https://www.youtube.com/watch?v=o5NngkDJcSQ&ab_channel=ProtoCodersPoint
+link2 = https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#how-internationalization-in-flutter-works
+link3 = https://medium.com/@nayanbabariya/language-localization-in-flutter-142cda85fc5e

@@ -1,0 +1,15 @@
+{
+    "and" : "et",
+    "skip" : "Passer",
+    "done" : "Done",
+    "submit" : "Soumettre",
+    "appName" : "money-tracker",
+    "tContinue" : "Continue",
+
+    "onBoardingTitle1" : "Controllez tes finances",
+    "onBoardingTitle2" : "Budgétisez en toute simplicité",
+    "onBoardingTitle3" : "Connecter et automatiser",
+    "onBoardingBody1" : "Prenez le contrôle de vos finances avec Coin Sensei ! \n\nNotre application intuitive facilite le suivi de vos revenus, de vos dépenses et de votre budget, le tout en un seul endroit.",
+    "onBoardingBody2" : "Nous vous aidons à classer vos dépenses par catégories, à identifier les domaines dans lesquels vous pouvez économiser et à ne pas perdre de vue vos objectifs financiers.",
+    "onBoardingBody3" : "Gagnez du temps et obtenez des informations précieuses en connectant en toute sécurité vos comptes bancaires à Coin Sensei. \n\nProfitez du suivi automatique des transactions et d'une vue d'ensemble de vos finances."
+}
