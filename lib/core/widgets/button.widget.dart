@@ -17,14 +17,18 @@ class ButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(SizeUtil.defaultSpace),
+      width: double.infinity,
       child: ElevatedButton(
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
           backgroundColor: ColorsUtils.primary_5,
+          padding: const EdgeInsets.all(16.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(SizeUtil.borderRadiusMd),
+          ),
         ),
-
         child: Text(
-          AppLocalizations.of(context).onBoardingTitle3,
+          title,
           style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
+import 'package:moneytracker/core/utils/device/device.util.dart';
 import 'package:moneytracker/core/widgets/button.widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:moneytracker/core/utils/constants/colors.util.dart';
@@ -11,17 +12,21 @@ class OnBoardingNavigation extends StatelessWidget {
     required this.pageController,
     required this.onDotClicked,
     required this.onTapNextButton,
+    required this.currentPageIndex,
   });
 
   final PageController pageController;
   final OnDotClicked onDotClicked;
   final VoidCallback onTapNextButton;
+  final int currentPageIndex;
 
   @override
   Widget build(BuildContext context) {
     return Positioned(
       bottom: SizeUtil.defaultSpace,
+      width: DeviceUtils.getScreenWidth(context),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SmoothPageIndicator(
@@ -33,7 +38,10 @@ class OnBoardingNavigation extends StatelessWidget {
               dotHeight: 6.0,
             ),
           ),
-          ButtonWidget(title: AppLocalizations.of(context).tContinue, onTap: onTapNextButton,)
+          ButtonWidget(
+            title: currentPageIndex == 2 ? AppLocalizations.of(context).lastOnBoardingButtonTitle : AppLocalizations.of(context).tContinue,
+            onTap: onTapNextButton,
+          ),
         ],
       ),
     );

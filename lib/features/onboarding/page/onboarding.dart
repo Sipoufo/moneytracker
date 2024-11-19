@@ -28,7 +28,11 @@ class _OnboardingState extends State<Onboarding> {
           children: [
             PageView(
               controller: controller.pageController,
-              onPageChanged: controller.updatePageIndicator,
+              onPageChanged: (int page) {
+                setState(() {
+                  controller.updatePageIndicator(page);
+                });
+              },
               children: [
                 // Page 1
                 OnBoardingPage(
@@ -53,15 +57,23 @@ class _OnboardingState extends State<Onboarding> {
 
             // Skip button
             OnBoardingSkip(
-              onTap: controller.skipPage,
+              onTap: () {
+                setState(() {
+                  controller.skipPage();
+                });
+              },
             ),
 
             // Dot navigation smooth page indicator
             OnBoardingNavigation(
               pageController: controller.pageController,
-              onDotClicked:
-              controller.dotNavigationClick,
+              onDotClicked: (int index) {
+                setState(() {
+                  controller.dotNavigationClick(index);
+                });
+              },
               onTapNextButton: controller.nextPage,
+              currentPageIndex: controller.currentPageIndex,
             )
           ],
         ),

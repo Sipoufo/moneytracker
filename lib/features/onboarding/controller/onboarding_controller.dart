@@ -12,7 +12,7 @@ class OnboardingController {
   // Jum to the specific dot selected page
   void dotNavigationClick (index) {
     currentPageIndex = index;
-    pageController.jumpTo(index);
+    pageController.jumpToPage(index);
   }
 
   // Update current index & jump to next page
