@@ -62,6 +62,7 @@ class _OnboardingState extends State<Onboarding> {
                   controller.skipPage();
                 });
               },
+              currentPageIndex: controller.currentPageIndex,
             ),
 
             // Dot navigation smooth page indicator

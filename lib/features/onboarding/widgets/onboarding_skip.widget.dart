@@ -6,9 +6,11 @@ class OnBoardingSkip extends StatelessWidget {
   const OnBoardingSkip({
     super.key,
     required this.onTap,
+    required this.currentPageIndex,
   });
 
   final VoidCallback onTap;
+  final int currentPageIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,9 @@ class OnBoardingSkip extends StatelessWidget {
       child: TextButton(
         onPressed: onTap,
         child: Text(
-          AppLocalizations.of(context).skip,
+          currentPageIndex == 2
+              ? AppLocalizations.of(context).done
+              : AppLocalizations.of(context).skip,
           style: Theme.of(context).textTheme.bodyLarge,
         ),
       ),

@@ -10,6 +10,7 @@ class ThemeUtil {
     fontFamily: 'PlusJakartaSans',
     colorScheme: const ColorScheme.light(
       primary: ColorsUtils.grayscale_white_white,
+      secondary: ColorsUtils.grayscale_gray_light_gray,
     ),
     textTheme: TextThemeUtils.lightTextTheme,
   );
@@ -21,6 +22,7 @@ class ThemeUtil {
     fontFamily: 'PlusJakartaSans',
     colorScheme: const ColorScheme.dark(
       primary: ColorsUtils.grayscale_black_light_black,
+      secondary: ColorsUtils.grayscale_gray_dark_gray,
     ),
     textTheme: TextThemeUtils.darkTextTheme,
   );
