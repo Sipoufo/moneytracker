@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moneytracker/core/utils/constants/colors.util.dart';
 import 'package:moneytracker/core/utils/constants/icons.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
+import 'package:moneytracker/features/home/presentation/pages/home.dart';
 import 'package:moneytracker/features/navigation/cubit/application_navigation_cubit.cubit.dart';
 import 'package:moneytracker/features/navigation/cubit/application_navigation_state.cubit.dart';
 
@@ -15,9 +16,7 @@ class Navigation extends StatefulWidget {
 
 class _NavigationState extends State<Navigation> {
   static const List<Widget> _pages = [
-    Center(
-      child: Text("Home"),
-    ),
+    Home(),
     Center(
       child: Text("Transaction"),
     ),
@@ -41,47 +40,13 @@ class _NavigationState extends State<Navigation> {
           body: SafeArea(
             child: _pages.elementAt(state.pageIndex),
           ),
-          // bottomNavigationBar: BottomNavigationBar(
-          //   showSelectedLabels: false,
-          //   selectedIconTheme: const IconThemeData(color: ColorsUtils.primary_5),
-          //   selectedItemColor: ColorsUtils.primary_5,
-          //   unselectedItemColor: Theme.of(context).colorScheme.secondary,
-          //   unselectedIconTheme: IconThemeData(color: Theme.of(context).colorScheme.secondary),
-          //   currentIndex: state.pageIndex,
-          //   onTap: (int pageIndex) {
-          //     context.read<ApplicationNavigationCubit>().changePage(pageIndex);
-          //   },
-          //   items: [
-          //     BottomNavigationBarItem(
-          //       icon: IconsUtils.home(context),
-          //       label: "Home",
-          //     ),
-          //     BottomNavigationBarItem(
-          //       icon: IconsUtils.transaction(context),
-          //       label: "Transaction",
-          //     ),
-          //     BottomNavigationBarItem(
-          //       icon: IconsUtils.add(context),
-          //       label: "Add",
-          //
-          //     ),
-          //     BottomNavigationBarItem(
-          //       icon: IconsUtils.budget(context),
-          //       label: "Budget",
-          //     ),
-          //     BottomNavigationBarItem(
-          //       icon: IconsUtils.setting(context),
-          //       label: "Setting",
-          //     ),
-          //   ],
-          // ),
           bottomNavigationBar: BottomAppBar(
             padding: const EdgeInsets.all(0.0),
             color: Theme.of(context).colorScheme.primary,
             child: Container(
               padding: const EdgeInsets.symmetric(
                   horizontal: SizeUtil.defaultSpace,
-                  vertical: SizeUtil.spaceBtwItems),
+                  vertical: SizeUtil.spaceBtwItems_2),
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(

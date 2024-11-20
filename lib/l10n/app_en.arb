@@ -5,6 +5,7 @@
     "submit": "Submit",
     "appName": "money-tracker",
     "tContinue": "Continue",
+    "seeMore": "See more",
 
     "onBoardingTitle1": "Take Control of Your Finances",
     "onBoardingTitle2": "Budgeting Made Simple",
@@ -12,5 +13,16 @@
     "onBoardingBody1": "Empower yourself financially with Coin Sensei! \n\nOur intuitive app makes it easy to track your income, expenses, and budget - all in one place.",
     "onBoardingBody2": "We help you categorize your spending, identify areas to save, and stay on top of your financial goals.",
     "onBoardingBody3": "Save time and gain valuable insights by securely connecting your bank accounts to Coin Sensei. \n\n Enjoy automatic transaction tracking and a holistic view of your finances.",
-    "lastOnBoardingButtonTitle": "Start tracking your money!"
+    "lastOnBoardingButtonTitle": "Start tracking your money!",
+
+    "netBalance": "Net Balance",
+    "income": "Income",
+    "expenses": "Expenses",
+    "transaction": "Transaction",
+
+    "today": "Today",
+    "yesterday": "Yesterday",
+
+    "business": "Business",
+    "vehicle": "Vehicle"
 }

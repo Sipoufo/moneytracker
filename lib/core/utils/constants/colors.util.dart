@@ -52,4 +52,5 @@ class ColorsUtils {
   static const Color malibu = Color.fromRGBO(74, 188, 252, 1);
   static const Color gossip = Color.fromRGBO(199, 249, 187, 1);
   static const Color broom = Color.fromRGBO(255, 232, 22, 1);
+  static const Color shadow = Color.fromRGBO(0, 0, 0, 0.1);
 }
