@@ -21,78 +21,81 @@ class TransactionItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(SizeUtil.borderRadiusMd),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.secondaryContainer,
-        ),
-        color: Theme.of(context).colorScheme.primaryContainer,
-        boxShadow: [
-          BoxShadow(
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(context, "/transaction/transaction-detail"),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          border: Border.all(
             color: Theme.of(context).colorScheme.secondaryContainer,
-            spreadRadius: 1,
-            blurRadius: 0,
-            offset: const Offset(0, 1),
-          )
-        ],
-      ),
-      child: IntrinsicHeight(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Label
-            Container(
-              width: 10,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.horizontal(
-                    left: Radius.circular(SizeUtil.borderRadiusMd)),
-                color: transactionType == "income" ? ColorsUtils.primary_5 : ColorsUtils.danger_4,
-              ),
+          ),
+          color: Theme.of(context).colorScheme.primaryContainer,
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(context).colorScheme.secondaryContainer,
+              spreadRadius: 1,
+              blurRadius: 0,
+              offset: const Offset(0, 1),
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: SizeUtil.md,
-                  vertical: SizeUtil.md,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          AppLocalizations.of(context).business,
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: !HelperFunctions.isDarkMode(context)
-                                        ? ColorsUtils.grayscale_gray_light_gray
-                                        : ColorsUtils.grayscale_gray_pale_gray,
-                                  ),
-                        ),
-                        const SizedBox(
-                          height: SizeUtil.xs,
-                        ),
-                        Text(
-                          "Food Sales",
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                      ],
-                    ),
-                    Text(
-                      "${transactionType == "income" ? "+" : "-"} ${FormatterUtils.formatCurrency(amount)}",
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: transactionType == "income" ? ColorsUtils.primary_5 : ColorsUtils.danger_4,
-                          ),
-                    ),
-                  ],
+          ],
+        ),
+        child: IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Label
+              Container(
+                width: 10,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.horizontal(
+                      left: Radius.circular(SizeUtil.borderRadiusMd)),
+                  color: transactionType == "income" ? ColorsUtils.primary_5 : ColorsUtils.danger_4,
                 ),
               ),
-            )
-          ],
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: SizeUtil.md,
+                    vertical: SizeUtil.md,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            AppLocalizations.of(context).business,
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      color: !HelperFunctions.isDarkMode(context)
+                                          ? ColorsUtils.grayscale_gray_light_gray
+                                          : ColorsUtils.grayscale_gray_pale_gray,
+                                    ),
+                          ),
+                          const SizedBox(
+                            height: SizeUtil.xs,
+                          ),
+                          Text(
+                            "Food Sales",
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                        ],
+                      ),
+                      Text(
+                        "${transactionType == "income" ? "+" : "-"} ${FormatterUtils.formatCurrency(amount)}",
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              color: transactionType == "income" ? ColorsUtils.primary_5 : ColorsUtils.danger_4,
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

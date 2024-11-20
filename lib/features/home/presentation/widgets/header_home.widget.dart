@@ -4,8 +4,8 @@ import 'package:moneytracker/core/utils/constants/icons.util.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
 
-class HeaderHome extends StatelessWidget {
-  const HeaderHome({super.key});
+class HeaderHomeWidget extends StatelessWidget {
+  const HeaderHomeWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

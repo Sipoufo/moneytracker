@@ -136,4 +136,26 @@ class IconsUtils {
     Icons.arrow_circle_down,
     color: ColorsUtils.danger_6,
   );
+
+  // Transaction page
+  // back icon
+  static IconButtonWidget back({
+    required BuildContext context,
+    required VoidCallback onTap,
+  }) {
+    return IconButtonWidget(
+      onTap: onTap,
+      color: Theme.of(context).colorScheme.tertiary,
+      icon: Icons.arrow_back_outlined,
+      buttonStyle: IconButton.styleFrom(
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(SizeUtil.borderRadiusMd),
+          side: BorderSide(
+            color: Theme.of(context).colorScheme.secondaryContainer,
+          ),
+        ),
+      ),
+    );
+  }
 }

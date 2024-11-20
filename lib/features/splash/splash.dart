@@ -17,7 +17,7 @@ class _SplashState extends State<Splash> {
     super.initState();
     Timer(
       const Duration(seconds: 3),
-        () => Navigator.pushReplacementNamed(context, "/onboarding")
+        () => Navigator.pushNamed(context, "/onboarding")
     );
   }
 

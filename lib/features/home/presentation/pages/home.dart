@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
     return Column(
       children: [
         // Header of home page
-        const HeaderHome(),
+        const HeaderHomeWidget(),
 
         // Body of home page
         Container(

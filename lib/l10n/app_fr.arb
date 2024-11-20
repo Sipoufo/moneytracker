@@ -6,6 +6,7 @@
     "appName" : "money-tracker",
     "tContinue" : "Continue",
     "seeMore": "Voir plus",
+    "shortcut": "Raccourci",
 
     "onBoardingTitle1" : "Controllez tes finances",
     "onBoardingTitle2" : "Budgétisez en toute simplicité",
@@ -24,5 +25,14 @@
     "yesterday": "Hier",
 
     "business": "Business",
-    "vehicle": "Véhicule"
+    "vehicle": "Véhicule",
+
+    "transactionDetail": "Détail de la transaction",
+
+    "categories": "Categories",
+    "type": "Type",
+    "date": "Date",
+    "time": "Temps",
+    "note": "Note",
+    "addNewTransaction": "Ajouter une nouvelle transaction"
 }

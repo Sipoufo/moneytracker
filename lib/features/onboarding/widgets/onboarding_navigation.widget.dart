@@ -43,7 +43,7 @@ class OnBoardingNavigation extends StatelessWidget {
                 ? AppLocalizations.of(context).lastOnBoardingButtonTitle
                 : AppLocalizations.of(context).tContinue,
             onTap: currentPageIndex == 2
-                ? () => Navigator.pushReplacementNamed(context, "/navigation")
+                ? () => Navigator.pushNamed(context, "/navigation")
                 : onTapNextButton,
           ),
         ],
