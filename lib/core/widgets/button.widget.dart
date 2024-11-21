@@ -6,6 +6,7 @@ class ButtonWidget extends StatelessWidget {
   const ButtonWidget({
     super.key,
     required this.title,
+    required this.textStyle,
     required this.onTap,
     required this.padding,
     required this.color,
@@ -14,6 +15,7 @@ class ButtonWidget extends StatelessWidget {
   });
 
   final String title;
+  final TextStyle? textStyle;
   final VoidCallback onTap;
   final EdgeInsetsGeometry padding;
   final Color color;
@@ -36,13 +38,14 @@ class ButtonWidget extends StatelessWidget {
           ),
         ),
         child: Wrap(
-          alignment: WrapAlignment.center,
           spacing: 8.0,
+          alignment: WrapAlignment.center,
+          crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             icon ?? const SizedBox(),
             Text(
               title,
-              style: Theme.of(context).textTheme.headlineSmall,
+              style: textStyle,
             ),
           ],
         ),

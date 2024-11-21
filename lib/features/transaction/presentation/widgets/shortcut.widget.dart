@@ -21,6 +21,7 @@ class ShortcutWidget extends StatelessWidget {
 
           ButtonWidget(
             title: AppLocalizations.of(context).addNewTransaction,
+            textStyle: Theme.of(context).textTheme.titleMedium,
             onTap: () {},
             padding: const EdgeInsets.symmetric(vertical: SizeUtil.defaultSpace),
             icon: Icon(
@@ -30,6 +31,7 @@ class ShortcutWidget extends StatelessWidget {
             color: Theme.of(context).colorScheme.primaryContainer,
             border: BorderSide(
               color: Theme.of(context).colorScheme.secondaryContainer,
+              width: 2.0,
             ),
           ),
         ],
