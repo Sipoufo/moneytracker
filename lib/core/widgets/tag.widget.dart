@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:moneytracker/core/utils/constants/colors.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
 
 class TagWidget extends StatelessWidget {

@@ -5,6 +5,7 @@ import 'package:moneytracker/core/utils/constants/size.util.dart';
 import 'package:moneytracker/features/home/presentation/pages/home.dart';
 import 'package:moneytracker/features/navigation/cubit/application_navigation_cubit.cubit.dart';
 import 'package:moneytracker/features/navigation/cubit/application_navigation_state.cubit.dart';
+import 'package:moneytracker/features/setting/presentation/pages/setting.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});
@@ -25,9 +26,7 @@ class _NavigationState extends State<Navigation> {
     Center(
       child: Text("Budget"),
     ),
-    Center(
-      child: Text("Setting"),
-    ),
+    Setting(),
   ];
 
   @override

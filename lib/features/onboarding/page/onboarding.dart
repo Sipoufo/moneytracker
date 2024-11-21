@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moneytracker/core/utils/constants/Images.util.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:moneytracker/core/utils/helpers/functions.helper.dart';
 import 'package:moneytracker/features/onboarding/controller/onboarding_controller.dart';
 import 'package:moneytracker/features/onboarding/widgets/onboarding_navigation.widget.dart';
 import 'package:moneytracker/features/onboarding/widgets/onboarding_page.widget.dart';
@@ -19,8 +18,6 @@ class _OnboardingState extends State<Onboarding> {
 
   @override
   Widget build(BuildContext context) {
-    final dark = HelperFunctions.isDarkMode(context);
-
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: SafeArea(

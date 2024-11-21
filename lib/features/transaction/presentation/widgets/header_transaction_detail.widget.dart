@@ -9,14 +9,20 @@ class HeaderTransactionDetailWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: SizeUtil.sm),
+      padding: const EdgeInsets.symmetric(
+        vertical: SizeUtil.sm_12,
+        horizontal: SizeUtil.md,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           // Back button
-          IconsUtils.back(context: context, onTap: () => Navigator.pop(context)),
+          IconsUtils.back(
+              context: context, onTap: () => Navigator.pop(context)),
 
-          const SizedBox(width: SizeUtil.spaceBtwItems,),
+          const SizedBox(
+            width: SizeUtil.spaceBtwItems,
+          ),
 
           // Title
           Text(

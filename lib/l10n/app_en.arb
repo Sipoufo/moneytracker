@@ -35,5 +35,21 @@
     "date": "Date",
     "time": "Time",
     "note": "Note",
-    "addNewTransaction": "Add new transaction"
+    "addNewTransaction": "Add new transaction",
+
+    "setting": "Setting",
+    "account": "Account",
+    "accountInformationAndPreference": "Account information and preference",
+    "wallet": "Wallet",
+    "savedWallet": "Saved wallet",
+    "integration": "Integration",
+    "connectBankAndOtherFinancialService": "Connect bank and other financial service",
+    "currency": "Currency",
+    "changeCurrency": "Change currency",
+    "theme": "Theme",
+    "darkMode": "Dark mode",
+    "security": "Security",
+    "setSecurityAndPrivacyOption": "Set security and privacy option",
+    "support": "Support",
+    "getHelpAndSupport": "Get help and support"
 }

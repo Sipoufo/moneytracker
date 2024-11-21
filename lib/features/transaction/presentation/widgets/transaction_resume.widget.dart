@@ -14,7 +14,10 @@ class TransactionResumeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: SizeUtil.sm),
+      margin: const EdgeInsets.symmetric(
+        vertical: SizeUtil.sm,
+        horizontal: SizeUtil.md,
+      ),
       padding: const EdgeInsets.all(SizeUtil.md),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
@@ -76,10 +79,11 @@ class TransactionResumeWidget extends StatelessWidget {
                     ),
                     TagWidget(
                       name: AppLocalizations.of(context).income,
-                      textStyle: Theme.of(context).textTheme.labelLarge!.copyWith(
-                            color: ColorsUtils.text_black,
-                            fontWeight: FontWeight.w700,
-                          ),
+                      textStyle:
+                          Theme.of(context).textTheme.labelLarge!.copyWith(
+                                color: ColorsUtils.text_black,
+                                fontWeight: FontWeight.w700,
+                              ),
                       backgroundColor: ColorsUtils.primary_2,
                     )
                   ],
@@ -104,15 +108,15 @@ class TransactionResumeWidget extends StatelessWidget {
                 AppLocalizations.of(context).amount,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: Theme.of(context).colorScheme.tertiaryContainer,
-                ),
+                      color: Theme.of(context).colorScheme.tertiaryContainer,
+                    ),
               ),
               Text(
                 FormatterUtils.formatCurrency(120000),
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                  color: ColorsUtils.primary_5,
-                ),
+                      color: ColorsUtils.primary_5,
+                    ),
               ),
             ],
           ),
@@ -141,8 +145,8 @@ class TransactionResumeWidget extends StatelessWidget {
                   AppLocalizations.of(context).categories,
                   textAlign: TextAlign.start,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: Theme.of(context).colorScheme.tertiaryContainer,
-                  ),
+                        color: Theme.of(context).colorScheme.tertiaryContainer,
+                      ),
                 ),
               ),
 
@@ -175,8 +179,8 @@ class TransactionResumeWidget extends StatelessWidget {
                   AppLocalizations.of(context).type,
                   textAlign: TextAlign.start,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: Theme.of(context).colorScheme.tertiaryContainer,
-                  ),
+                        color: Theme.of(context).colorScheme.tertiaryContainer,
+                      ),
                 ),
               ),
 
@@ -209,8 +213,8 @@ class TransactionResumeWidget extends StatelessWidget {
                   AppLocalizations.of(context).date,
                   textAlign: TextAlign.start,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: Theme.of(context).colorScheme.tertiaryContainer,
-                  ),
+                        color: Theme.of(context).colorScheme.tertiaryContainer,
+                      ),
                 ),
               ),
 
@@ -243,8 +247,8 @@ class TransactionResumeWidget extends StatelessWidget {
                   AppLocalizations.of(context).time,
                   textAlign: TextAlign.start,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: Theme.of(context).colorScheme.tertiaryContainer,
-                  ),
+                        color: Theme.of(context).colorScheme.tertiaryContainer,
+                      ),
                 ),
               ),
 
@@ -277,8 +281,8 @@ class TransactionResumeWidget extends StatelessWidget {
                   AppLocalizations.of(context).note,
                   textAlign: TextAlign.start,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: Theme.of(context).colorScheme.tertiaryContainer,
-                  ),
+                        color: Theme.of(context).colorScheme.tertiaryContainer,
+                      ),
                 ),
               ),
 

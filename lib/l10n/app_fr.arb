@@ -35,5 +35,21 @@
     "date": "Date",
     "time": "Temps",
     "note": "Note",
-    "addNewTransaction": "Ajouter une nouvelle transaction"
+    "addNewTransaction": "Ajouter une nouvelle transaction",
+
+    "setting": "Paramètre",
+    "account": "Compte",
+    "accountInformationAndPreference": "Information sur le compte et préférences",
+    "wallet": "Portfeuille",
+    "savedWallet": "Portfeuille sauvegardé",
+    "integration": "Intégration",
+    "connectBankAndOtherFinancialService": "Connecter les banques et autres services financiers",
+    "currency": "Monnaie",
+    "changeCurrency": "Changer de monnaie",
+    "theme": "Thème",
+    "darkMode": "Thème sombre",
+    "security": "Sécurité",
+    "setSecurityAndPrivacyOption": "Définir les options de sécurité et de confidentialité",
+    "support": "Soutien",
+    "getHelpAndSupport": "Obtenir de l'aide et du soutien"
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:moneytracker/core/utils/constants/size.util.dart';
 import 'package:moneytracker/features/transaction/presentation/widgets/header_transaction_detail.widget.dart';
 import 'package:moneytracker/features/transaction/presentation/widgets/shortcut.widget.dart';
 import 'package:moneytracker/features/transaction/presentation/widgets/transaction_resume.widget.dart';
@@ -17,31 +16,26 @@ class _TransactionDetailState extends State<TransactionDetail> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: const SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: SizeUtil.md,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Header of transaction detail page
-              HeaderTransactionDetailWidget(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header of transaction detail page
+            HeaderTransactionDetailWidget(),
 
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      // Transaction resume
-                      TransactionResumeWidget(),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    // Transaction resume
+                    TransactionResumeWidget(),
 
-                      // Shortcut
-                      ShortcutWidget(),
-                    ],
-                  ),
+                    // Shortcut
+                    ShortcutWidget(),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

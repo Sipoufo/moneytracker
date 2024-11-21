@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:moneytracker/core/utils/constants/colors.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
 
 class ButtonWidget extends StatelessWidget {
@@ -10,8 +9,9 @@ class ButtonWidget extends StatelessWidget {
     required this.onTap,
     required this.padding,
     required this.color,
-    this.border = BorderSide. none,
+    this.border = BorderSide.none,
     this.icon,
+    this.secondIcon,
   });
 
   final String title;
@@ -20,6 +20,7 @@ class ButtonWidget extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final Color color;
   final Icon? icon;
+  final Icon? secondIcon;
   final BorderSide border;
 
   @override
@@ -36,17 +37,33 @@ class ButtonWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(SizeUtil.borderRadiusMd),
             side: border,
           ),
+
         ),
-        child: Wrap(
-          spacing: 8.0,
-          alignment: WrapAlignment.center,
-          crossAxisAlignment: WrapCrossAlignment.center,
+        child: Row(
+          mainAxisAlignment: secondIcon == null
+              ? MainAxisAlignment.center
+              : MainAxisAlignment.spaceBetween,
           children: [
-            icon ?? const SizedBox(),
-            Text(
-              title,
-              style: textStyle,
+            Expanded(
+              child: Wrap(
+                spacing: SizeUtil.sm,
+                alignment: secondIcon == null ? WrapAlignment.center : WrapAlignment.start,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  icon ?? const SizedBox(),
+                  Text(
+                    title,
+                    style: textStyle,
+                  ),
+                ],
+              ),
             ),
+            secondIcon == null
+                ? const SizedBox()
+                : const SizedBox(
+                    width: SizeUtil.spaceBtwItems,
+                  ),
+            secondIcon ?? const SizedBox(),
           ],
         ),
       ),

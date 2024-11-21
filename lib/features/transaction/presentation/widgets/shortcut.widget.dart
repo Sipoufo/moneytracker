@@ -9,7 +9,10 @@ class ShortcutWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: SizeUtil.spaceBtwItems),
+      margin: const EdgeInsets.symmetric(
+        vertical: SizeUtil.spaceBtwItems,
+        horizontal: SizeUtil.md,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -18,12 +21,12 @@ class ShortcutWidget extends StatelessWidget {
             textAlign: TextAlign.start,
             style: Theme.of(context).textTheme.titleSmall,
           ),
-
           ButtonWidget(
             title: AppLocalizations.of(context).addNewTransaction,
             textStyle: Theme.of(context).textTheme.titleMedium,
             onTap: () {},
-            padding: const EdgeInsets.symmetric(vertical: SizeUtil.defaultSpace),
+            padding:
+                const EdgeInsets.symmetric(vertical: SizeUtil.defaultSpace),
             icon: Icon(
               Icons.add,
               color: Theme.of(context).colorScheme.surface,

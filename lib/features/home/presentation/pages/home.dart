@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
         Container(
           padding: const EdgeInsets.symmetric(
             horizontal: SizeUtil.md,
-            vertical: SizeUtil.md,
+            vertical: SizeUtil.sm_12,
           ),
           child: Column(
             children: [
