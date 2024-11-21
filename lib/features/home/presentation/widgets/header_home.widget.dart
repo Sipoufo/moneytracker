@@ -10,7 +10,7 @@ class HeaderHomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: SizeUtil.spaceBtwItems_2),
+      padding: const EdgeInsets.all(SizeUtil.md, ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

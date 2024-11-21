@@ -7,28 +7,44 @@ class ButtonWidget extends StatelessWidget {
     super.key,
     required this.title,
     required this.onTap,
+    required this.padding,
+    required this.color,
+    this.border = BorderSide. none,
+    this.icon,
   });
 
   final String title;
   final VoidCallback onTap;
+  final EdgeInsetsGeometry padding;
+  final Color color;
+  final Icon? icon;
+  final BorderSide border;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(SizeUtil.defaultSpace),
+      padding: padding,
       width: double.infinity,
       child: ElevatedButton(
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
-          backgroundColor: ColorsUtils.primary_5,
+          backgroundColor: color,
           padding: const EdgeInsets.all(16.0),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(SizeUtil.borderRadiusMd),
+            side: border,
           ),
         ),
-        child: Text(
-          title,
-          style: Theme.of(context).textTheme.headlineSmall,
+        child: Wrap(
+          alignment: WrapAlignment.center,
+          spacing: 8.0,
+          children: [
+            icon ?? const SizedBox(),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+          ],
         ),
       ),
     );

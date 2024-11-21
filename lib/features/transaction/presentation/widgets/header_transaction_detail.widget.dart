@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:moneytracker/core/utils/constants/colors.util.dart';
 import 'package:moneytracker/core/utils/constants/icons.util.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
@@ -10,12 +9,12 @@ class HeaderTransactionDetailWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: SizeUtil.spaceBtwItems_2),
+      padding: const EdgeInsets.symmetric(vertical: SizeUtil.sm),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           // Back button
-          IconsUtils.back(context: context, onTap: () => Navigator.pop),
+          IconsUtils.back(context: context, onTap: () => Navigator.pop(context)),
 
           const SizedBox(width: SizeUtil.spaceBtwItems,),
 

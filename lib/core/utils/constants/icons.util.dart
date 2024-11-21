@@ -158,4 +158,17 @@ class IconsUtils {
       ),
     );
   }
+
+  // Option icon
+  static IconButtonWidget option({
+    required BuildContext context,
+    required VoidCallback onTap,
+    bool isActive = false,
+  }) {
+    return IconButtonWidget(
+      onTap: onTap,
+      color: Theme.of(context).colorScheme.surface,
+      icon: Icons.more_vert_outlined,
+    );
+  }
 }

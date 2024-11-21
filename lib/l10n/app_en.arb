@@ -7,6 +7,7 @@
     "tContinue": "Continue",
     "seeMore": "See more",
     "shortcut": "Shortcut",
+    "amount": "Amount",
 
     "onBoardingTitle1": "Take Control of Your Finances",
     "onBoardingTitle2": "Budgeting Made Simple",
@@ -28,6 +29,8 @@
     "vehicle": "Vehicle",
 
     "transactionDetail": "Transaction detail",
+
+    "categories": "Categories",
     "type": "Type",
     "date": "Date",
     "time": "Time",

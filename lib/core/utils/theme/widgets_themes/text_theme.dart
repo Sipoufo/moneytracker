@@ -19,6 +19,8 @@ class TextThemeUtils {
     bodyLarge: TypographiesUtils.body_1.copyWith(color: ColorsUtils.text_white),
     bodyMedium: TypographiesUtils.body_2.copyWith(color: ColorsUtils.text_white),
     bodySmall: TypographiesUtils.body_3.copyWith(color: ColorsUtils.text_white),
+
+    displayLarge: TypographiesUtils.body_4.copyWith(color: ColorsUtils.text_white),
   );
 
   /// Customizable Dark Text Theme
@@ -34,5 +36,7 @@ class TextThemeUtils {
     bodyLarge: TypographiesUtils.body_1.copyWith(color: ColorsUtils.text_black),
     bodyMedium: TypographiesUtils.body_2.copyWith(color: ColorsUtils.text_black),
     bodySmall: TypographiesUtils.body_3.copyWith(color: ColorsUtils.text_black),
+
+    displayLarge: TypographiesUtils.body_4.copyWith(color: ColorsUtils.text_black),
   );
 }

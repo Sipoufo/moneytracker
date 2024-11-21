@@ -45,6 +45,8 @@ class OnBoardingNavigation extends StatelessWidget {
             onTap: currentPageIndex == 2
                 ? () => Navigator.pushNamed(context, "/navigation")
                 : onTapNextButton,
+            padding: const EdgeInsets.all(SizeUtil.defaultSpace),
+            color: ColorsUtils.primary_5,
           ),
         ],
       ),

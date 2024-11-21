@@ -14,6 +14,8 @@ class ThemeUtil {
       secondary: ColorsUtils.grayscale_gray_light_gray,
       secondaryContainer: ColorsUtils.grayscale_white_dark_white,
       tertiary: ColorsUtils.grayscale_gray_shaded_gray,
+      tertiaryContainer: ColorsUtils.grayscale_gray_tinded_gray,
+      surface: ColorsUtils.text_black,
     ),
     textTheme: TextThemeUtils.lightTextTheme,
   );
@@ -29,6 +31,8 @@ class ThemeUtil {
       secondary: ColorsUtils.grayscale_gray_dark_gray,
       secondaryContainer: ColorsUtils.grayscale_gray_dark_gray,
       tertiary: ColorsUtils.grayscale_white_white,
+      tertiaryContainer: ColorsUtils.grayscale_gray_pale_gray,
+      surface: ColorsUtils.text_white,
     ),
     textTheme: TextThemeUtils.darkTextTheme,
   );
