@@ -4,7 +4,7 @@ import 'package:moneytracker/core/utils/constants/icons.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
 import 'package:moneytracker/core/utils/formatters/formatter.dart';
 import 'package:moneytracker/core/widgets/card.widget.dart';
-import 'package:moneytracker/features/home/presentation/widgets/header_home.widget.dart';
+import 'package:moneytracker/core/widgets/header.widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:moneytracker/features/home/presentation/widgets/transaction_home.widget.dart';
 
@@ -21,7 +21,12 @@ class _HomeState extends State<Home> {
     return Column(
       children: [
         // Header of home page
-        const HeaderHomeWidget(),
+        HeaderWidget(
+          title: AppLocalizations.of(context).appName,
+          imageLeftPosition: "assets/pictures/logo/logo.png",
+          secondIcon: IconsUtils.search(context: context, onTap: () {}),
+          thirdIcon: IconsUtils.notification(context: context, onTap: () {}),
+        ),
 
         // Body of home page
         Container(
@@ -48,7 +53,7 @@ class _HomeState extends State<Home> {
                 isHorizontalCenter: false,
               ),
               const SizedBox(
-                height: SizeUtil.spaceBtwItems_2,
+                height: SizeUtil.spaceBtwItems_16,
               ),
               IntrinsicHeight(
                 child: Row(
@@ -67,7 +72,7 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     const SizedBox(
-                      width: SizeUtil.spaceBtwItems_2,
+                      width: SizeUtil.spaceBtwItems_16,
                     ),
                     Expanded(
                       child: CardWidget(
@@ -86,7 +91,7 @@ class _HomeState extends State<Home> {
                 ),
               ),
               const SizedBox(
-                height: SizeUtil.spaceBtwItems_2,
+                height: SizeUtil.spaceBtwItems_16,
               ),
             ],
           ),

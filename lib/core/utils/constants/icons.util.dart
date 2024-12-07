@@ -171,4 +171,25 @@ class IconsUtils {
       icon: Icons.more_vert_outlined,
     );
   }
+
+  // Filter icon
+  static IconButtonWidget filter({
+    required BuildContext context,
+    required VoidCallback onTap,
+  }) {
+    return IconButtonWidget(
+      onTap: onTap,
+      color: Theme.of(context).colorScheme.tertiary,
+      icon: Icons.filter_alt,
+      buttonStyle: IconButton.styleFrom(
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(SizeUtil.borderRadiusMd),
+          side: BorderSide(
+            color: Theme.of(context).colorScheme.secondaryContainer,
+          ),
+        ),
+      ),
+    );
+  }
 }

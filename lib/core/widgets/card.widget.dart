@@ -49,7 +49,7 @@ class CardWidget extends StatelessWidget {
             style: titleStyle,
           ),
           SizedBox(
-            height: spacing ?? SizeUtil.spaceBtwItems_2,
+            height: spacing ?? SizeUtil.spaceBtwItems_16,
           ),
           Row(
             children: [

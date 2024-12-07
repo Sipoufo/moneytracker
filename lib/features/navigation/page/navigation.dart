@@ -6,6 +6,7 @@ import 'package:moneytracker/features/home/presentation/pages/home.dart';
 import 'package:moneytracker/features/navigation/cubit/application_navigation_cubit.cubit.dart';
 import 'package:moneytracker/features/navigation/cubit/application_navigation_state.cubit.dart';
 import 'package:moneytracker/features/setting/presentation/pages/setting.dart';
+import 'package:moneytracker/features/transaction/presentation/pages/transaction.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});
@@ -17,9 +18,7 @@ class Navigation extends StatefulWidget {
 class _NavigationState extends State<Navigation> {
   static const List<Widget> _pages = [
     Home(),
-    Center(
-      child: Text("Transaction"),
-    ),
+    Transaction(),
     Center(
       child: Text("Add"),
     ),
@@ -44,7 +43,7 @@ class _NavigationState extends State<Navigation> {
             child: Container(
               padding: const EdgeInsets.symmetric(
                   horizontal: SizeUtil.defaultSpace,
-                  vertical: SizeUtil.spaceBtwItems_2),
+                  vertical: SizeUtil.spaceBtwItems_16),
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(

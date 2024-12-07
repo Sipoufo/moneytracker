@@ -16,7 +16,7 @@ class SettingItemWidget extends StatelessWidget {
   final String title;
   final String label;
   final Icon? icon;
-  final Icon? secondIcon;
+  final Widget? secondIcon;
 
   @override
   Widget build(BuildContext context) {

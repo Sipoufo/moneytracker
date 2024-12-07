@@ -20,7 +20,7 @@ class ButtonWidget extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final Color color;
   final Icon? icon;
-  final Icon? secondIcon;
+  final Widget? secondIcon;
   final BorderSide border;
 
   @override

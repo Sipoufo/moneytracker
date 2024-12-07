@@ -2,6 +2,7 @@ class SizeUtil {
   // Padding and margin sizes
   static const double xs = 4.0;
   static const double sm = 8.0;
+  static const double sm_10 = 10.0;
   static const double sm_12 = 12.0;
   static const double md_14 = 14.0;
   static const double md = 16.0;
@@ -34,8 +35,10 @@ class SizeUtil {
 
   // Default spacing between sections
   static const double defaultSpace = 24.0;
+  static const double spaceBtwItems_12 = 12.0;
   static const double spaceBtwItems = 14.0;
-  static const double spaceBtwItems_2 = 16.0;
+  static const double spaceBtwItems_16 = 16.0;
+  static const double spaceBtwItems_24 = 24.0;
   static const double spaceBtwSections = 32.0;
 
   // Border radius

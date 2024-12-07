@@ -4,6 +4,7 @@ import 'package:moneytracker/core/utils/constants/colors.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:moneytracker/core/widgets/daily_transaction.widget.dart';
+import 'package:moneytracker/core/widgets/separator.widget.dart';
 import 'package:moneytracker/features/navigation/cubit/application_navigation_cubit.cubit.dart';
 
 class TransactionHome extends StatelessWidget {
@@ -75,14 +76,7 @@ class TransactionHome extends StatelessWidget {
                     ),
 
                     // Separator
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: SizeUtil.defaultSpace),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Theme.of(context).colorScheme.secondaryContainer,
-                        ),
-                      ),
-                    ),
+                    const Separator(),
 
                     // Yesterday transaction
                     DailyTransactionWidget(

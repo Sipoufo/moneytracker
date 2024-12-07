@@ -8,11 +8,11 @@ import 'package:moneytracker/core/widgets/transaction_item.widget.dart';
 class DailyTransactionWidget extends StatelessWidget {
   const DailyTransactionWidget({
     super.key,
-    required this.title,
+    this.title,
     required this.dateTime,
   });
 
-  final String title;
+  final String? title;
   final DateTime dateTime;
 
 
@@ -42,10 +42,10 @@ class DailyTransactionWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
+        title != null ? Text(
+          title!,
           style: Theme.of(context).textTheme.bodySmall,
-        ),
+        ) : const SizedBox(),
         Text(
           FormatterUtils.formatDate(date: dateTime),
           style: Theme.of(context).textTheme.bodySmall?.copyWith(

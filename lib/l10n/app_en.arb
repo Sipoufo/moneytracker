@@ -29,6 +29,14 @@
     "vehicle": "Vehicle",
 
     "transactionDetail": "Transaction detail",
+    "transactionRecap": "Transaction recap",
+    "transactionList": "Transaction list",
+
+    "daily": "Daily",
+    "monthly": "Monthly",
+    "annually": "Annually",
+
+    "rank": "Rank",
 
     "categories": "Categories",
     "type": "Type",
@@ -36,6 +44,27 @@
     "time": "Time",
     "note": "Note",
     "addNewTransaction": "Add new transaction",
+
+    "monday": "Monday",
+    "thursday": "Thursday",
+    "wednesday": "Wednesday",
+    "tuesday": "Tuesday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "may": "May",
+    "june": "June",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "october": "October",
+    "november": "November",
+    "december": "December",
 
     "setting": "Setting",
     "account": "Account",

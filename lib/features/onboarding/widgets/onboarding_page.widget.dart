@@ -30,7 +30,7 @@ class OnBoardingPage extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           const SizedBox(
-            height: SizeUtil.spaceBtwItems_2,
+            height: SizeUtil.spaceBtwItems_16,
           ),
           Text(
             body,
