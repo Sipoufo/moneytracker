@@ -192,4 +192,37 @@ class IconsUtils {
       ),
     );
   }
+
+  // Add note icon
+  static IconButtonWidget addNote({
+    required BuildContext context,
+    required VoidCallback onTap,
+  }) {
+    return IconButtonWidget(
+      onTap: onTap,
+      color: Theme.of(context).colorScheme.tertiary,
+      icon: Icons.note_add,
+      buttonStyle: IconButton.styleFrom(
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(SizeUtil.borderRadiusMd),
+          side: BorderSide(
+            color: Theme.of(context).colorScheme.secondaryContainer,
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Add note icon
+  static IconButtonWidget verticalDote({
+    required BuildContext context,
+    required VoidCallback onTap,
+  }) {
+    return IconButtonWidget(
+      onTap: onTap,
+      color: Theme.of(context).colorScheme.tertiary,
+      icon: Icons.more_vert,
+    );
+  }
 }

@@ -15,6 +15,10 @@ class FormatterUtils {
     return NumberFormat.currency(locale: 'en_US', symbol: '\$').format(amount); // Customize the currency locale and symbol as needed
   }
 
+  static String formatCurrencyCompact(double amount) {
+    return NumberFormat.compactCurrency(locale: 'en_US', symbol: '\$').format(amount); // Customize the currency locale and symbol as needed
+  }
+
   static String formatPhoneNumber(String phoneNumber) {
     // Assuming a 10-digit US phone number format: (123) 456-7890
     if (phoneNumber.length == 10) {

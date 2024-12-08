@@ -23,6 +23,7 @@ class SizeUtil {
 
   // Button sizes
   static const double buttonHeight = 18.0;
+  static const double buttonHeight_30 = 30.0;
   static const double buttonRadius = 12.0;
   static const double buttonWidth = 120.0;
   static const double buttonElevation = 4.0;
@@ -35,6 +36,7 @@ class SizeUtil {
 
   // Default spacing between sections
   static const double defaultSpace = 24.0;
+  static const double spaceBtwItems_4 = 4.0;
   static const double spaceBtwItems_12 = 12.0;
   static const double spaceBtwItems = 14.0;
   static const double spaceBtwItems_16 = 16.0;

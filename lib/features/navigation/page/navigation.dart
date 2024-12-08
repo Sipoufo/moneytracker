@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moneytracker/core/utils/constants/icons.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
+import 'package:moneytracker/features/budget/presentation/pages/budget.dart';
 import 'package:moneytracker/features/home/presentation/pages/home.dart';
 import 'package:moneytracker/features/navigation/cubit/application_navigation_cubit.cubit.dart';
 import 'package:moneytracker/features/navigation/cubit/application_navigation_state.cubit.dart';
@@ -22,9 +23,7 @@ class _NavigationState extends State<Navigation> {
     Center(
       child: Text("Add"),
     ),
-    Center(
-      child: Text("Budget"),
-    ),
+    Budget(),
     Setting(),
   ];
 

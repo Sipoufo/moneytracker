@@ -27,6 +27,7 @@
 
     "business": "Business",
     "vehicle": "Véhicule",
+    "education": "Education",
 
     "transactionDetail": "Détail de la transaction",
     "transactionRecap": "Récap de la transaction",
@@ -41,6 +42,7 @@
     "categories": "Categories",
     "type": "Type",
     "date": "Date",
+    "day": "Jours",
     "time": "Temps",
     "note": "Note",
     "addNewTransaction": "Ajouter une nouvelle transaction",
@@ -65,6 +67,18 @@
     "october": "Octobre",
     "november": "Novembre",
     "december": "Decembre",
+
+    "budgeting": "Budgétisation",
+    "visualizeYourFinances": "Visualisez vos finances !",
+    "createABudgetToday": "Créer un budget aujourd'hui",
+    "createNewBudget": "Créer un nouveau budget",
+    "yourBudget": "Votre budget",
+    "notBudgetTitle": "Vous n'avez pas de budget pour le moment.",
+    "notBudgetDescription": "Essayez de cliquer sur le bouton ci-dessus, ou cliquez ici pour en créer un nouveau.",
+    "budgetPercentageTitle": "Le total des fonds économisés",
+    "timeRemaining": "Temps restant",
+    "achievementDate": "Date de réalisation",
+    "category": "Catégorie",
 
     "setting": "Paramètre",
     "account": "Compte",

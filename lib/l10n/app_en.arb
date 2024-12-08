@@ -27,6 +27,7 @@
 
     "business": "Business",
     "vehicle": "Vehicle",
+    "education": "Education",
 
     "transactionDetail": "Transaction detail",
     "transactionRecap": "Transaction recap",
@@ -41,6 +42,7 @@
     "categories": "Categories",
     "type": "Type",
     "date": "Date",
+    "day": "Days",
     "time": "Time",
     "note": "Note",
     "addNewTransaction": "Add new transaction",
@@ -65,6 +67,18 @@
     "october": "October",
     "november": "November",
     "december": "December",
+
+    "budgeting": "Budgeting",
+    "visualizeYourFinances": "Visualize your finances !",
+    "createABudgetToday": "Create a budget today",
+    "createNewBudget": "Create new budget",
+    "yourBudget": "Your budget",
+    "notBudgetTitle": "You don’t have any budget at the moment.",
+    "notBudgetDescription": "Try clicking the button above, or click here to create a new one.",
+    "budgetPercentageTitle": "The Total Funds Saved",
+    "timeRemaining": "Time remaining",
+    "achievementDate": "Achievement date",
+    "category": "Category",
 
     "setting": "Setting",
     "account": "Account",

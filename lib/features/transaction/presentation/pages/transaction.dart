@@ -1,4 +1,3 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:moneytracker/core/utils/constants/colors.util.dart';
 import 'package:moneytracker/core/utils/constants/icons.util.dart';
@@ -6,11 +5,11 @@ import 'package:moneytracker/core/utils/constants/information.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
 import 'package:moneytracker/core/utils/formatters/formatter.dart';
 import 'package:moneytracker/core/widgets/card.widget.dart';
-import 'package:moneytracker/core/widgets/daily_transaction.widget.dart';
 import 'package:moneytracker/core/widgets/drop_down_button.widget.dart';
 import 'package:moneytracker/core/widgets/header.widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:moneytracker/core/widgets/separator.widget.dart';
+import 'package:moneytracker/features/transaction/presentation/widgets/transaction_categories.widget.dart';
+import 'package:moneytracker/features/transaction/presentation/widgets/transaction_list.widget.dart';
 
 class Transaction extends StatefulWidget {
   const Transaction({super.key});
@@ -33,56 +32,6 @@ class _TransactionState extends State<Transaction> {
     selectedPeriodValueAndPeriod = InformationUtil.periodicValuesAndCorrespondent(context)
         .firstWhere((value) => value['period'] == selectedPeriodValue);
     subItemSelected = selectedPeriodValueAndPeriod?["values"][0];
-  }
-
-  List<PieChartSectionData> showingSections() {
-    return [
-      PieChartSectionData(
-        color: ColorsUtils.broom,
-        value: 10,
-        title: 'Food & Drink',
-        radius: 60,
-        titleStyle: const TextStyle(
-          color: Colors.transparent,
-        ),
-        badgeWidget: Image.asset(
-          "assets/pictures/categories/food.png",
-          height: 30,
-          width: 30,
-          fit: BoxFit.contain,
-        ),
-      ),
-      PieChartSectionData(
-        color: ColorsUtils.malibu,
-        value: 20,
-        title: 'Vehicle',
-        radius: 60,
-        titleStyle: const TextStyle(
-          color: Colors.transparent,
-        ),
-        badgeWidget: Image.asset(
-          "assets/pictures/categories/vehicle.png",
-          height: 30,
-          width: 30,
-          fit: BoxFit.contain,
-        ),
-      ),
-      PieChartSectionData(
-        color: ColorsUtils.gossip,
-        value: 70,
-        title: 'Investment',
-        radius: 60,
-        titleStyle: const TextStyle(
-          color: Colors.transparent,
-        ),
-        badgeWidget: Image.asset(
-          "assets/pictures/categories/investment.png",
-          height: 30,
-          width: 30,
-          fit: BoxFit.contain,
-        ),
-      ),
-    ];
   }
 
   @override
@@ -237,7 +186,7 @@ class _TransactionState extends State<Transaction> {
                                     borderRadius: SizeUtil.borderRadiusSm,
                                     title: AppLocalizations.of(context).income,
                                     titleStyle: Theme.of(context).textTheme.bodySmall,
-                                    content: FormatterUtils.formatCurrency(5436788),
+                                    content: FormatterUtils.formatCurrencyCompact(5436788),
                                     contextStyle: Theme.of(context).textTheme.titleLarge,
                                     icon: IconsUtils.incomeIcon,
                                   ),
@@ -252,7 +201,7 @@ class _TransactionState extends State<Transaction> {
                                     borderRadius: SizeUtil.borderRadiusSm,
                                     title: AppLocalizations.of(context).expenses,
                                     titleStyle: Theme.of(context).textTheme.bodySmall,
-                                    content: FormatterUtils.formatCurrency(5436788),
+                                    content: FormatterUtils.formatCurrencyCompact(5436788),
                                     contextStyle: Theme.of(context).textTheme.titleLarge,
                                     icon: IconsUtils.expenseIcon,
                                   ),
@@ -270,44 +219,7 @@ class _TransactionState extends State<Transaction> {
                     ),
 
                     // Transaction list
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: SizeUtil.md,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            AppLocalizations.of(context).transactionList,
-                            style: Theme.of(context).textTheme.titleLarge,
-                            textAlign: TextAlign.left,
-                          ),
-
-                          // Yesterday transaction
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: SizeUtil.md,
-                            ),
-                            child: DailyTransactionWidget(
-                              dateTime: DateTime.now().copyWith(
-                                day: DateTime.now().day - 2,
-                              ),
-                            ),
-                          ),
-
-                          // Today transaction
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: SizeUtil.md,
-                            ),
-                            child: DailyTransactionWidget(
-                              dateTime: DateTime.now(),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    const TransactionListWidget(),
 
                     // Spacing
                     const SizedBox(
@@ -315,211 +227,7 @@ class _TransactionState extends State<Transaction> {
                     ),
 
                     // Categories part
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: SizeUtil.md,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            AppLocalizations.of(context).categories,
-                            style: Theme.of(context).textTheme.titleLarge,
-                            textAlign: TextAlign.left,
-                          ),
-
-                          // Spacing
-                          const SizedBox(
-                            height: SizeUtil.spaceBtwItems_16,
-                          ),
-
-                          // Chart
-                          Column(
-                            children: [
-                              SizedBox(
-                                height: 300,
-                                child: PieChart(
-                                  PieChartData(
-                                    borderData: FlBorderData(
-                                      show: false,
-                                    ),
-                                    sectionsSpace: 0,
-                                    centerSpaceRadius: MediaQuery.of(context).size.width / 6,
-                                    sections: showingSections(),
-                                  ),
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: showingSections().map<Widget>((value) {
-                                  return Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: SizeUtil.sm_10),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: 10,
-                                          height: 10,
-                                          decoration: BoxDecoration(
-                                            color: value.color,
-                                            borderRadius: BorderRadius.circular(SizeUtil.borderRadiusXl),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: SizeUtil.xs,
-                                        ),
-                                        Text(value.title, style: Theme.of(context).textTheme.displayLarge,)
-                                      ],
-                                    ),
-                                  );
-                                }).toList(),
-                              )
-                            ],
-                          ),
-
-                          // Spacing
-                          const SizedBox(
-                            height: SizeUtil.spaceBtwItems_16,
-                          ),
-
-                          // Rank
-                          Container(
-                            padding: const EdgeInsets.all(SizeUtil.md),
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.primaryContainer,
-                              borderRadius: BorderRadius.circular(SizeUtil.borderRadiusMd),
-                              border: Border.all(
-                                color: Theme.of(context).colorScheme.secondaryContainer,
-                              ),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  AppLocalizations.of(context).rank,
-                                  style: Theme.of(context).textTheme.titleMedium,
-                                ),
-
-                                // Separator
-                                const Separator(),
-
-                                // Income
-                                Text(
-                                  AppLocalizations.of(context).income,
-                                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                    color: Theme.of(context).colorScheme.tertiaryContainer,
-                                  ),
-                                ),
-
-                                // Spacing
-                                const SizedBox(
-                                  height: SizeUtil.spaceBtwItems_12,
-                                ),
-
-                                Container(
-                                  padding: const EdgeInsets.all(SizeUtil.sm_12),
-                                  decoration: BoxDecoration(
-                                    color: ColorsUtils.gossip,
-                                    borderRadius: BorderRadius.circular(SizeUtil.borderRadiusMd),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "1. Investment",
-                                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                          color: ColorsUtils.text_black,
-                                        ),
-                                      ),
-                                      Text(
-                                        "70%",
-                                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                          color: ColorsUtils.text_black,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-
-                                // Spacing
-                                const SizedBox(
-                                  height: SizeUtil.spaceBtwItems_12,
-                                ),
-
-                                // Expense
-                                Text(
-                                  AppLocalizations.of(context).expenses,
-                                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                    color: Theme.of(context).colorScheme.tertiaryContainer,
-                                  ),
-                                ),
-
-                                // Spacing
-                                const SizedBox(
-                                  height: SizeUtil.spaceBtwItems_12,
-                                ),
-
-                                Container(
-                                  padding: const EdgeInsets.all(SizeUtil.sm_12),
-                                  decoration: BoxDecoration(
-                                    color: ColorsUtils.malibu,
-                                    borderRadius: BorderRadius.circular(SizeUtil.borderRadiusMd),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "1. Vehicle",
-                                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                          color: ColorsUtils.text_black,
-                                        ),
-                                      ),
-                                      Text(
-                                        "20%",
-                                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                          color: ColorsUtils.text_black,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-
-                                // Spacing
-                                const SizedBox(
-                                  height: SizeUtil.spaceBtwItems_12,
-                                ),
-
-                                Container(
-                                  padding: const EdgeInsets.all(SizeUtil.sm_12),
-                                  decoration: BoxDecoration(
-                                    color: ColorsUtils.broom,
-                                    borderRadius: BorderRadius.circular(SizeUtil.borderRadiusMd),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "2. Food & drink",
-                                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                          color: ColorsUtils.text_black,
-                                        ),
-                                      ),
-                                      Text(
-                                        "20%",
-                                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                          color: ColorsUtils.text_black,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
+                    const TransactionCategoriesWidget(),
 
                     // Spacing
                     const SizedBox(
