@@ -25,9 +25,11 @@
     "today": "Today",
     "yesterday": "Yesterday",
 
-    "business": "Business",
-    "vehicle": "Vehicle",
+    "investment": "Investment ",
     "education": "Education",
+    "food": "Food",
+    "gift": "Gift",
+    "vehicle": "Vehicle",
 
     "transactionDetail": "Transaction detail",
     "transactionRecap": "Transaction recap",

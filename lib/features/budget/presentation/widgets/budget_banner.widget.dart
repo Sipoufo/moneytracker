@@ -48,28 +48,31 @@ class BudgetBanner extends StatelessWidget {
                       height: SizeUtil.spaceBtwItems_12,
                     ),
 
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: SizeUtil.sm_12, vertical: SizeUtil.sm_10),
-                      decoration: BoxDecoration(
-                        color: ColorsUtils.broom,
-                        borderRadius: BorderRadius.circular(SizeUtil.borderRadiusXl),
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.add,
-                            color: ColorsUtils.primary_8,
-                            size: SizeUtil.iconXs,
-                          ),
-                          Text(
-                            AppLocalizations.of(context).createABudgetToday,
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                                  color: ColorsUtils.primary_8,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                          ),
-                        ],
+                    GestureDetector(
+                      onTap: () => Navigator.pushNamed(context, "/budget/new-budget"),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: SizeUtil.sm_12, vertical: SizeUtil.sm_10),
+                        decoration: BoxDecoration(
+                          color: ColorsUtils.broom,
+                          borderRadius: BorderRadius.circular(SizeUtil.borderRadiusXl),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.add,
+                              color: ColorsUtils.primary_8,
+                              size: SizeUtil.iconXs,
+                            ),
+                            Text(
+                              AppLocalizations.of(context).createABudgetToday,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                                    color: ColorsUtils.primary_8,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                            ),
+                          ],
+                        ),
                       ),
                     )
                   ],

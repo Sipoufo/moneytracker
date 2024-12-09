@@ -25,9 +25,11 @@
     "today": "Aujourdh'hui",
     "yesterday": "Hier",
 
-    "business": "Business",
-    "vehicle": "Véhicule",
+    "investment": "Investissement",
     "education": "Education",
+    "food": "Nourriture",
+    "gift": "Cadeau",
+    "vehicle": "Véhicule",
 
     "transactionDetail": "Détail de la transaction",
     "transactionRecap": "Récap de la transaction",

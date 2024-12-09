@@ -67,7 +67,7 @@ class TransactionItemWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            AppLocalizations.of(context).business,
+                            AppLocalizations.of(context).investment,
                             style:
                                 Theme.of(context).textTheme.bodySmall?.copyWith(
                                       color: !HelperFunctions.isDarkMode(context)

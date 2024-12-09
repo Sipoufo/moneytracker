@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:moneytracker/features/budget/presentation/pages/new_budget_budget_name.dart';
 import 'package:moneytracker/features/navigation/page/navigation.dart';
 import 'package:moneytracker/features/onboarding/page/onboarding.dart';
 import 'package:moneytracker/features/splash/splash.dart';
@@ -11,4 +12,7 @@ Map<String, WidgetBuilder> get generalRoutes => <String, WidgetBuilder> {
 
   // Transaction part
   "/transaction/transaction-detail": (context) => const TransactionDetail(),
+
+  // Budget part
+  "/budget/new-budget": (context) => const NewBudget(),
 };

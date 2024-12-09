@@ -7,7 +7,6 @@ import 'package:moneytracker/core/widgets/button.widget.dart';
 import 'package:moneytracker/core/widgets/header.widget.dart';
 import 'package:moneytracker/features/budget/presentation/widgets/budget_banner.widget.dart';
 import 'package:moneytracker/features/budget/presentation/widgets/my_budget.widget.dart';
-import 'package:moneytracker/features/budget/presentation/widgets/no_budget.widget.dart';
 
 class Budget extends StatefulWidget {
   const Budget({super.key});
@@ -27,7 +26,7 @@ class _BudgetState extends State<Budget> {
           children: [
             // Header of transaction recap page
             HeaderWidget(
-              title: AppLocalizations.of(context).transactionRecap,
+              title: AppLocalizations.of(context).budgeting,
               secondIcon: IconsUtils.addNote(context: context, onTap: () {}),
               thirdIcon: IconsUtils.search(context: context, onTap: () {}),
             ),
@@ -41,15 +40,15 @@ class _BudgetState extends State<Budget> {
 
                     // Your budget
                     const MyBudgetWidget(),
-
                     // const NoBudgetWidget(),
 
+                    // Create a budget
                     ButtonWidget(
                       title: AppLocalizations.of(context).createNewBudget,
                       textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
                             color: ColorsUtils.primary_4,
                           ),
-                      onTap: () {},
+                      onTap: () => Navigator.pushNamed(context, "/budget/new-budget"),
                       padding: const EdgeInsets.all(SizeUtil.md_18),
                       color: Theme.of(context).colorScheme.primaryContainer,
                       icon: const Icon(
