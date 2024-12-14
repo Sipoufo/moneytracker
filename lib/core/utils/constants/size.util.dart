@@ -7,6 +7,7 @@ class SizeUtil {
   static const double md_14 = 14.0;
   static const double md = 16.0;
   static const double md_18 = 18.0;
+  static const double md_20 = 20.0;
   static const double lg = 24.0;
   static const double xl = 32.0;
 
@@ -22,9 +23,11 @@ class SizeUtil {
   static const double fontSizeLg = 18.0;
 
   // Button sizes
+  static const double buttonHeight_10 = 10.0;
   static const double buttonHeight = 18.0;
   static const double buttonHeight_30 = 30.0;
   static const double buttonRadius = 12.0;
+  static const double buttonWidth_64 = 64.0;
   static const double buttonWidth = 120.0;
   static const double buttonElevation = 4.0;
 
@@ -37,6 +40,7 @@ class SizeUtil {
   // Default spacing between sections
   static const double defaultSpace = 24.0;
   static const double spaceBtwItems_4 = 4.0;
+  static const double spaceBtwItems_8 = 8.0;
   static const double spaceBtwItems_12 = 12.0;
   static const double spaceBtwItems = 14.0;
   static const double spaceBtwItems_16 = 16.0;

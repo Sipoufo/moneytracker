@@ -225,4 +225,47 @@ class IconsUtils {
       icon: Icons.more_vert,
     );
   }
+
+  // Eye open icon
+  static const Icon eyeOpen = Icon(
+    Icons.visibility_outlined,
+  );
+
+  // Eye close icon
+  static const Icon eyeClose = Icon(
+    Icons.visibility_off_outlined,
+  );
+
+  // Download icon
+  static Icon download({
+    required BuildContext context,
+  }) {
+    return Icon(
+      Icons.file_download_outlined,
+      size: 24,
+      color: Theme.of(context).colorScheme.surfaceContainer,
+    );
+  }
+
+  // Upload icon
+  static Icon upload({
+    required BuildContext context,
+  }) {
+    return Icon(
+      Icons.file_upload_outlined,
+      size: 24,
+      color: Theme.of(context).colorScheme.surfaceContainer,
+    );
+  }
+
+  // Info icon
+  static Icon info({
+    required BuildContext context,
+  }) {
+    return Icon(
+      Icons.info,
+      size: 16,
+      color: Theme.of(context).colorScheme.surfaceContainer,
+    );
+  }
 }

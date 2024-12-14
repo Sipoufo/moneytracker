@@ -8,6 +8,14 @@
     "seeMore": "See more",
     "shortcut": "Shortcut",
     "amount": "Amount",
+    "previous": "Previous",
+    "next": "Next",
+    "cancel": "Cancel",
+    "finish": "Finish",
+    "isMissing": "is missing",
+    "details": "Détails",
+    "moreDetails": "More details",
+    "inputEmpty": "Please fill in this field",
 
     "onBoardingTitle1": "Take Control of Your Finances",
     "onBoardingTitle2": "Budgeting Made Simple",
@@ -81,6 +89,24 @@
     "timeRemaining": "Time remaining",
     "achievementDate": "Achievement date",
     "category": "Category",
+
+    "budgetName": "Budget name",
+    "entreBudgetName": "Enter budget name",
+    "enterTheAmountsOfFundsNeeded": "Enter the amount of funds needed",
+    "selectDate": "Select date",
+    "addNewBudgetInfo": "To achieve your goal, you need to save at least {amount} each day",
+    "@addNewBudgetInfo": {
+        "description": "Budget information with contain amount",
+        "amount": {
+            "type": "String"
+        }
+    },
+
+    "addFunds": "Add funds",
+    "withdraw": "Withdraw",
+    "fundProgress": "Fund progress",
+    "fundInfo": "Keep going! You need Rp 110M left to achieve your goal",
+    "requiredFunds": "Required funds",
 
     "setting": "Setting",
     "account": "Account",

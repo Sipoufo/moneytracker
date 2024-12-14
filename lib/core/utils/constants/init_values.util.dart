@@ -15,4 +15,8 @@ class InitValuesUtil {
       CategoryModel(name: AppLocalizations.of(context).vehicle, picture: "assets/pictures/categories/vehicle.png" , backgroundColor: ColorsUtils.malibu),
     ];
   }
+
+  // ---------- Dates ----------
+  static int startDate = 1900;
+  static int endDate = 2100;
 }

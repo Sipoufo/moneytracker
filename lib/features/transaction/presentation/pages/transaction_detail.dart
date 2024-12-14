@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:moneytracker/core/utils/constants/icons.util.dart';
 import 'package:moneytracker/core/widgets/header.widget.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:moneytracker/features/transaction/presentation/widgets/shortcut.widget.dart';
 import 'package:moneytracker/features/transaction/presentation/widgets/transaction_resume.widget.dart';
 

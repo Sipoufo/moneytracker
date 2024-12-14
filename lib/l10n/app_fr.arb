@@ -8,6 +8,14 @@
     "seeMore": "Voir plus",
     "shortcut": "Raccourci",
     "amount": "Montant",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "cancel": "Fermer",
+    "finish": "Terminer",
+    "isMissing": "est manquant",
+    "details": "Details",
+    "moreDetails": "Plus de détails",
+    "inputEmpty": "Veuillez remplir ce champs",
 
     "onBoardingTitle1" : "Controllez tes finances",
     "onBoardingTitle2" : "Budgétisez en toute simplicité",
@@ -81,6 +89,24 @@
     "timeRemaining": "Temps restant",
     "achievementDate": "Date de réalisation",
     "category": "Catégorie",
+
+    "budgetName": "Nom du budget",
+    "entreBudgetName": "Entrer le nom du budget",
+    "enterTheAmountsOfFundsNeeded": "Indiquer le montant des fonds nécessaires",
+    "selectDate": "Selectionner une date",
+    "addNewBudgetInfo": "Pour atteindre votre objectif, vous devez épargner au moins {amount} chaque jour.",
+    "@addNewBudgetInfo": {
+        "description": "Informations sur le budget avec le montant contenu",
+        "amount": {
+            "type": "String"
+        }
+    },
+
+    "addFunds": "Ajouter des fonds",
+    "withdraw": "Retirer",
+    "fundProgress": "Progression du fonds",
+    "fundInfo": "Continuez ! Il vous reste 110 millions de roupies pour atteindre votre objectif",
+    "requiredFunds": "Fonds requis",
 
     "setting": "Paramètre",
     "account": "Compte",
