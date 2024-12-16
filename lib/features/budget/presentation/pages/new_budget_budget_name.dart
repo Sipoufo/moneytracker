@@ -64,7 +64,7 @@ class _NewBudgetState extends State<NewBudget> {
               children: [
                 // Header of transaction recap page
                 HeaderWidget(
-                  title: AppLocalizations.of(context).budgeting,
+                  title: AppLocalizations.of(context).newBudget,
                   firstIcon: IconsUtils.back(context: context, onTap: () => Navigator.pop(context)),
                 ),
 
@@ -170,6 +170,14 @@ class _NewBudgetState extends State<NewBudget> {
                     topLeft: Radius.circular(SizeUtil.borderRadiusXl),
                     topRight: Radius.circular(SizeUtil.borderRadiusXl),
                   ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: ColorsUtils.grayscale_black_black.withOpacity(0.1),
+                      spreadRadius: 1,
+                      blurRadius: 10,
+                      offset: const Offset(0, -4),
+                    ),
+                  ],
                 ),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(SizeUtil.md, 0, SizeUtil.md, SizeUtil.sm_12),

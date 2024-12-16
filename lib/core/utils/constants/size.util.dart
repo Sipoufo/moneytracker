@@ -28,6 +28,7 @@ class SizeUtil {
   static const double buttonHeight_30 = 30.0;
   static const double buttonRadius = 12.0;
   static const double buttonWidth_64 = 64.0;
+  static const double buttonWidth_48 = 48.0;
   static const double buttonWidth = 120.0;
   static const double buttonElevation = 4.0;
 

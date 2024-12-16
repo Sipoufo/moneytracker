@@ -13,6 +13,8 @@ class TransactionDetail extends StatefulWidget {
 }
 
 class _TransactionDetailState extends State<TransactionDetail> {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

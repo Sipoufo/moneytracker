@@ -24,7 +24,7 @@ class ShortcutWidget extends StatelessWidget {
           ButtonWidget(
             title: AppLocalizations.of(context).addNewTransaction,
             textStyle: Theme.of(context).textTheme.titleMedium,
-            onTap: () {},
+            onTap: () => Navigator.pushNamed(context, "/transaction/new-transaction"),
             padding:
                 const EdgeInsets.symmetric(vertical: SizeUtil.defaultSpace),
             icon: Icon(
