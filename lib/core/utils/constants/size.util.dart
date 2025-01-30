@@ -1,6 +1,7 @@
 class SizeUtil {
   // Padding and margin sizes
   static const double xs = 4.0;
+  static const double xs_6 = 6.0;
   static const double sm = 8.0;
   static const double sm_10 = 10.0;
   static const double sm_12 = 12.0;

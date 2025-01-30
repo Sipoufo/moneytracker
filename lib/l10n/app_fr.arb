@@ -52,6 +52,7 @@
     "daily": "Journalier",
     "monthly": "Mensuel",
     "annually": "Annuel",
+    "timeSlot": "Plage horaire",
 
     "rank": "Rang",
 
@@ -69,6 +70,7 @@
     "earnedIncome": "Revenu gagné",
     "selfEmployment": "Travail indépendant",
     "rental": "Location",
+    "salariesAndWages": "Salaires et traitements",
     "overtimePay": "Rémunération des heures supplémentaires",
     "bonusesAndCommissions": "Primes et commissions",
     "tipsAndGratuities": "Pourboires et gratifications",

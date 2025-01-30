@@ -4,7 +4,7 @@ import 'package:moneytracker/features/budget/presentation/pages/new_budget_budge
 import 'package:moneytracker/features/navigation/page/navigation.dart';
 import 'package:moneytracker/features/onboarding/page/onboarding.dart';
 import 'package:moneytracker/features/splash/splash.dart';
-import 'package:moneytracker/features/transaction/presentation/pages/new_transaction.widget.dart';
+import 'package:moneytracker/features/transaction/presentation/pages/new_transaction.dart';
 import 'package:moneytracker/features/transaction/presentation/pages/transaction_detail.dart';
 
 Map<String, WidgetBuilder> get generalRoutes => <String, WidgetBuilder> {

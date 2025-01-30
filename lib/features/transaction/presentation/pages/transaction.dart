@@ -25,16 +25,6 @@ class _TransactionState extends State<Transaction> {
   String subItemSelected = "";
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    selectedPeriodValue = InformationUtil.periodicValues(context)[0];
-    selectedPeriodValueAndPeriod = InformationUtil.periodicValuesAndCorrespondent(context)
-        .firstWhere((value) => value['period'] == selectedPeriodValue);
-    subItemSelected = selectedPeriodValueAndPeriod?["values"][0];
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
@@ -62,6 +52,7 @@ class _TransactionState extends State<Transaction> {
                       horizontal: SizeUtil.md,
                     ),
                     child: DropDownButtonWidget<String?>(
+                      placeholder: AppLocalizations.of(context).timeSlot,
                       selectedValue: selectedPeriodValue,
                       onChanged: (String? value) {
                         setState(() {

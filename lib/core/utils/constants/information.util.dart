@@ -67,4 +67,42 @@ class InformationUtil {
       },
     ];
   }
+
+  // List of values of categories types
+  static List<Map<String, dynamic>> categoriesTypes(BuildContext context) {
+    return [
+      {
+        "type": AppLocalizations.of(context).earnedIncome,
+        "values": <String>[
+          AppLocalizations.of(context).salariesAndWages,
+          AppLocalizations.of(context).overtimePay,
+          AppLocalizations.of(context).bonusesAndCommissions,
+          AppLocalizations.of(context).tipsAndGratuities,
+        ]
+      },
+      {
+        "type": AppLocalizations.of(context).selfEmployment,
+        "values": <String>[
+          AppLocalizations.of(context).soleProprietorship,
+          AppLocalizations.of(context).partnerships,
+        ]
+      },
+      {
+        "type": AppLocalizations.of(context).investment,
+        "values": [
+          AppLocalizations.of(context).capitalGains,
+          AppLocalizations.of(context).interest,
+          AppLocalizations.of(context).dividend,
+        ]
+      },
+      {
+        "type": AppLocalizations.of(context).rental,
+        "values": [
+          AppLocalizations.of(context).property,
+          AppLocalizations.of(context).vehicle,
+          AppLocalizations.of(context).commercial,
+        ]
+      },
+    ];
+  }
 }

@@ -52,6 +52,7 @@
     "daily": "Daily",
     "monthly": "Monthly",
     "annually": "Annually",
+    "timeSlot": "Time slot",
 
     "rank": "Rank",
 
@@ -69,6 +70,7 @@
     "earnedIncome": "Earned Income",
     "selfEmployment": "Self-Employment",
     "rental": "Rental",
+    "salariesAndWages": "Salaries and Wages",
     "overtimePay": "Overtime Pay",
     "bonusesAndCommissions": "Bonuses and Commissions",
     "tipsAndGratuities": "Tips and Gratuities",

@@ -12,11 +12,13 @@ class DropDownButtonWidget<DropDownButtonWidgetValueType>
     required this.selectedValue,
     required this.onChanged,
     required this.values,
+    required this.placeholder,
   });
 
   final ValueChanged<DropDownButtonWidgetValueType?>? onChanged;
-  final DropDownButtonWidgetValueType selectedValue;
+  final DropDownButtonWidgetValueType? selectedValue;
   final List<DropdownMenuItem<DropDownButtonWidgetValueType>>? values;
+  final String placeholder;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +40,15 @@ class DropDownButtonWidget<DropDownButtonWidgetValueType>
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<DropDownButtonWidgetValueType>(
+          hint: Container(
+            alignment: Alignment.centerLeft,
+            width: double.infinity,
+            child: Text(
+              placeholder,
+              style: Theme.of(context).textTheme.bodySmall,
+              textAlign: TextAlign.left,
+            ),
+          ),
           isExpanded: true,
           isDense: true,
           value: selectedValue,
