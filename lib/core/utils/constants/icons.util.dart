@@ -268,4 +268,37 @@ class IconsUtils {
       color: Theme.of(context).colorScheme.surfaceContainer,
     );
   }
+
+  // Arrow down icon
+  static Icon arrowDown({
+    required BuildContext context,
+  }) {
+    return Icon(
+      Icons.keyboard_arrow_down,
+      size: 16,
+      color: Theme.of(context).colorScheme.surface,
+    );
+  }
+
+  // Arrow down icon
+  static Icon arrowUp({
+    required BuildContext context,
+  }) {
+    return Icon(
+      Icons.keyboard_arrow_up,
+      size: 16,
+      color: Theme.of(context).colorScheme.surface,
+    );
+  }
+
+  // Scan icon
+  static Icon scan({
+    required BuildContext context,
+  }) {
+    return Icon(
+      Icons.document_scanner_outlined,
+      size: 16,
+      color: Theme.of(context).colorScheme.surface,
+    );
+  }
 }

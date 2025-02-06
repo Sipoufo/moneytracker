@@ -6,7 +6,7 @@ import 'package:moneytracker/core/utils/constants/icons.util.dart';
 import 'package:moneytracker/core/utils/constants/init_values.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
 import 'package:moneytracker/core/widgets/header.widget.dart';
-import 'package:moneytracker/features/transaction/presentation/widgets/new_transaction/new_transaction_amount.widget.dart';
+import 'package:moneytracker/features/transaction/presentation/widgets/new_transaction/amount/new_transaction_amount.widget.dart';
 import 'package:moneytracker/features/transaction/presentation/widgets/new_transaction/new_transaction_wallet_categories.widget.dart';
 
 class NewTransactionWidget extends StatefulWidget {
@@ -21,10 +21,15 @@ class _NewTransactionWidgetState extends State<NewTransactionWidget> {
   int transactionStepIndex = 0;
   bool editCategory = false;
 
-  //Attributes of new transaction part
+  // Attributes of new transaction part
+  // Part 1 : Wallet
   String? wallet;
   String? typeCategory;
   String? category;
+
+  // Part 2 : Amount
+  String? amountIcon;
+  String? amount;
 
   List<Widget> transactionStepWidget = [];
 
@@ -34,28 +39,53 @@ class _NewTransactionWidgetState extends State<NewTransactionWidget> {
     transactionStepWidget = [
       NewTransactionWalletCategoriesWidget(
         selectedWallet: "apple wall",
-        updateFields: updateFields,
+        updateFields: updateFieldsPart1,
         updateTransactionStepIndex: updateTransactionStepIndex,
       ),
-      const NewTransactionAmountWidget(),
+      NewTransactionAmountWidget(
+        updateFields: updateFieldsPart2,
+        updateTransactionStepIndex: updateTransactionStepIndex,
+      ),
     ];
   }
 
-  void updateFields({String? selectWallet, String? selectTypeCategory, String? selectCategory}) {
+  void updateFieldsPart1({String? selectWallet, String? selectTypeCategory, String? selectCategory}) {
     // Update wallet value
-    setState(() {
-      wallet = selectWallet;
-    });
+    if (selectWallet != null) {
+      setState(() {
+        wallet = selectWallet;
+      });
+    }
 
     // Update type of category value
-    setState(() {
-      typeCategory = selectTypeCategory;
-    });
+    if (selectTypeCategory != null) {
+      setState(() {
+        typeCategory = selectTypeCategory;
+      });
+    }
 
     // Update category value
-    setState(() {
-      category = selectCategory;
-    });
+    if (selectCategory != null) {
+      setState(() {
+        category = selectCategory;
+      });
+    }
+  }
+
+  void updateFieldsPart2({String? amountIcon, double? amount}) {
+    // Update amountIcon value
+    if (amountIcon != null) {
+      setState(() {
+        amountIcon = amountIcon;
+      });
+    }
+
+    // Update amount value
+    if (amount != null) {
+      setState(() {
+        amount = amount;
+      });
+    }
   }
 
   // Update step
@@ -91,49 +121,51 @@ class _NewTransactionWidgetState extends State<NewTransactionWidget> {
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
-                            children: InitValuesUtil.transactionsSteps(context).mapIndexed<Widget>((index, step) {
-                              return Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  step == InitValuesUtil.transactionsSteps(context)[0]
-                                      ? const SizedBox(
-                                          width: SizeUtil.md,
-                                        )
-                                      : const SizedBox(),
-                                  Text(
-                                    step,
-                                    textAlign: TextAlign.center,
-                                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                          color: transactionStepIndex >= index
-                                              ? ColorsUtils.primary_5
-                                              : Theme.of(context).colorScheme.onPrimary,
-                                        ),
-                                  ),
-                                  step !=
-                                          InitValuesUtil.transactionsSteps(
-                                              context)[InitValuesUtil.transactionsSteps(context).length - 1]
-                                      ? Container(
-                                          width: SizeUtil.md,
-                                          margin: const EdgeInsets.symmetric(horizontal: SizeUtil.sm),
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: transactionStepIndex >= index
-                                                  ? ColorsUtils.primary_5
-                                                  : Theme.of(context).colorScheme.onPrimary,
-                                            ),
+                            children: InitValuesUtil.transactionsSteps(context).mapIndexed<Widget>(
+                              (index, step) {
+                                return Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    step == InitValuesUtil.transactionsSteps(context)[0]
+                                        ? const SizedBox(
+                                            width: SizeUtil.md,
+                                          )
+                                        : const SizedBox(),
+                                    Text(
+                                      step,
+                                      textAlign: TextAlign.center,
+                                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                            color: transactionStepIndex >= index
+                                                ? ColorsUtils.primary_5
+                                                : Theme.of(context).colorScheme.onPrimary,
                                           ),
-                                        )
-                                      : const SizedBox(),
-                                  step ==
-                                          InitValuesUtil.transactionsSteps(
-                                              context)[InitValuesUtil.transactionsSteps(context).length - 1]
-                                      ? const SizedBox(
-                                          width: SizeUtil.md,
-                                        )
-                                      : const SizedBox(),
-                                ],
-                              );
-                            }).toList(),
+                                    ),
+                                    step !=
+                                            InitValuesUtil.transactionsSteps(
+                                                context)[InitValuesUtil.transactionsSteps(context).length - 1]
+                                        ? Container(
+                                            width: SizeUtil.md,
+                                            margin: const EdgeInsets.symmetric(horizontal: SizeUtil.sm),
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color: transactionStepIndex >= index
+                                                    ? ColorsUtils.primary_5
+                                                    : Theme.of(context).colorScheme.onPrimary,
+                                              ),
+                                            ),
+                                          )
+                                        : const SizedBox(),
+                                    step ==
+                                            InitValuesUtil.transactionsSteps(
+                                                context)[InitValuesUtil.transactionsSteps(context).length - 1]
+                                        ? const SizedBox(
+                                            width: SizeUtil.md,
+                                          )
+                                        : const SizedBox(),
+                                  ],
+                                );
+                              },
+                            ).toList(),
                           ),
                         ),
                       ),

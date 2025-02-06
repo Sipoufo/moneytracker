@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moneytracker/core/utils/constants/colors.util.dart';
 import 'package:moneytracker/core/utils/constants/icons.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
 
@@ -12,7 +13,7 @@ import 'package:moneytracker/core/utils/constants/size.util.dart';
 /// [maxLine] use for determine the maximum line of field. It's use if we want a textarea. The default value is 1.
 /// [readOnly] use for determine if the field is read only. The default value is false
 class InputFormWidget extends StatefulWidget {
-  final String label;
+  final String? label;
   final String placeholder;
   final TextInputType textInputType;
   final TextEditingController controller;
@@ -23,7 +24,7 @@ class InputFormWidget extends StatefulWidget {
 
   const InputFormWidget({
     super.key,
-    required this.label,
+    this.label,
     required this.placeholder,
     required this.textInputType,
     required this.controller,
@@ -54,13 +55,14 @@ class _InputFormWidgetState extends State<InputFormWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            widget.label,
-            style: Theme.of(context).textTheme.displayLarge,
-          ),
-          const SizedBox(
-            height: SizeUtil.spaceBtwItems_8,
-          ),
+          if (widget.label != null)
+            Text(
+              widget.label!,
+              style: Theme.of(context).textTheme.displayLarge,
+            ),
+            const SizedBox(
+              height: SizeUtil.spaceBtwItems_8,
+            ),
           TextFormField(
             onTap: widget.onTap,
             maxLines: widget.maxLine,
@@ -87,6 +89,12 @@ class _InputFormWidgetState extends State<InputFormWidget> {
                 borderRadius: BorderRadius.circular(SizeUtil.borderRadiusMd),
                 borderSide: BorderSide(
                   color: Theme.of(context).colorScheme.secondaryContainer,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(SizeUtil.borderRadiusMd),
+                borderSide: const BorderSide(
+                  color: ColorsUtils.primary_5,
                 ),
               ),
               suffixIcon: Padding(

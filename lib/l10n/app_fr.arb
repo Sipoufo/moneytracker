@@ -16,6 +16,7 @@
     "details": "Details",
     "moreDetails": "Plus de détails",
     "inputEmpty": "Veuillez remplir ce champs",
+    "or": "ou",
 
     "onBoardingTitle1" : "Controllez tes finances",
     "onBoardingTitle2" : "Budgétisez en toute simplicité",
@@ -39,6 +40,9 @@
     "food": "Nourriture",
     "gift": "Cadeau",
     "vehicle": "Véhicule",
+    "money": "Argent",
+    "chart": "Diagramme",
+    "loyalty": "Loyauté",
 
     "transactionDetail": "Détail de la transaction",
     "transactionRecap": "Récap de la transaction",
@@ -66,6 +70,8 @@
     "enterYourTransactionNote": "Entrer votre note de transaction",
     "addNewTransaction": "Ajouter une nouvelle transaction",
     "chooseCategory": "Choisir une catégorie",
+    "scanReceipt": "Scanner le reçu",
+    "createTransactionAmount": "En scannant le reçu, notre système ajoutera automatiquement toutes les données du reçu à l'application.",
 
     "earnedIncome": "Revenu gagné",
     "selfEmployment": "Travail indépendant",

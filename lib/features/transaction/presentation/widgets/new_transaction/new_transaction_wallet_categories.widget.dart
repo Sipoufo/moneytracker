@@ -293,7 +293,7 @@ class _NewTransactionWalletCategoriesWidgetState extends State<NewTransactionWal
                     textStyle: Theme.of(context).textTheme.headlineSmall,
                     onTap: () {
                       if (category == null) {
-                        showSnackBar(context, "Please complete the form before proceeding to the next step.");
+                        showSnackBar(context, "Complete the form before proceeding to the next step.");
                       } else {
                         widget.updateTransactionStepIndex(1);
                       }
