@@ -7,6 +7,7 @@ import 'package:moneytracker/core/utils/constants/size.util.dart';
 import 'package:moneytracker/core/widgets/button.widget.dart';
 import 'package:moneytracker/core/widgets/monthly_screen.widget.dart';
 import 'package:moneytracker/core/widgets/separator.widget.dart';
+import 'package:moneytracker/core/widgets/show_snackbar.widget.dart';
 import 'package:moneytracker/features/transaction/presentation/widgets/new_transaction/date&time/new_transaction_date_time.time_item.widget.dart';
 
 class NewTransactionDateTimeWidget extends StatefulWidget {
@@ -202,7 +203,13 @@ class _NewTransactionDateTimeWidgetState extends State<NewTransactionDateTimeWid
                   ButtonWidget(
                     title: AppLocalizations.of(context).next,
                     textStyle: Theme.of(context).textTheme.headlineSmall,
-                    onTap: () {},
+                    onTap: () {
+                      if (date == null) {
+                        showSnackBar(context, "Enter the date !");
+                      } else {
+                        widget.updateTransactionStepIndex(3);
+                      }
+                    },
                     padding: const EdgeInsets.all(SizeUtil.md),
                     color: ColorsUtils.primary_5,
                   ),

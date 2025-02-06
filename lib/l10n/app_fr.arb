@@ -30,6 +30,7 @@
     "income": "Entrées",
     "expenses": "Dépenses",
     "transaction": "Transaction",
+    "transactionName": "Nom de la transaction",
     "newTransaction": "Nouvelle Transaction",
 
     "today": "Aujourdh'hui",
@@ -67,6 +68,7 @@
     "time": "Temps",
     "note": "Note",
     "optional": "Optionnel",
+    "enterYourTransactionName": "Entrer le nom de transaction",
     "enterYourTransactionNote": "Entrer votre note de transaction",
     "addNewTransaction": "Ajouter une nouvelle transaction",
     "chooseCategory": "Choisir une catégorie",
