@@ -242,7 +242,7 @@ class IconsUtils {
   }) {
     return Icon(
       Icons.file_download_outlined,
-      size: 24,
+      size: SizeUtil.lg,
       color: Theme.of(context).colorScheme.surfaceContainer,
     );
   }
@@ -253,7 +253,7 @@ class IconsUtils {
   }) {
     return Icon(
       Icons.file_upload_outlined,
-      size: 24,
+      size: SizeUtil.lg,
       color: Theme.of(context).colorScheme.surfaceContainer,
     );
   }
@@ -264,7 +264,7 @@ class IconsUtils {
   }) {
     return Icon(
       Icons.info,
-      size: 16,
+      size: SizeUtil.md,
       color: Theme.of(context).colorScheme.surfaceContainer,
     );
   }
@@ -275,7 +275,7 @@ class IconsUtils {
   }) {
     return Icon(
       Icons.keyboard_arrow_down,
-      size: 16,
+      size: SizeUtil.md,
       color: Theme.of(context).colorScheme.surface,
     );
   }
@@ -286,8 +286,61 @@ class IconsUtils {
   }) {
     return Icon(
       Icons.keyboard_arrow_up,
-      size: 16,
+      size: SizeUtil.md,
       color: Theme.of(context).colorScheme.surface,
+    );
+  }
+
+  // Arrow right icon
+  static Icon arrowRight({
+    required BuildContext context,
+  }) {
+    return Icon(
+      Icons.keyboard_arrow_right,
+      size: SizeUtil.lg,
+      color: Theme.of(context).colorScheme.surface,
+    );
+  }
+
+  // Arrow right icon
+  static IconButtonWidget arrowRight2({
+    required BuildContext context,
+    required VoidCallback onTap,
+  }) {
+    return IconButtonWidget(
+      onTap: onTap,
+      color: ColorsUtils.primary_5,
+      icon: Icons.arrow_forward_sharp,
+      buttonStyle: IconButton.styleFrom(
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(SizeUtil.borderRadiusMd),
+          side: BorderSide(
+            color: ColorsUtils.primary_5,
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Arrow left icon
+  static IconButtonWidget arrowLeft2({
+    required BuildContext context,
+    required VoidCallback onTap,
+  }) {
+    return IconButtonWidget(
+      onTap: onTap,
+      color: ColorsUtils.primary_5,
+      icon: Icons.arrow_back_sharp,
+      buttonStyle: IconButton.styleFrom(
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(SizeUtil.borderRadiusMd),
+          side: const BorderSide(
+            color: ColorsUtils.primary_5,
+          ),
+        ),
+      ),
     );
   }
 
@@ -297,7 +350,7 @@ class IconsUtils {
   }) {
     return Icon(
       Icons.document_scanner_outlined,
-      size: 16,
+      size: SizeUtil.md,
       color: Theme.of(context).colorScheme.surface,
     );
   }

@@ -11,6 +11,7 @@ class SizeUtil {
   static const double md_20 = 20.0;
   static const double lg = 24.0;
   static const double xl = 32.0;
+  static const double xl2 = 64.0;
 
   // Icon sizes
   static const double iconXs = 12.0;
@@ -48,12 +49,15 @@ class SizeUtil {
   static const double spaceBtwItems_16 = 16.0;
   static const double spaceBtwItems_24 = 24.0;
   static const double spaceBtwSections = 32.0;
+  static const double spaceBtwSections_42 = 42.0;
 
   // Border radius
+  static const double borderRadiusXs = 2.0;
   static const double borderRadiusSm = 4.0;
   static const double borderRadiusMd = 8.0;
   static const double borderRadiusLg = 12.0;
   static const double borderRadiusXl = 24.0;
+  static const double borderRadius2Xl = 48.0;
 
   // Divider height
   static const double dividerHeight = 1.0;

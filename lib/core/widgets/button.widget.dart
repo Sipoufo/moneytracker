@@ -10,6 +10,7 @@ class ButtonWidget extends StatelessWidget {
     required this.padding,
     required this.color,
     this.border = BorderSide.none,
+    this.margin = const EdgeInsets.all(0),
     this.icon,
     this.secondIcon,
   });
@@ -18,6 +19,7 @@ class ButtonWidget extends StatelessWidget {
   final TextStyle? textStyle;
   final VoidCallback onTap;
   final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry margin;
   final Color color;
   final Icon? icon;
   final Widget? secondIcon;
@@ -26,13 +28,13 @@ class ButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: padding,
+      margin: margin,
       width: double.infinity,
       child: ElevatedButton(
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
           backgroundColor: color,
-          padding: const EdgeInsets.all(16.0),
+          padding: padding,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(SizeUtil.borderRadiusMd),
             side: border,

@@ -15,6 +15,7 @@ class ShortcutWidget extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: SizeUtil.sm_12,
         children: [
           Text(
             AppLocalizations.of(context).shortcut,

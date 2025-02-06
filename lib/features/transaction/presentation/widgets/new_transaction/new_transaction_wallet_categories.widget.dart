@@ -298,7 +298,7 @@ class _NewTransactionWalletCategoriesWidgetState extends State<NewTransactionWal
                         widget.updateTransactionStepIndex(1);
                       }
                     },
-                    padding: const EdgeInsets.all(0),
+                    padding: const EdgeInsets.all(SizeUtil.md),
                     color: ColorsUtils.primary_5,
                   ),
                   ButtonWidget(
@@ -307,7 +307,7 @@ class _NewTransactionWalletCategoriesWidgetState extends State<NewTransactionWal
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    padding: const EdgeInsets.all(0),
+                    padding: const EdgeInsets.all(SizeUtil.md),
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 ],
@@ -350,7 +350,7 @@ class _NewTransactionWalletCategoriesWidgetState extends State<NewTransactionWal
                         onPanUpdate: (detail) {
                           setState(() {
                             double value =
-                                (containWidgetHeight ??= MediaQuery.of(context).size.height / 2) - detail.delta.dy;
+                                (containWidgetHeight ??= MediaQuery.of(context).size.height / 1.5) - detail.delta.dy;
                             if (containWidgetHeight == null) {
                               containWidgetHeight = value;
                             } else if (value > 300) {
@@ -441,7 +441,7 @@ class _NewTransactionWalletCategoriesWidgetState extends State<NewTransactionWal
                                                     child: Container(
                                                       clipBehavior: Clip.hardEdge,
                                                       decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(10.0),
+                                                        borderRadius: BorderRadius.circular(SizeUtil.borderRadiusMd),
                                                         border: Border.all(
                                                           color: Theme.of(context).colorScheme.secondaryContainer,
                                                         ),

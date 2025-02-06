@@ -105,4 +105,20 @@ class InformationUtil {
       },
     ];
   }
+
+  // List of hours
+  static List<String> hours = List.generate(12, (index) {
+    return index < 9 ? "0${index + 1}" : "${index + 1}";
+  });
+
+  // List of hours
+  static List<String> minutes = List.generate(60, (index) {
+    return index < 9 ? "0$index" : "$index";
+  });
+
+  // List of dailies segments
+  static List<String> dailiesSegments = [
+    "AM",
+    "PM",
+  ];
 }

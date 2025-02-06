@@ -141,6 +141,8 @@ class _NewTransactionAmountWidgetState extends State<NewTransactionAmountWidget>
               ),
             ),
           ),
+
+          // Button button
           Column(
             children: [
               ButtonWidget(
@@ -152,10 +154,10 @@ class _NewTransactionAmountWidgetState extends State<NewTransactionAmountWidget>
                   } else if (selectedAmountIcon == null) {
                     showSnackBar(context, "Select icon for your transaction !");
                   } else {
-
+                    widget.updateTransactionStepIndex(2);
                   }
                 },
-                padding: const EdgeInsets.all(0),
+                padding: const EdgeInsets.all(SizeUtil.md),
                 color: ColorsUtils.primary_5,
               ),
               ButtonWidget(
@@ -164,7 +166,7 @@ class _NewTransactionAmountWidgetState extends State<NewTransactionAmountWidget>
                 onTap: () {
                   widget.updateTransactionStepIndex(0);
                 },
-                padding: const EdgeInsets.all(0),
+                padding: const EdgeInsets.all(SizeUtil.md),
                 color: Theme.of(context).colorScheme.primary,
               ),
             ],
