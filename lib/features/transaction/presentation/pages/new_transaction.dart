@@ -9,6 +9,7 @@ import 'package:moneytracker/core/widgets/header.widget.dart';
 import 'package:moneytracker/features/transaction/presentation/widgets/new_transaction/amount/new_transaction_amount.widget.dart';
 import 'package:moneytracker/features/transaction/presentation/widgets/new_transaction/date&time/new_transaction_date_time.widget.dart';
 import 'package:moneytracker/features/transaction/presentation/widgets/new_transaction/new_transaction_name_note.widget.dart';
+import 'package:moneytracker/features/transaction/presentation/widgets/new_transaction/new_transaction_review.widget.dart';
 import 'package:moneytracker/features/transaction/presentation/widgets/new_transaction/new_transaction_wallet_categories.widget.dart';
 
 class NewTransactionWidget extends StatefulWidget {
@@ -52,6 +53,9 @@ class _NewTransactionWidgetState extends State<NewTransactionWidget> {
         updateTransactionStepIndex: updateTransactionStepIndex,
       ),
       NewTransactionNameNoteWidget(
+        updateTransactionStepIndex: updateTransactionStepIndex,
+      ),
+      NewTransactionReviewsWidget(
         updateTransactionStepIndex: updateTransactionStepIndex,
       ),
     ];

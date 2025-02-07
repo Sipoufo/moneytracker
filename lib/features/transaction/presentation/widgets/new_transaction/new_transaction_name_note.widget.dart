@@ -20,6 +20,7 @@ class NewTransactionNameNoteWidget extends StatefulWidget {
 
 class _NewTransactionNameNoteWidgetState extends State<NewTransactionNameNoteWidget> {
   final TextEditingController transactionNameController = TextEditingController();
+  final TextEditingController transactionNoteController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +52,7 @@ class _NewTransactionNameNoteWidgetState extends State<NewTransactionNameNoteWid
                       // Contain
                       InputFormWidget(
                         placeholder: AppLocalizations.of(context).enterYourTransactionName,
-                        textInputType: TextInputType.number,
+                        textInputType: TextInputType.text,
                         controller: transactionNameController,
                       ),
                     ],
@@ -70,8 +71,8 @@ class _NewTransactionNameNoteWidgetState extends State<NewTransactionNameNoteWid
                       // Contain
                       InputFormWidget(
                         placeholder: AppLocalizations.of(context).enterYourTransactionNote,
-                        textInputType: TextInputType.number,
-                        controller: transactionNameController,
+                        textInputType: TextInputType.text,
+                        controller: transactionNoteController,
                       ),
                     ],
                   ),
