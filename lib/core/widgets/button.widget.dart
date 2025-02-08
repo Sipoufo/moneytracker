@@ -21,7 +21,7 @@ class ButtonWidget extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final EdgeInsetsGeometry margin;
   final Color color;
-  final Icon? icon;
+  final Widget? icon;
   final Widget? secondIcon;
   final BorderSide border;
 

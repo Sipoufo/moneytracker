@@ -38,6 +38,7 @@ class SizeUtil {
   static const double appBarHeight = 56.0;
 
   // Image sizes
+  static const double imageSize = 100.0;
   static const double imageThumbSize = 80.0;
 
   // Default spacing between sections
@@ -63,7 +64,7 @@ class SizeUtil {
   static const double dividerHeight = 1.0;
 
   // Product item dimensions
-  static const double productImageSize = 120.0;
+  static const double productImageSize = 100.0;
   static const double productImageRadius = 16.0;
   static const double productItemHeight = 160.0;
 

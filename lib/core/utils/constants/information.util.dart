@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:moneytracker/core/utils/helpers/functions.helper.dart';
+import 'package:moneytracker/core/utils/models/country_infos.model.dart';
 
 /// Use to get different information with translation effect
 class InformationUtil {
@@ -121,4 +124,16 @@ class InformationUtil {
     "AM",
     "PM",
   ];
+
+  // Country information
+  static Future<List<CountryInfos>> countries() async {
+    List<CountryInfos> result = [];
+    dynamic countriesJson = await HelperFunctions.readJson("assets/json/country_currency_flag_phone_code.json");
+
+    for(dynamic country in countriesJson) {
+      result.add(CountryInfos.fromJson(country));
+    }
+
+    return result;
+  }
 }

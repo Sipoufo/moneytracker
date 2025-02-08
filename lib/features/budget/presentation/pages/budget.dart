@@ -50,6 +50,7 @@ class _BudgetState extends State<Budget> {
                           ),
                       onTap: () => Navigator.pushNamed(context, "/budget/new-budget"),
                       padding: const EdgeInsets.all(SizeUtil.md_18),
+                      margin: const EdgeInsets.symmetric(horizontal: SizeUtil.md_18, vertical: SizeUtil.lg),
                       color: Theme.of(context).colorScheme.primaryContainer,
                       icon: const Icon(
                         Icons.add,
@@ -57,7 +58,7 @@ class _BudgetState extends State<Budget> {
                         size: SizeUtil.iconMd,
                       ),
                       border: const BorderSide(color: ColorsUtils.primary_4, style: BorderStyle.solid),
-                    )
+                    ),
                   ],
                 ),
               ),

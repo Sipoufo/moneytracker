@@ -17,6 +17,8 @@
     "moreDetails": "More details",
     "inputEmpty": "Please fill in this field",
     "or": "or",
+    "edit": "Edit",
+    "other": "Other",
 
     "onBoardingTitle1": "Take Control of Your Finances",
     "onBoardingTitle2": "Budgeting Made Simple",
@@ -158,5 +160,19 @@
     "security": "Security",
     "setSecurityAndPrivacyOption": "Set security and privacy option",
     "support": "Support",
-    "getHelpAndSupport": "Get help and support"
+    "getHelpAndSupport": "Get help and support",
+    "addProfilePicture": "Add profile picture",
+
+    "userInformation": "User information",
+    "fullName": "Full name",
+    "username": "Username",
+    "email": "Email",
+    "saveChanges": "Save changes",
+
+    "yoursWallets": "Yours Wallets",
+    "addNewWallet": "Add new wallet",
+
+    "currentCurrency": "Current currency",
+    "currentCurrencyDetail": "To change the currency, you can choose one of the available currency below.",
+    "otherCurrency": "Other currency"
 }

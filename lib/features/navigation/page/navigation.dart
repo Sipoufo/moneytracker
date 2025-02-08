@@ -20,9 +20,6 @@ class _NavigationState extends State<Navigation> {
   static const List<Widget> _pages = [
     Home(),
     Transaction(),
-    Center(
-      child: Text("Add"),
-    ),
     Budget(),
     Setting(),
   ];
@@ -69,22 +66,19 @@ class _NavigationState extends State<Navigation> {
                         .changePage(1),),
                   IconsUtils.add(
                     context: context,
+                    onTap: () => Navigator.pushNamed(context, "/transaction/new-transaction"),),
+                  IconsUtils.budget(
+                    context: context,
                     isActive: state.pageIndex == 2,
                     onTap: () => context
                         .read<ApplicationNavigationCubit>()
                         .changePage(2),),
-                  IconsUtils.budget(
+                  IconsUtils.setting(
                     context: context,
                     isActive: state.pageIndex == 3,
                     onTap: () => context
                         .read<ApplicationNavigationCubit>()
                         .changePage(3),),
-                  IconsUtils.setting(
-                    context: context,
-                    isActive: state.pageIndex == 4,
-                    onTap: () => context
-                        .read<ApplicationNavigationCubit>()
-                        .changePage(4),),
                 ],
               ),
             ),

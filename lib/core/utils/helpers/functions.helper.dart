@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 class HelperFunctions {
@@ -36,5 +39,11 @@ class HelperFunctions {
       wrappedList.add(Row(children: rowChildren));
     }
     return wrappedList;
+  }
+
+  // Read json file
+  static Future<dynamic> readJson(String jsonFileLink) async {
+    final String response = await rootBundle.loadString(jsonFileLink);
+    return await json.decode(response);
   }
 }

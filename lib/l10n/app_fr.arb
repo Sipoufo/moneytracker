@@ -17,6 +17,8 @@
     "moreDetails": "Plus de détails",
     "inputEmpty": "Veuillez remplir ce champs",
     "or": "ou",
+    "edit": "Modifier",
+    "other": "Autre",
 
     "onBoardingTitle1" : "Controllez tes finances",
     "onBoardingTitle2" : "Budgétisez en toute simplicité",
@@ -158,5 +160,19 @@
     "security": "Sécurité",
     "setSecurityAndPrivacyOption": "Définir les options de sécurité et de confidentialité",
     "support": "Soutien",
-    "getHelpAndSupport": "Obtenir de l'aide et du soutien"
+    "getHelpAndSupport": "Obtenir de l'aide et du soutien",
+    "addProfilePicture": "Ajouter une photo de profile",
+
+    "userInformation": "Informations de l'utilisateur",
+    "fullName": "Nom complet",
+    "username": "Nom d'utilisateur",
+    "email": "Email",
+    "saveChanges": "Enregister les modifications",
+
+    "yoursWallets": "Tes portefeuilles",
+    "addNewWallet": "Ajouter un nouveau portefeuille",
+
+    "currentCurrency": "Monnaie courante",
+    "currentCurrencyDetail": "Pour changer de devise, vous pouvez choisir l'une des devises disponibles ci-dessous.",
+    "otherCurrency": "Autre monnaie"
 }

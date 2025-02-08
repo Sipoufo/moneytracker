@@ -50,6 +50,7 @@ class _SettingState extends State<Setting> {
                     horizontal: SizeUtil.md,
                   ),
                   child: Column(
+                    spacing: SizeUtil.defaultSpace,
                     children: [
                       // Account
                       SettingItemWidget(
@@ -64,11 +65,7 @@ class _SettingState extends State<Setting> {
                           size: 16.0,
                           color: Theme.of(context).colorScheme.surface,
                         ),
-                      ),
-
-                      // Spacing
-                      const SizedBox(
-                        height: SizeUtil.defaultSpace,
+                        onTap: () => Navigator.pushNamed(context, "/setting/account"),
                       ),
 
                       // Wallet
@@ -84,32 +81,7 @@ class _SettingState extends State<Setting> {
                           size: 16.0,
                           color: Theme.of(context).colorScheme.surface,
                         ),
-                      ),
-
-                      // Spacing
-                      const SizedBox(
-                        height: SizeUtil.defaultSpace,
-                      ),
-
-                      // Integration
-                      SettingItemWidget(
-                        title: AppLocalizations.of(context).integration,
-                        label: AppLocalizations.of(context)
-                            .connectBankAndOtherFinancialService,
-                        icon: const Icon(
-                          Icons.account_balance,
-                          color: ColorsUtils.grayscale_gray_light_gray,
-                        ),
-                        secondIcon: Icon(
-                          Icons.arrow_forward_ios,
-                          size: 16.0,
-                          color: Theme.of(context).colorScheme.surface,
-                        ),
-                      ),
-
-                      // Spacing
-                      const SizedBox(
-                        height: SizeUtil.defaultSpace,
+                        onTap: () => Navigator.pushNamed(context, "/setting/wallet"),
                       ),
 
                       // Currency
@@ -125,11 +97,7 @@ class _SettingState extends State<Setting> {
                           size: 16.0,
                           color: Theme.of(context).colorScheme.surface,
                         ),
-                      ),
-
-                      // Spacing
-                      const SizedBox(
-                        height: SizeUtil.defaultSpace,
+                        onTap: () => Navigator.pushNamed(context, "/setting/currency"),
                       ),
 
                       // Theme
@@ -137,7 +105,7 @@ class _SettingState extends State<Setting> {
                         title: AppLocalizations.of(context).theme,
                         label: AppLocalizations.of(context).darkMode,
                         icon: const Icon(
-                          Icons.mode_night,
+                          Icons.nightlight,
                           color: ColorsUtils.grayscale_gray_light_gray,
                         ),
                         secondIcon: Switch(
@@ -152,11 +120,7 @@ class _SettingState extends State<Setting> {
                             isDark = value;
                           }),
                         ),
-                      ),
-
-                      // Spacing
-                      const SizedBox(
-                        height: SizeUtil.defaultSpace,
+                        onTap: () {},
                       ),
 
                       // Security
@@ -173,11 +137,7 @@ class _SettingState extends State<Setting> {
                           size: 16.0,
                           color: Theme.of(context).colorScheme.surface,
                         ),
-                      ),
-
-                      // Spacing
-                      const SizedBox(
-                        height: SizeUtil.defaultSpace,
+                        onTap: () {},
                       ),
 
                       // Support
@@ -193,6 +153,7 @@ class _SettingState extends State<Setting> {
                           size: 16.0,
                           color: Theme.of(context).colorScheme.surface,
                         ),
+                        onTap: () {},
                       ),
                     ],
                   ),

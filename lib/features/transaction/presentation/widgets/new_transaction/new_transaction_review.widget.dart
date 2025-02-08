@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:moneytracker/core/utils/constants/colors.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
 import 'package:moneytracker/core/widgets/button.widget.dart';
+import 'package:moneytracker/features/navigation/cubit/application_navigation_cubit.cubit.dart';
 import 'package:moneytracker/features/transaction/presentation/widgets/shortcut.widget.dart';
 import 'package:moneytracker/features/transaction/presentation/widgets/transaction_resume.widget.dart';
 
@@ -51,6 +53,7 @@ class _NewTransactionReviewsWidgetState extends State<NewTransactionReviewsWidge
                 title: AppLocalizations.of(context).finish,
                 textStyle: Theme.of(context).textTheme.headlineSmall,
                 onTap: () {
+                  context.read<ApplicationNavigationCubit>().changePage(0);
                   Navigator.pop(context);
                 },
                 padding: const EdgeInsets.all(SizeUtil.md),
