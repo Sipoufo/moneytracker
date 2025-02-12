@@ -1,8 +1,8 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:moneytracker/core/errors/failure.dart';
-import 'package:moneytracker/features/setting/data/models/setting_theme.model.dart';
+import 'package:moneytracker/features/setting/data/models/theme/setting_theme.model.dart';
 import 'package:moneytracker/features/setting/data/services/theme/setting_theme.service.dart';
-import 'package:moneytracker/features/setting/domain/entities/setting_theme_mode.entity.dart';
+import 'package:moneytracker/features/setting/domain/entities/theme/setting_theme.entity.dart';
 import 'package:moneytracker/features/setting/domain/repositories/theme/setting_theme.repository.dart';
 
 class SettingThemeRepositoryImpl implements SettingThemeRepository {

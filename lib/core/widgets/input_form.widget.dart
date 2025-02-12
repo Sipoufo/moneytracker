@@ -21,6 +21,7 @@ class InputFormWidget extends StatefulWidget {
   final bool isPassword;
   final int maxLine;
   final bool readOnly;
+  final String? Function(String?)? validator;
 
   const InputFormWidget({
     super.key,
@@ -32,6 +33,7 @@ class InputFormWidget extends StatefulWidget {
     this.isPassword = false,
     this.maxLine = 1,
     this.readOnly = false,
+    this.validator,
   });
 
   @override
@@ -41,6 +43,7 @@ class InputFormWidget extends StatefulWidget {
 class _InputFormWidgetState extends State<InputFormWidget> {
   bool _seePassword = false;
   FocusNode focusNode = FocusNode();
+  String? errorValue;
 
   @override
   void initState() {
@@ -54,14 +57,12 @@ class _InputFormWidgetState extends State<InputFormWidget> {
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: SizeUtil.spaceBtwItems_8,
         children: [
           if (widget.label != null)
             Text(
               widget.label!,
               style: Theme.of(context).textTheme.displayLarge,
-            ),
-            const SizedBox(
-              height: SizeUtil.spaceBtwItems_8,
             ),
           TextFormField(
             onTap: widget.onTap,
@@ -74,6 +75,7 @@ class _InputFormWidgetState extends State<InputFormWidget> {
             cursorColor: Theme.of(context).colorScheme.surface,
             focusNode: focusNode,
             onTapAlwaysCalled: true,
+            validator: widget.validator,
             onTapOutside: (PointerDownEvent pointer) {
               focusNode.unfocus();
             },
@@ -112,6 +114,13 @@ class _InputFormWidgetState extends State<InputFormWidget> {
               ),
             ),
           ),
+          if(errorValue != null)
+            Text(
+              errorValue!,
+              style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                color: ColorsUtils.danger_5,
+              ),
+            ),
         ],
       ),
     );

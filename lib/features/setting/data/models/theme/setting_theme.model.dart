@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:moneytracker/features/setting/domain/entities/setting_theme_mode.entity.dart';
+import 'package:moneytracker/features/setting/domain/entities/theme/setting_theme.entity.dart';
 
 part 'setting_theme.model.g.dart';
 

@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:moneytracker/core/utils/constants/colors.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
 import 'package:moneytracker/core/widgets/header.widget.dart';
-import 'package:moneytracker/features/setting/domain/entities/setting_theme_mode.entity.dart';
+import 'package:moneytracker/features/setting/domain/entities/theme/setting_theme.entity.dart';
 import 'package:moneytracker/features/setting/presentation/blocs/theme/setting_theme.bloc.dart';
 import 'package:moneytracker/features/setting/presentation/blocs/theme/setting_theme.event.dart';
 import 'package:moneytracker/features/setting/presentation/blocs/theme/setting_theme.state.dart';

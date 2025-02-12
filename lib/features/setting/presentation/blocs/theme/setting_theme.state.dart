@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moneytracker/features/setting/domain/entities/setting_theme_mode.entity.dart';
+import 'package:moneytracker/features/setting/domain/entities/theme/setting_theme.entity.dart';
 
 @immutable
 sealed class SettingThemeState {

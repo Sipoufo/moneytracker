@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moneytracker/core/services/local_data/local_data.service.dart';
-import 'package:moneytracker/features/setting/data/models/setting_theme.model.dart';
+import 'package:moneytracker/features/setting/data/models/theme/setting_theme.model.dart';
 import 'package:moneytracker/features/setting/data/services/theme/setting_theme.service.dart';
 
 // Abstract class use to manage theme
@@ -14,7 +14,7 @@ class SettingThemeServiceImpl implements SettingThemeService {
   SettingThemeModel fetchCurrentTheme() {
     List<SettingThemeModel> currentTheme = localDataService.loadData();
 
-    // If no theme is save, we save the system theme for default theme
+    // If no theme is find, we save the system theme for default theme
     if (currentTheme.isEmpty) {
       SettingThemeModel systemTheme = const SettingThemeModel(
         id: "0",
