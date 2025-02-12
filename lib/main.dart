@@ -4,6 +4,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:moneytracker/bloc_providers.dart';
 import 'package:moneytracker/core/utils/theme/theme.util.dart';
+import 'package:moneytracker/features/setting/presentation/blocs/theme/setting_theme.bloc.dart';
+import 'package:moneytracker/features/setting/presentation/blocs/theme/setting_theme.event.dart';
+import 'package:moneytracker/features/setting/presentation/blocs/theme/setting_theme.state.dart';
+import 'package:moneytracker/hive_register.dart';
 import 'package:moneytracker/init_dependencies.main.dart';
 import 'package:moneytracker/routes/general_routes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -14,8 +18,14 @@ void main() async {
   // Hive initialization
   await Hive.initFlutter();
 
+  // Hives objects registrations
+  HiveRegister.allHivesObjectsRegister();
+
+  // Open all hives boxes
+  await HiveRegister.openAllBoxes();
+
   // Dependencies initializations
-  await initDependencies();
+  initDependencies();
 
   runApp(
     MultiBlocProvider(
@@ -25,30 +35,55 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  ThemeMode themeMode = ThemeMode.system;
+
+  @override
+  void initState() {
+    context.read<SettingThemeBloc>().add(const SettingFetchCurrentThemeEvent());
+    super.initState();
+  }
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Coin Sensei',
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      locale: const Locale('en'),
-      supportedLocales: const [
-        Locale('en'), // English
-        Locale('fr'), // French
-      ],
-      themeMode: ThemeMode.system,
-      theme: ThemeUtil.light,
-      darkTheme: ThemeUtil.dark,
-      debugShowCheckedModeBanner: false,
-      routes: generalRoutes,
+    return BlocConsumer<SettingThemeBloc, SettingThemeState>(
+      listener: (context, state) {
+        if (state is SettingThemeSuccessState) {
+          setState(() {
+            themeMode = state.settingThemeEntity.themeMode;
+          });
+        }
+      },
+      builder: (context, state) {
+        ThemeMode themeMode = state is SettingThemeSuccessState ? state.settingThemeEntity.themeMode : ThemeMode.system;
+        return MaterialApp(
+          title: 'Coin Sensei',
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          locale: const Locale('en'),
+          supportedLocales: const [
+            Locale('en'), // English
+            Locale('fr'), // French
+          ],
+          themeMode: themeMode,
+          theme: ThemeUtil.light,
+          darkTheme: ThemeUtil.dark,
+          debugShowCheckedModeBanner: false,
+          routes: generalRoutes,
+        );
+      },
     );
   }
 }

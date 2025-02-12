@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:moneytracker/core/utils/constants/colors.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
 import 'package:moneytracker/core/widgets/header.widget.dart';
+import 'package:moneytracker/features/setting/domain/entities/setting_theme_mode.entity.dart';
+import 'package:moneytracker/features/setting/presentation/blocs/theme/setting_theme.bloc.dart';
+import 'package:moneytracker/features/setting/presentation/blocs/theme/setting_theme.event.dart';
+import 'package:moneytracker/features/setting/presentation/blocs/theme/setting_theme.state.dart';
 import 'package:moneytracker/features/setting/presentation/widgets/setting_item.widget.dart';
 
 class Setting extends StatefulWidget {
@@ -15,6 +20,12 @@ class Setting extends StatefulWidget {
 class _SettingState extends State<Setting> {
   // Switch button value
   bool isDark = true;
+
+  @override
+  void initState() {
+    context.read<SettingThemeBloc>().add(const SettingFetchCurrentThemeEvent());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,33 +112,47 @@ class _SettingState extends State<Setting> {
                       ),
 
                       // Theme
-                      SettingItemWidget(
-                        title: AppLocalizations.of(context).theme,
-                        label: AppLocalizations.of(context).darkMode,
-                        icon: const Icon(
-                          Icons.nightlight,
-                          color: ColorsUtils.grayscale_gray_light_gray,
-                        ),
-                        secondIcon: Switch(
-                          activeColor: ColorsUtils.grayscale_white_white,
-                          activeTrackColor:
-                              ColorsUtils.grayscale_gray_shaded_gray,
-                          inactiveThumbColor: ColorsUtils.grayscale_white_white,
-                          inactiveTrackColor:
-                              ColorsUtils.grayscale_white_shaded_white,
-                          value: isDark,
-                          onChanged: (value) => setState(() {
-                            isDark = value;
-                          }),
-                        ),
-                        onTap: () {},
+                      BlocConsumer<SettingThemeBloc, SettingThemeState>(
+                        listener: (context, state) {
+                          if (state is SettingThemeSuccessState) {
+                            setState(() {
+                              isDark = state.settingThemeEntity.themeMode == ThemeMode.dark;
+                            });
+                          }
+                        },
+                        builder: (context, state) {
+                          return SettingItemWidget(
+                            title: AppLocalizations.of(context).theme,
+                            label: AppLocalizations.of(context).darkMode,
+                            icon: const Icon(
+                              Icons.nightlight,
+                              color: ColorsUtils.grayscale_gray_light_gray,
+                            ),
+                            secondIcon: Switch(
+                              activeColor: ColorsUtils.grayscale_white_white,
+                              activeTrackColor: ColorsUtils.grayscale_gray_shaded_gray,
+                              inactiveThumbColor: ColorsUtils.grayscale_white_white,
+                              inactiveTrackColor: ColorsUtils.grayscale_white_shaded_white,
+                              value: isDark,
+                              onChanged: (value) => setState(() {
+                                context.read<SettingThemeBloc>().add(
+                                  SettingUpdateCurrentThemeEvent(
+                                    SettingThemeEntity(
+                                      themeMode: !isDark ? ThemeMode.dark : ThemeMode.light,
+                                    ),
+                                  ),
+                                );
+                              }),
+                            ),
+                            onTap: () {},
+                          );
+                        },
                       ),
 
                       // Security
                       SettingItemWidget(
                         title: AppLocalizations.of(context).security,
-                        label: AppLocalizations.of(context)
-                            .setSecurityAndPrivacyOption,
+                        label: AppLocalizations.of(context).setSecurityAndPrivacyOption,
                         icon: const Icon(
                           Icons.lock,
                           color: ColorsUtils.grayscale_gray_light_gray,
