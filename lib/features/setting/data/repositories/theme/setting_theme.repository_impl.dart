@@ -22,7 +22,7 @@ class SettingThemeRepositoryImpl implements SettingThemeRepository {
   @override
   Future<Either<Failure, SettingThemeEntity>> updateCurrentTheme(SettingThemeEntity theme) async {
     try {
-      return right(SettingThemeEntity.map(settingThemeService.updateCurrentTheme(SettingThemeModel.map(theme))));
+      return right(SettingThemeEntity.map(await settingThemeService.updateCurrentTheme(SettingThemeModel.map(theme))));
     } catch (e) {
       return left(Failure(e.toString()));
     }

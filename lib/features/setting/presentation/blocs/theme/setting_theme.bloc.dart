@@ -17,6 +17,9 @@ class SettingThemeBloc extends Bloc<SettingThemeEvent, SettingThemeState> {
         super(SettingThemeInitial()) {
     on<SettingFetchCurrentThemeEvent>(_onFetchCurrentTheme);
     on<SettingUpdateCurrentThemeEvent>(_onUpdateCurrentTheme);
+    on<SettingThemeEvent>((_, emit) {
+      emit(SettingThemeLoadingState());
+    });
   }
 
   void _onFetchCurrentTheme(SettingFetchCurrentThemeEvent event, Emitter<SettingThemeState> emit) async {

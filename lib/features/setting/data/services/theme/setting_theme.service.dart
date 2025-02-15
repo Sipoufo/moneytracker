@@ -6,5 +6,5 @@ abstract  interface class SettingThemeService {
   SettingThemeModel fetchCurrentTheme();
 
   /// Use to update current theme
-  SettingThemeModel updateCurrentTheme(SettingThemeModel theme);
+  Future<SettingThemeModel> updateCurrentTheme(SettingThemeModel theme);
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:moneytracker/core/utils/constants/colors.util.dart';
+import 'package:moneytracker/core/utils/constants/init_values.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
 import 'package:moneytracker/core/widgets/header.widget.dart';
 import 'package:moneytracker/features/setting/domain/entities/theme/setting_theme.entity.dart';
@@ -20,11 +21,20 @@ class Setting extends StatefulWidget {
 class _SettingState extends State<Setting> {
   // Switch button value
   bool isDark = true;
+  String? username;
 
   @override
   void initState() {
     context.read<SettingThemeBloc>().add(const SettingFetchCurrentThemeEvent());
+    loadCurrentUsername();
     super.initState();
+  }
+
+  loadCurrentUsername() async {
+    final prefs = await InitValuesUtil.sharedPreferences;
+    setState(() {
+      username = prefs.getString("username");
+    });
   }
 
   @override
@@ -45,7 +55,7 @@ class _SettingState extends State<Setting> {
                   color: ColorsUtils.primary_5,
                 ),
                 child: Text(
-                  "S",
+                  username != null && username!.isNotEmpty ? username![0] : "S",
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.displayLarge,
                 ),
@@ -76,7 +86,7 @@ class _SettingState extends State<Setting> {
                           size: 16.0,
                           color: Theme.of(context).colorScheme.surface,
                         ),
-                        onTap: () => Navigator.pushNamed(context, "/setting/account"),
+                        onTap: () => Navigator.pushNamed(context, "/setting/account").then((_) => loadCurrentUsername()),
                       ),
 
                       // Wallet

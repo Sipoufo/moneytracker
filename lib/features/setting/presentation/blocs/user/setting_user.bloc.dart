@@ -17,6 +17,9 @@ class SettingUserBloc extends Bloc<SettingUserEvent, SettingUserState> {
         super(SettingUserInitial()) {
     on<SettingFetchCurrentUserEvent>(_onFetchCurrentUser);
     on<SettingSaveCurrentUserEvent>(_onSaveCurrentUser);
+    on<SettingUserEvent>((_, emit) {
+      emit(SettingUserLoadingState());
+    });
   }
 
   void _onFetchCurrentUser(SettingFetchCurrentUserEvent event, Emitter<SettingUserState> emit) async {

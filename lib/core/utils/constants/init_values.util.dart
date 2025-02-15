@@ -12,23 +12,23 @@ class InitValuesUtil {
       CategoryModel(
           name: AppLocalizations.of(context).education,
           picture: "assets/pictures/categories/education.png",
-          backgroundColor: ColorsUtils.malibu),
+          backgroundColor: ColorsUtils.malibu.value),
       CategoryModel(
           name: AppLocalizations.of(context).food,
           picture: "assets/pictures/categories/food.png",
-          backgroundColor: ColorsUtils.broom),
+          backgroundColor: ColorsUtils.broom.value),
       CategoryModel(
           name: AppLocalizations.of(context).gift,
           picture: "assets/pictures/categories/gift.png",
-          backgroundColor: ColorsUtils.broom),
+          backgroundColor: ColorsUtils.broom.value),
       CategoryModel(
           name: AppLocalizations.of(context).investment,
           picture: "assets/pictures/categories/investment.png",
-          backgroundColor: ColorsUtils.primary_2),
+          backgroundColor: ColorsUtils.primary_2.value),
       CategoryModel(
           name: AppLocalizations.of(context).vehicle,
           picture: "assets/pictures/categories/vehicle.png",
-          backgroundColor: ColorsUtils.malibu),
+          backgroundColor: ColorsUtils.malibu.value),
     ];
   }
 

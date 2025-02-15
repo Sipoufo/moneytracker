@@ -13,19 +13,8 @@ class NoBudgetWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: SizeUtil.md, vertical: SizeUtil.sm_12),
       width: double.infinity,
       child: Column(
+        spacing: SizeUtil.spaceBtwItems_12,
         children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              AppLocalizations.of(context).yourBudget,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-          ),
-
-          // Spacing
-          const SizedBox(
-            height: SizeUtil.spaceBtwItems_24,
-          ),
 
           Center(
             child: Image.asset(
@@ -35,22 +24,11 @@ class NoBudgetWidget extends StatelessWidget {
               fit: BoxFit.contain,
             ),
           ),
-
-          // Spacing
-          const SizedBox(
-            height: SizeUtil.spaceBtwItems_12,
-          ),
-
           Text(
             AppLocalizations.of(context).notBudgetTitle,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
               color: Theme.of(context).colorScheme.tertiaryContainer,
             ),
-          ),
-
-          // Spacing
-          const SizedBox(
-            height: SizeUtil.spaceBtwItems_12,
           ),
 
           Text(

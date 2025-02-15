@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:moneytracker/features/budget/presentation/blocs/budget.bloc.dart';
 import 'package:moneytracker/features/navigation/cubit/application_navigation_cubit.cubit.dart';
 import 'package:moneytracker/features/setting/presentation/blocs/theme/setting_theme.bloc.dart';
 import 'package:moneytracker/features/setting/presentation/blocs/user/setting_user.bloc.dart';
@@ -11,5 +12,6 @@ class AppBlocProvider {
         BlocProvider(create: (_) => serviceLocator<SettingThemeBloc>()),
         BlocProvider(create: (_) => serviceLocator<SettingUserBloc>()),
         BlocProvider(create: (_) => serviceLocator<SettingWalletBloc>()),
+        BlocProvider(create: (_) => serviceLocator<BudgetBloc>()),
       ];
 }

@@ -16,6 +16,7 @@ import 'package:moneytracker/hive_register.dart';
 import 'package:moneytracker/init_dependencies.main.dart';
 import 'package:moneytracker/routes/general_routes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:moneytracker/routes/param_routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -91,6 +92,7 @@ class _MyAppState extends State<MyApp> {
           darkTheme: ThemeUtil.dark,
           debugShowCheckedModeBanner: false,
           routes: generalRoutes,
+          onGenerateRoute: (setting) => paramRoutes(setting),
         );
       },
     );

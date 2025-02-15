@@ -30,8 +30,8 @@ class SettingThemeServiceImpl implements SettingThemeService {
 
   /// Use to update current theme
   @override
-  SettingThemeModel updateCurrentTheme(SettingThemeModel theme) {
-    localDataService.updateLocalData(id: theme.id, data: theme);
+  Future<SettingThemeModel> updateCurrentTheme(SettingThemeModel theme) async {
+    await localDataService.updateLocalData(id: theme.id, data: theme);
     return theme;
   }
 }

@@ -20,10 +20,6 @@ Map<String, WidgetBuilder> get generalRoutes => <String, WidgetBuilder> {
   "/transaction/transaction-detail": (context) => const TransactionDetail(),
   "/transaction/new-transaction": (context) => const NewTransactionWidget(),
 
-  // Budget part
-  "/budget/budget-detail": (context) => const BudgetDetail(),
-  "/budget/new-budget": (context) => const NewBudget(),
-
   // Setting part
   "/setting/account": (context) => const AccountSetting(),
   "/setting/wallet": (context) => const WalletSetting(),

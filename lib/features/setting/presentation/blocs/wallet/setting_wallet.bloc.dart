@@ -32,6 +32,9 @@ class SettingWalletBloc extends Bloc<SettingWalletEvent, SettingWalletState> {
     on<SettingSaveDefaultWalletEvent>(_onSaveDefaultWallet);
     on<SettingDeleteWalletEvent>(_onDeleteWallet);
     on<SettingChangeDefaultWalletEvent>(_onChangeDefaultWallet);
+    on<SettingWalletEvent>((_, emit) {
+      emit(SettingWalletLoadingState());
+    });
   }
 
   void _onFetchAllWallets(SettingFetchAllWalletsEvent event, Emitter<SettingWalletState> emit) async {

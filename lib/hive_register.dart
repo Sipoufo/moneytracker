@@ -1,8 +1,10 @@
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:moneytracker/core/utils/models/category.model.dart';
 import 'package:moneytracker/core/utils/models/country_infos.model.dart';
 import 'package:moneytracker/core/utils/models/currency.model.dart';
 import 'package:moneytracker/core/utils/models/flag.model.dart';
+import 'package:moneytracker/features/budget/data/models/budget.model.dart';
 import 'package:moneytracker/features/setting/data/models/theme/setting_theme.model.dart';
 import 'package:moneytracker/features/setting/data/models/user/setting_user.model.dart';
 import 'package:moneytracker/features/setting/data/models/wallet/setting_wallet.model.dart';
@@ -16,6 +18,8 @@ class HiveRegister {
     Hive.registerAdapter<CountryInfos>(CountryInfosAdapter());
     Hive.registerAdapter<FlagModel>(FlagModelAdapter());
     Hive.registerAdapter<CurrencyModel>(CurrencyModelAdapter());
+    Hive.registerAdapter<CategoryModel>(CategoryModelAdapter());
+    Hive.registerAdapter<BudgetModel>(BudgetModelAdapter());
   }
 
   static Future<void> openAllBoxes() async {
@@ -25,6 +29,8 @@ class HiveRegister {
     await Hive.openBox<CountryInfos>("CountryInfos");
     await Hive.openBox<FlagModel>("FlagModel");
     await Hive.openBox<CurrencyModel>("CurrencyModel");
+    await Hive.openBox<CategoryModel>("CategoryModel");
+    await Hive.openBox<BudgetModel>("BudgetModel");
   }
 
   static void initDependencies() {
@@ -34,5 +40,7 @@ class HiveRegister {
     serviceLocator.registerFactory<Box<CountryInfos>>(() => Hive.box<CountryInfos>("CountryInfos"));
     serviceLocator.registerFactory<Box<FlagModel>>(() => Hive.box<FlagModel>("FlagModel"));
     serviceLocator.registerFactory<Box<CurrencyModel>>(() => Hive.box<CurrencyModel>("CurrencyModel"));
+    serviceLocator.registerFactory<Box<CategoryModel>>(() => Hive.box<CategoryModel>("CategoryModel"));
+    serviceLocator.registerFactory<Box<BudgetModel>>(() => Hive.box<BudgetModel>("BudgetModel"));
   }
 }

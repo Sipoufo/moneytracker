@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:moneytracker/features/navigation/cubit/application_navigation_cubit.cubit.dart';
 import 'package:moneytracker/hive_register.dart';
+import 'package:moneytracker/injection/budget.injection.dart';
 import 'package:moneytracker/injection/setting.injection.dart';
 
 final serviceLocator = GetIt.instance;
@@ -14,6 +15,7 @@ void initDependencies() async {
   SettingInjection.settingThemeInjection();
   SettingInjection.settingUserInjection();
   SettingInjection.settingWalletInjection();
+  BudgetInjection.budgetInjection();
 }
 
 // Function use to init onboarding dependencies

@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:moneytracker/core/utils/constants/colors.util.dart';
 import 'package:moneytracker/core/utils/constants/icons.util.dart';
 import 'package:moneytracker/core/utils/constants/init_values.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
+import 'package:moneytracker/core/utils/models/category.model.dart';
 import 'package:moneytracker/core/widgets/button.widget.dart';
 import 'package:moneytracker/core/widgets/header.widget.dart';
+import 'package:moneytracker/features/budget/domain/entries/budget.entity.dart';
+import 'package:moneytracker/features/budget/presentation/blocs/budget.bloc.dart';
+import 'package:moneytracker/features/budget/presentation/blocs/budget.event.dart';
 import 'package:moneytracker/features/budget/presentation/widgets/new_budget_page_1.widget.dart';
 import 'package:moneytracker/features/budget/presentation/widgets/new_budget_page_2.widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class NewBudget extends StatefulWidget {
-  const NewBudget({super.key});
+  const NewBudget({super.key, this.budget});
+
+  final BudgetEntity? budget;
 
   @override
   State<NewBudget> createState() => _NewBudgetState();
@@ -25,30 +32,111 @@ class _NewBudgetState extends State<NewBudget> {
   int actualCategoryIndex = 0;
   double? containWidgetHeight;
 
-  // Fields' controllers of form
-  TextEditingController budgetNameController = TextEditingController();
-  TextEditingController budgetAmountController = TextEditingController();
-  TextEditingController budgetAchievementDateController = TextEditingController();
-
-  final formKey = GlobalKey<FormState>();
-
   final List<Widget> pageFormContain = [];
   int pageFormContainIndex = 0;
+  List<CategoryModel> categories = [];
+
+  // Fields
+  String name = "";
+  double amount = 0;
+  DateTime dateTime = DateTime.now();
+
+  void updateFieldsState1(String nameField) {
+    setState(() {
+      name = nameField;
+    });
+  }
+
+  void updateFieldsState2(double amountField, DateTime dateTimeField) {
+    setState(() {
+      amount = amountField;
+      dateTime = dateTimeField;
+    });
+  }
 
   @override
   void initState() {
+    Future.delayed(Duration.zero,() {
+      setState(() {
+        categories = InitValuesUtil.categories(context);
+      });
+    });
+
+    // If it's updated
+    setState(() {
+      if (widget.budget != null) {
+        name = widget.budget!.name;
+        amount = widget.budget!.amount;
+        dateTime = widget.budget!.achievementDate;
+        actualCategoryIndex = 0;
+        for (int i = 0; i < categories.length; i++) {
+          if (categories[i].name == widget.budget!.category.name) {
+            actualCategoryIndex = i;
+            pageController = PageController(
+              viewportFraction: 0.35,
+              initialPage: i,
+            );
+          }
+        }
+      }
+    });
     pageFormContain.add(
       NewBudgetPage1Widget(
-        budgetNameController: budgetNameController,
+        nextPage: nextPage,
+        name: name,
+        updateFieldsState1: updateFieldsState1,
       ),
     );
     pageFormContain.add(
       NewBudgetPage2Widget(
-        budgetAmountController: budgetAmountController,
-        budgetAchievementDateController: budgetAchievementDateController,
+        amount: amount,
+        date: dateTime,
+        save: save,
+        prevPage: prevPage,
+        updateFieldsState2: updateFieldsState2,
       ),
     );
     super.initState();
+  }
+
+  void nextPage() {
+    if (pageFormContain.length - 1 > pageFormContainIndex) {
+      setState(() {
+        pageFormContainIndex += 1;
+      });
+    }
+  }
+
+  void prevPage() {
+    if (pageFormContainIndex > 0) {
+      setState(() {
+        pageFormContainIndex -= 1;
+      });
+    }
+  }
+
+  void save() {
+    // If budget is pass as parameter so we consider that is update section
+    if (widget.budget != null) {
+      context.read<BudgetBloc>().add(BudgetUpdateOneEvent(widget.budget!.id, BudgetEntity(
+        name: name,
+        amount: amount,
+        currentAmount: 0,
+        achievementDate: dateTime,
+        category: categories[actualCategoryIndex],
+      )));
+      context.read<BudgetBloc>().add(BudgetFetchAllEvent());
+    } else {
+      context.read<BudgetBloc>().add(BudgetSaveOneEvent(BudgetEntity(
+        name: name,
+        amount: amount,
+        currentAmount: 0,
+        achievementDate: dateTime,
+        category: categories[actualCategoryIndex],
+      )));
+      context.read<BudgetBloc>().add(BudgetFetchAllEvent());
+    }
+    Navigator.pop(context);
   }
 
   @override
@@ -89,7 +177,7 @@ class _NewBudgetState extends State<NewBudget> {
                         width: double.infinity,
                         child: PageView.builder(
                           controller: pageController,
-                          itemCount: InitValuesUtil.categories(context).length,
+                          itemCount: categories.length,
                           onPageChanged: (int pageIndex) {
                             setState(() {
                               actualCategoryIndex = pageIndex;
@@ -106,11 +194,11 @@ class _NewBudgetState extends State<NewBudget> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         color: actualCategoryIndex == itemIndex
-                                            ? InitValuesUtil.categories(context)[itemIndex].backgroundColor
+                                            ? Color(categories[itemIndex].backgroundColor)
                                             : Theme.of(context).colorScheme.tertiary,
                                         borderRadius: const BorderRadius.all(Radius.circular(10000)),
                                         image: DecorationImage(
-                                          image: AssetImage(InitValuesUtil.categories(context)[itemIndex].picture),
+                                          image: AssetImage(categories[itemIndex].picture),
                                         ),
                                       ),
                                       height: actualCategoryIndex == itemIndex ? 100 : 70,
@@ -125,7 +213,7 @@ class _NewBudgetState extends State<NewBudget> {
 
                                   if (actualCategoryIndex == itemIndex)
                                     Text(
-                                      InitValuesUtil.categories(context)[itemIndex].name,
+                                      categories[itemIndex].name,
                                       style: Theme.of(context).textTheme.headlineSmall,
                                     ),
                                 ],
@@ -182,6 +270,7 @@ class _NewBudgetState extends State<NewBudget> {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(SizeUtil.md, 0, SizeUtil.md, SizeUtil.sm_12),
                   child: Column(
+                    spacing: SizeUtil.spaceBtwItems_24,
                     children: [
                       // Pan button
                       GestureDetector(
@@ -217,77 +306,7 @@ class _NewBudgetState extends State<NewBudget> {
                         ),
                       ),
 
-                      // Spacing
-                      const SizedBox(
-                        height: SizeUtil.spaceBtwItems_24,
-                      ),
-
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Expanded(
-                              child: SingleChildScrollView(
-                                child: Form(
-                                  key: formKey,
-                                  child: pageFormContain[pageFormContainIndex],
-                                ),
-                              ),
-                            ),
-
-                            // Spacing
-                            const SizedBox(
-                              height: SizeUtil.spaceBtwItems_4,
-                            ),
-
-                            SizedBox(
-                              child: Column(
-                                children: [
-                                  // Spacing
-                                  const SizedBox(
-                                    height: SizeUtil.spaceBtwItems_24,
-                                  ),
-
-                                  ButtonWidget(
-                                    title: (pageFormContain.length - 1) == pageFormContainIndex
-                                        ? AppLocalizations.of(context).finish
-                                        : AppLocalizations.of(context).next,
-                                    textStyle: Theme.of(context).textTheme.headlineSmall,
-                                    onTap: () {
-                                      setState(() {
-                                        if (pageFormContain.length - 1 > pageFormContainIndex) {
-                                          pageFormContainIndex += 1;
-                                        } else {
-                                          Navigator.pop(context);
-                                        }
-                                      });
-                                    },
-                                    padding: const EdgeInsets.all(0),
-                                    color: ColorsUtils.primary_5,
-                                  ),
-
-                                  ButtonWidget(
-                                    title: pageFormContainIndex == 0
-                                        ? AppLocalizations.of(context).cancel
-                                        : AppLocalizations.of(context).previous,
-                                    textStyle: Theme.of(context).textTheme.headlineSmall,
-                                    onTap: () {
-                                      setState(() {
-                                        if (pageFormContainIndex > 0) {
-                                          pageFormContainIndex -= 1;
-                                        }
-                                      });
-                                    },
-                                    padding: const EdgeInsets.all(0),
-                                    color: Theme.of(context).colorScheme.primary,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      pageFormContain[pageFormContainIndex],
                     ],
                   ),
                 ),

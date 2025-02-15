@@ -86,6 +86,12 @@ class _InputFormWidgetState extends State<InputFormWidget> {
                   ),
               fillColor: Theme.of(context).colorScheme.primaryContainer,
               filled: true,
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(SizeUtil.borderRadiusMd),
+                borderSide: const BorderSide(
+                  color: ColorsUtils.danger_5,
+                ),
+              ),
               contentPadding: const EdgeInsets.symmetric(horizontal: SizeUtil.sm_12, vertical: SizeUtil.md_20),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(SizeUtil.borderRadiusMd),
@@ -114,13 +120,6 @@ class _InputFormWidgetState extends State<InputFormWidget> {
               ),
             ),
           ),
-          if(errorValue != null)
-            Text(
-              errorValue!,
-              style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                color: ColorsUtils.danger_5,
-              ),
-            ),
         ],
       ),
     );
