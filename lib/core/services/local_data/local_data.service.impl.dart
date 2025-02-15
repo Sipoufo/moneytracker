@@ -12,7 +12,7 @@ class LocalDataServiceImpl<T> implements LocalDataService<T> {
   }
 
   @override
-  Future<void> deleteOneLocalData({required String id}) async {
+  Future<void> deleteOneLocalData({required int id}) async {
     return await box.delete(id);
   }
 
@@ -22,12 +22,17 @@ class LocalDataServiceImpl<T> implements LocalDataService<T> {
   }
 
   @override
-  T? loadOneData({required String id}) {
+  T? loadOneData({required int id}) {
     return box.get(id);
   }
 
   @override
-  Future<void> updateLocalData({required String id, required data}) async {
+  Future<int> addLocalData({required data}) async {
+    return await box.add(data);
+  }
+
+  @override
+  Future<void> updateLocalData({required int id, required data}) async {
     await box.put(id, data);
   }
 }

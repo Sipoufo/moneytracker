@@ -150,6 +150,7 @@
     "account": "Account",
     "accountInformationAndPreference": "Account information and preference",
     "wallet": "Wallet",
+    "createWallet": "Create wallet",
     "savedWallet": "Saved wallet",
     "integration": "Integration",
     "connectBankAndOtherFinancialService": "Connect bank and other financial service",
@@ -171,6 +172,11 @@
 
     "yoursWallets": "Yours Wallets",
     "addNewWallet": "Add new wallet",
+    "nameWallet": "Name of wallet",
+    "selectCountry": "Select country",
+    "initialAmount": "Initial amount",
+    "deleteWallet": "Delete wallet",
+    "setAsDefault": "Set as Default",
 
     "currentCurrency": "Current currency",
     "currentCurrencyDetail": "To change the currency, you can choose one of the available currency below.",

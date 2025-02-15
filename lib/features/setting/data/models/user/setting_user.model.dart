@@ -7,7 +7,7 @@ part 'setting_user.model.g.dart';
 @HiveType(typeId: 02)
 class SettingUserModel {
   @HiveField(00)
-  final String id;
+  final int id;
 
   @HiveField(01)
   final String fullName;

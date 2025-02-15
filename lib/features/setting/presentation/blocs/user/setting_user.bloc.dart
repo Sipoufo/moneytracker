@@ -23,7 +23,7 @@ class SettingUserBloc extends Bloc<SettingUserEvent, SettingUserState> {
     final res = await _settingFetchCurrentUserUseCase(NoParams());
     res.fold(
       (l) => emit(SettingUserFailureState(l.message)),
-      (r) => emit(SettingUserSuccessState(r)),
+      (r) => emit(SettingUserSuccessFetchState(r)),
     );
   }
 
@@ -31,7 +31,7 @@ class SettingUserBloc extends Bloc<SettingUserEvent, SettingUserState> {
     final res = await _settingSaveCurrentUserUseCase(SettingUpdateCurrentUserParam(event.user));
     res.fold(
           (l) => emit(SettingUserFailureState(l.message)),
-          (r) => emit(SettingUserSuccessState(r)),
+          (r) => emit(SettingUserSuccessSaveState(r)),
     );
   }
 }

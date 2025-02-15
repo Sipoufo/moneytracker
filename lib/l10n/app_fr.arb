@@ -150,6 +150,7 @@
     "account": "Compte",
     "accountInformationAndPreference": "Information sur le compte et préférences",
     "wallet": "Portfeuille",
+    "createWallet": "Créer un portfeuille",
     "savedWallet": "Portfeuille sauvegardé",
     "integration": "Intégration",
     "connectBankAndOtherFinancialService": "Connecter les banques et autres services financiers",
@@ -171,6 +172,11 @@
 
     "yoursWallets": "Tes portefeuilles",
     "addNewWallet": "Ajouter un nouveau portefeuille",
+    "nameWallet": "Nome du portefeuille",
+    "selectCountry": "Selectionner un pays",
+    "initialAmount": "Montant initial",
+    "deleteWallet": "Supprimer ce portefeuille",
+    "setAsDefault": "Mettre comme default",
 
     "currentCurrency": "Monnaie courante",
     "currentCurrencyDetail": "Pour changer de devise, vous pouvez choisir l'une des devises disponibles ci-dessous.",

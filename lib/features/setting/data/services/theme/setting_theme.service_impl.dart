@@ -17,7 +17,7 @@ class SettingThemeServiceImpl implements SettingThemeService {
     // If no theme is find, we save the system theme for default theme
     if (currentTheme.isEmpty) {
       SettingThemeModel systemTheme = const SettingThemeModel(
-        id: "0",
+        id: 0,
         isDark: (ThemeMode.system == ThemeMode.dark ? true : false),
       );
       updateCurrentTheme(SettingThemeModel(id: systemTheme.id, isDark: systemTheme.isDark));

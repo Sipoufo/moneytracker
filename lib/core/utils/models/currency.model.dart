@@ -1,3 +1,7 @@
+import 'package:hive_flutter/hive_flutter.dart';
+
+part 'currency.model.g.dart';
+
 /// This class is use to mange flag of country
 /// [symbol] represent the symbol of currency
 /// [name] represent the name of currency
@@ -6,13 +10,21 @@
 /// [rounding] represent rounding
 /// [code] represent the code of currency
 /// [namePlural] represent the full name of currency
+@HiveType(typeId: 07)
 class CurrencyModel {
+  @HiveField(00)
   final String symbol;
+  @HiveField(01)
   final String name;
+  @HiveField(02)
   final String symbolNative;
+  @HiveField(03)
   final double? decimalDigits;
+  @HiveField(04)
   final double? rounding;
+  @HiveField(05)
   final String code;
+  @HiveField(06)
   final String namePlural;
 
   CurrencyModel({

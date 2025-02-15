@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:moneytracker/core/utils/constants/colors.util.dart';
 import 'package:moneytracker/core/utils/constants/icons.util.dart';
+import 'package:moneytracker/core/utils/constants/init_values.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
 import 'package:moneytracker/core/widgets/button.widget.dart';
 import 'package:moneytracker/core/widgets/header.widget.dart';
 import 'package:moneytracker/core/widgets/input_form.widget.dart';
+import 'package:moneytracker/core/widgets/loading.widget.dart';
 import 'package:moneytracker/core/widgets/separator.widget.dart';
 import 'package:moneytracker/core/widgets/show_snackbar.widget.dart';
 import 'package:moneytracker/core/widgets/text_button.widget.dart';
@@ -27,11 +29,20 @@ class _AccountSettingState extends State<AccountSetting> {
   TextEditingController usernameInputController = TextEditingController();
   TextEditingController emailInputController = TextEditingController();
   bool canEdit = false;
+  String? username;
 
   @override
   void initState() {
     context.read<SettingUserBloc>().add(const SettingFetchCurrentUserEvent());
+    loadCurrentUsername();
     super.initState();
+  }
+
+  loadCurrentUsername() async {
+    final prefs = await InitValuesUtil.sharedPreferences;
+    setState(() {
+      username = prefs.getString("username");
+    });
   }
 
   @override
@@ -42,16 +53,25 @@ class _AccountSettingState extends State<AccountSetting> {
         child: BlocConsumer<SettingUserBloc, SettingUserState>(
           listener: (context, state) {
             // If response is successful
-            if (state is SettingUserSuccessState) {
+            if (state is SettingUserSuccessSaveState) {
+              showSnackBar(context, "Successful updated", isError: false);
+              context.read<SettingUserBloc>().add(const SettingFetchCurrentUserEvent());
+            }
+
+            if (state is SettingUserSuccessFetchState) {
               fullNameInputController = TextEditingController(text: state.settingUserEntity?.fullName ?? "");
               usernameInputController = TextEditingController(text: state.settingUserEntity?.userName ?? "");
               emailInputController = TextEditingController(text: state.settingUserEntity?.email ?? "");
+              loadCurrentUsername();
             }
             if (state is SettingUserFailureState) {
               showSnackBar(context, state.message);
             }
           },
           builder: (context, state) {
+            if (state is SettingUserLoadingState) {
+              return const Expanded(child: LoadingWidget());
+            }
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -85,7 +105,7 @@ class _AccountSettingState extends State<AccountSetting> {
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Text(
-                                    "S",
+                                    username != null && username!.isNotEmpty ? username![0] : "S",
                                     textAlign: TextAlign.center,
                                     style: Theme.of(context).textTheme.headlineSmall,
                                   ),
@@ -178,7 +198,7 @@ class _AccountSettingState extends State<AccountSetting> {
                                       context.read<SettingUserBloc>().add(
                                             SettingSaveCurrentUserEvent(
                                               SettingUserEntity(
-                                                id: "0",
+                                                id: 0,
                                                 fullName: fullNameInputController.text,
                                                 userName: usernameInputController.text,
                                                 email: emailInputController.text,

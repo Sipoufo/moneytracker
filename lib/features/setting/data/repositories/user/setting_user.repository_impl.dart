@@ -24,9 +24,9 @@ class SettingUserRepositoryImpl implements SettingUserRepository {
   }
 
   @override
-  Future<Either<Failure, SettingUserEntity>> saveCurrentUser(SettingUserEntity User) async {
+  Future<Either<Failure, SettingUserEntity>> saveCurrentUser(SettingUserEntity user) async {
     try {
-      return right(SettingUserEntity.map(settingUserService.saveCurrentUser(SettingUserModel.map(User))));
+      return right(SettingUserEntity.map(await settingUserService.saveCurrentUser(SettingUserModel.map(user))));
     } catch (e) {
       return left(Failure(e.toString()));
     }

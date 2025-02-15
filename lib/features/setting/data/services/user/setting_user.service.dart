@@ -1,10 +1,10 @@
 import 'package:moneytracker/features/setting/data/models/user/setting_user.model.dart';
 
-// Abstract class use to manage theme
+// Abstract class use to manage user
 abstract  interface class SettingUserService {
-  /// Use to fetch current theme
+  /// Use to fetch current user
   SettingUserModel? fetchCurrentUser();
 
-  /// Use to update current theme
-  SettingUserModel saveCurrentUser(SettingUserModel user);
+  /// Use to save current user
+  Future<SettingUserModel> saveCurrentUser(SettingUserModel user);
 }

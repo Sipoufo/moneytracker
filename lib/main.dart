@@ -3,10 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:moneytracker/bloc_providers.dart';
+import 'package:moneytracker/core/utils/constants/init_values.util.dart';
 import 'package:moneytracker/core/utils/theme/theme.util.dart';
+import 'package:moneytracker/features/setting/domain/entities/wallet/setting_wallet.entity.dart';
 import 'package:moneytracker/features/setting/presentation/blocs/theme/setting_theme.bloc.dart';
 import 'package:moneytracker/features/setting/presentation/blocs/theme/setting_theme.event.dart';
 import 'package:moneytracker/features/setting/presentation/blocs/theme/setting_theme.state.dart';
+import 'package:moneytracker/features/setting/presentation/blocs/wallet/setting_wallet.bloc.dart';
+import 'package:moneytracker/features/setting/presentation/blocs/wallet/setting_wallet.event.dart';
+import 'package:moneytracker/features/setting/presentation/blocs/wallet/setting_wallet.state.dart';
 import 'package:moneytracker/hive_register.dart';
 import 'package:moneytracker/init_dependencies.main.dart';
 import 'package:moneytracker/routes/general_routes.dart';
@@ -47,7 +52,11 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
+    // Get current theme
     context.read<SettingThemeBloc>().add(const SettingFetchCurrentThemeEvent());
+    // Save default wallet
+    context.read<SettingWalletBloc>().add(const SettingSaveDefaultWalletEvent());
+    // Init default wallet
     super.initState();
   }
 

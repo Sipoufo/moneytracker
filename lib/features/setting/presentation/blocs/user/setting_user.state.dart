@@ -10,9 +10,14 @@ final class SettingUserInitial extends SettingUserState {}
 
 final class SettingUserLoadingState extends SettingUserState {}
 
-final class SettingUserSuccessState extends SettingUserState{
+final class SettingUserSuccessFetchState extends SettingUserState{
   final SettingUserEntity? settingUserEntity;
-  const SettingUserSuccessState(this.settingUserEntity);
+  const SettingUserSuccessFetchState(this.settingUserEntity);
+}
+
+final class SettingUserSuccessSaveState extends SettingUserState{
+  final SettingUserEntity? settingUserEntity;
+  const SettingUserSuccessSaveState(this.settingUserEntity);
 }
 
 final class SettingUserFailureState extends SettingUserState {

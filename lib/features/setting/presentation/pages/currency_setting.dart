@@ -3,10 +3,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:moneytracker/core/utils/constants/colors.util.dart';
 import 'package:moneytracker/core/utils/constants/icons.util.dart';
 import 'package:moneytracker/core/utils/constants/information.util.dart';
+import 'package:moneytracker/core/utils/constants/init_values.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
 import 'package:moneytracker/core/utils/models/country_infos.model.dart';
 import 'package:moneytracker/core/widgets/button.widget.dart';
 import 'package:moneytracker/core/widgets/header.widget.dart';
+import 'package:moneytracker/core/widgets/loading.widget.dart';
 
 class CurrentSetting extends StatefulWidget {
   const CurrentSetting({super.key});
@@ -16,6 +18,42 @@ class CurrentSetting extends StatefulWidget {
 }
 
 class _CurrentSettingState extends State<CurrentSetting> {
+  List<CountryInfos> countriesInfos = [];
+  CountryInfos? countryInfos;
+  bool loadData = true;
+
+  @override
+  void initState() {
+    loadAllCountries();
+    super.initState();
+  }
+
+  loadAllCountries() async {
+    List<CountryInfos> items = await InformationUtil.countries();
+    final prefs = await InitValuesUtil.sharedPreferences;
+    String? actualCountryName = prefs.getString("countryName");
+
+    setState(() {
+      countriesInfos = items;
+    });
+    for (CountryInfos item in items) {
+      if (item.name == actualCountryName) {
+        countryInfos = item;
+      }
+    }
+
+    loadData = false;
+  }
+
+  updateCurrentCurrency(CountryInfos country) async {
+    setState(() {
+      countryInfos = country;
+    });
+    final prefs = await InitValuesUtil.sharedPreferences;
+    await prefs.setString("currency", country.currency.symbol);
+    await prefs.setString("countryName", country.name);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,13 +62,18 @@ class _CurrentSettingState extends State<CurrentSetting> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (loadData == true)
+              const Expanded(child: LoadingWidget()),
+
             // Header of account setting page
+            if (loadData == false)
             HeaderWidget(
               title: AppLocalizations.of(context).currency,
               firstIcon: IconsUtils.back(context: context, onTap: () => Navigator.pop(context)),
             ),
 
             // Current currency
+            if (loadData == false)
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(SizeUtil.md),
@@ -54,13 +97,13 @@ class _CurrentSettingState extends State<CurrentSetting> {
 
                       // Button add new wallet
                       ButtonWidget(
-                        title: "Cameroon (FCFA)",
+                        title: countryInfos != null ? "${countryInfos?.name} (${countryInfos?.currency.code})" : "Cameroon (FCFA)",
                         textStyle: Theme.of(context).textTheme.titleMedium,
                         onTap: () {},
                         padding: const EdgeInsets.all(SizeUtil.md_18),
                         color: Theme.of(context).colorScheme.primaryContainer,
-                        icon: const Text(
-                          "🇨🇲",
+                        icon: Text(
+                          countryInfos?.flag.emoji ?? "🇨🇲",
                         ),
                         secondIcon: const Icon(
                           Icons.check_circle,
@@ -96,6 +139,7 @@ class _CurrentSettingState extends State<CurrentSetting> {
             ),
 
             // Contain
+            if (loadData == false)
             Expanded(
               child: SingleChildScrollView(
                 child: Container(
@@ -120,39 +164,28 @@ class _CurrentSettingState extends State<CurrentSetting> {
                           ),
 
                           // Button add new wallet
-                          FutureBuilder(
-                            future: InformationUtil.countries(),
-                            builder: (BuildContext context, AsyncSnapshot<List<CountryInfos>> countries) {
-                              if (countries.connectionState == ConnectionState.waiting) {
-                                return const Center(child: Text('Please wait its loading...'));
-                              } else {
-                                if (countries.hasError) {
-                                  return Center(child: Text('Error: ${countries.error}'));
-                                } else {
-                                  return Column(
-                                    spacing: SizeUtil.defaultSpace,
-                                    children: countries.data!.map((country) {
-                                      return ButtonWidget(
-                                        title: "${country.name} (${country.currency.code})",
-                                        textStyle: Theme.of(context).textTheme.titleMedium,
-                                        onTap: () {},
-                                        padding: const EdgeInsets.all(SizeUtil.md_18),
-                                        color: Theme.of(context).colorScheme.primaryContainer,
-                                        icon: Text(
-                                          country.flag.emoji,
-                                        ),
-                                        secondIcon: const Icon(
-                                          Icons.circle_outlined,
-                                          color: ColorsUtils.grayscale_white_dark_white,
-                                          size: SizeUtil.iconMd,
-                                        ),
-                                        border: BorderSide(color: Theme.of(context).colorScheme.secondaryContainer,),
-                                      );
-                                    }).toList(),
-                                  );
-                                }
-                              }
-                            },
+                          Column(
+                            spacing: SizeUtil.defaultSpace,
+                            children: countriesInfos.map((country) {
+                              return ButtonWidget(
+                                title: "${country.name} (${country.currency.code})",
+                                textStyle: Theme.of(context).textTheme.titleMedium,
+                                onTap: () => updateCurrentCurrency(country),
+                                padding: const EdgeInsets.all(SizeUtil.md_18),
+                                color: Theme.of(context).colorScheme.primaryContainer,
+                                icon: Text(
+                                  country.flag.emoji,
+                                ),
+                                secondIcon: Icon(
+                                  country.name == countryInfos?.name ? Icons.lightbulb_circle_sharp : Icons.circle_outlined,
+                                  color: country.name == countryInfos?.name ? ColorsUtils.primary_4 : ColorsUtils.grayscale_white_dark_white,
+                                  size: SizeUtil.iconMd,
+                                ),
+                                border: BorderSide(
+                                  color: Theme.of(context).colorScheme.secondaryContainer,
+                                ),
+                              );
+                            }).toList(),
                           ),
                         ],
                       ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:moneytracker/core/utils/constants/colors.util.dart';
 import 'package:moneytracker/core/utils/models/category.model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Class use for general init values
 class InitValuesUtil {
@@ -45,4 +46,7 @@ class InitValuesUtil {
       "5. ${AppLocalizations.of(context).review}",
     ];
   }
+
+  // ---------- Init shared preferences ----------
+  static final Future<SharedPreferences> sharedPreferences = SharedPreferences.getInstance();
 }

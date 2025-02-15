@@ -1,7 +1,7 @@
 import 'package:moneytracker/features/setting/data/models/user/setting_user.model.dart';
 
 class SettingUserEntity {
-  final String id;
+  final int id;
   final String fullName;
   final String userName;
   final String email;

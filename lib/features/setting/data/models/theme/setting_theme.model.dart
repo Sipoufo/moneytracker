@@ -8,7 +8,7 @@ part 'setting_theme.model.g.dart';
 @HiveType(typeId: 01)
 class SettingThemeModel {
   @HiveField(00)
-  final String id;
+  final int id;
 
   @HiveField(02)
   final bool isDark;
@@ -20,7 +20,7 @@ class SettingThemeModel {
 
   factory SettingThemeModel.map(SettingThemeEntity theme) {
     return SettingThemeModel(
-      id: "0",
+      id: 0,
       isDark: (theme.themeMode == ThemeMode.dark ? true : false),
     );
   }

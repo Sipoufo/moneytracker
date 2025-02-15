@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moneytracker/core/utils/constants/colors.util.dart';
 
 void showSnackBar(BuildContext context, String content, {bool isError = true}) {
   ScaffoldMessenger.of(context)
@@ -7,7 +8,7 @@ void showSnackBar(BuildContext context, String content, {bool isError = true}) {
       SnackBar(
         content: Text(content),
         behavior: SnackBarBehavior.floating,
-        backgroundColor: isError ? Colors.redAccent : Colors.greenAccent,
+        backgroundColor: isError ? ColorsUtils.danger_5 : ColorsUtils.primary_5,
       ),
     );
 }

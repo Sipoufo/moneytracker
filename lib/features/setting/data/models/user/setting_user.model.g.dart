@@ -17,7 +17,7 @@ class SettingUserModelAdapter extends TypeAdapter<SettingUserModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return SettingUserModel(
-      id: fields[0] as String,
+      id: fields[0] as int,
       fullName: fields[1] as String,
       userName: fields[2] as String,
       email: fields[3] as String,

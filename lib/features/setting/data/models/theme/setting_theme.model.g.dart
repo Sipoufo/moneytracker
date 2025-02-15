@@ -17,7 +17,7 @@ class SettingThemeModelAdapter extends TypeAdapter<SettingThemeModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return SettingThemeModel(
-      id: fields[0] as String,
+      id: fields[0] as int,
       isDark: fields[2] as bool,
     );
   }

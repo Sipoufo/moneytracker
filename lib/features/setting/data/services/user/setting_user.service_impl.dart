@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:moneytracker/core/services/local_data/local_data.service.dart';
+import 'package:moneytracker/core/utils/constants/init_values.util.dart';
 import 'package:moneytracker/features/setting/data/models/theme/setting_theme.model.dart';
 import 'package:moneytracker/features/setting/data/models/user/setting_user.model.dart';
 import 'package:moneytracker/features/setting/data/services/theme/setting_theme.service.dart';
 import 'package:moneytracker/features/setting/data/services/user/setting_user.service.dart';
 
-// Abstract class use to manage theme
+// Abstract class use to manage user
 class SettingUserServiceImpl implements SettingUserService {
   final LocalDataService<SettingUserModel> localDataService;
 
   SettingUserServiceImpl(this.localDataService);
 
-  /// Use to fetch current user
+  /// return current user if it's already save
   @override
   SettingUserModel? fetchCurrentUser() {
     List<SettingUserModel> currentUser = localDataService.loadData();
@@ -27,8 +28,10 @@ class SettingUserServiceImpl implements SettingUserService {
 
   /// Use to update current user
   @override
-  SettingUserModel saveCurrentUser(SettingUserModel user) {
+  Future<SettingUserModel> saveCurrentUser(SettingUserModel user) async {
     localDataService.updateLocalData(id: user.id, data: user);
+    final prefs = await InitValuesUtil.sharedPreferences;
+    await prefs.setString("username", user.userName);
     return user;
   }
 }

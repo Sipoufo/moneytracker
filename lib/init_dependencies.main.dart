@@ -13,6 +13,7 @@ void initDependencies() async {
   _initApplicationNavigation();
   SettingInjection.settingThemeInjection();
   SettingInjection.settingUserInjection();
+  SettingInjection.settingWalletInjection();
 }
 
 // Function use to init onboarding dependencies

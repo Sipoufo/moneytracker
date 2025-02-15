@@ -66,7 +66,7 @@ class _SettingState extends State<Setting> {
                       // Account
                       SettingItemWidget(
                         title: AppLocalizations.of(context).account,
-                        label: AppLocalizations.of(context).addNewTransaction,
+                        label: AppLocalizations.of(context).account,
                         icon: const Icon(
                           Icons.account_circle,
                           color: ColorsUtils.grayscale_gray_light_gray,
