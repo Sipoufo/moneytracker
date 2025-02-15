@@ -8,8 +8,8 @@ Application for seamless offline financial management
 - [X] Splash part
 - [X] Onboarding part
 - [X] Home part
-- [] Transaction part
-- [] Create transaction
-- [] Budget part
-- [] Create budget
-- [] Setting part
+- [X] Transaction part
+- [X] Create transaction
+- [X] Budget part
+- [X] Create budget
+- [X] Setting part
