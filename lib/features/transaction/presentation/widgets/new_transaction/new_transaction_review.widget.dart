@@ -5,16 +5,22 @@ import 'package:moneytracker/core/utils/constants/colors.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
 import 'package:moneytracker/core/widgets/button.widget.dart';
 import 'package:moneytracker/features/navigation/cubit/application_navigation_cubit.cubit.dart';
-import 'package:moneytracker/features/transaction/presentation/widgets/shortcut.widget.dart';
+import 'package:moneytracker/features/transaction/domain/entities/transaction.entity.dart';
+import 'package:moneytracker/features/transaction/presentation/blocs/transaction.bloc.dart';
+import 'package:moneytracker/features/transaction/presentation/blocs/transaction.event.dart';
 import 'package:moneytracker/features/transaction/presentation/widgets/transaction_resume.widget.dart';
 
 class NewTransactionReviewsWidget extends StatefulWidget {
   const NewTransactionReviewsWidget({
     super.key,
+    required this.currencySymbol,
+    required this.transactionEntity,
     required this.updateTransactionStepIndex,
   });
 
+  final String currencySymbol;
   final Function(int step) updateTransactionStepIndex;
+  final TransactionEntity transactionEntity;
 
   @override
   State<NewTransactionReviewsWidget> createState() => _NewTransactionReviewsWidgetState();
@@ -34,13 +40,13 @@ class _NewTransactionReviewsWidgetState extends State<NewTransactionReviewsWidge
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Expanded(
+          Expanded(
             child: SingleChildScrollView(
               child: Column(
                 spacing: SizeUtil.defaultSpace,
                 children: [
                   // Transaction resume
-                  TransactionResumeWidget(),
+                  TransactionResumeWidget(currencySymbol: widget.currencySymbol, transactionEntity: widget.transactionEntity,),
                 ],
               ),
             ),
@@ -55,6 +61,7 @@ class _NewTransactionReviewsWidgetState extends State<NewTransactionReviewsWidge
                 onTap: () {
                   context.read<ApplicationNavigationCubit>().changePage(0);
                   Navigator.pop(context);
+                  context.read<TransactionBloc>().add(TransactionSaveOneEvent(widget.transactionEntity));
                 },
                 padding: const EdgeInsets.all(SizeUtil.md),
                 color: ColorsUtils.primary_5,

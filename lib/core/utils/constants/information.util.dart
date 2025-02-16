@@ -46,6 +46,14 @@ class InformationUtil {
       AppLocalizations.of(context).annually,
     ];
   }
+  static List<String> periodicValuesWithoutTranslation() {
+
+    return [
+      "daily",
+      "monthly",
+      "annually",
+    ];
+  }
 
   // List of values of all periodic with translation effect
   static List<Map<String, dynamic>> periodicValuesAndCorrespondent(BuildContext context) {

@@ -32,7 +32,6 @@ class BudgetServiceImpl implements BudgetService {
   @override
   Future<BudgetModel> saveOneBudget(BudgetModel budget) async {
     try {
-      print("Je passe");
       if (fetchAllBudgets().where((item) => item.name == budget.name).isNotEmpty) {
         throw "This budget exist !";
       }
@@ -42,8 +41,7 @@ class BudgetServiceImpl implements BudgetService {
       await localDataService.updateLocalData(id: budget.id, data: budget);
       return budget;
     } catch (e) {
-      print(e);
-      throw "This budget exist !";
+      throw "Error please retry !";
     }
   }
 

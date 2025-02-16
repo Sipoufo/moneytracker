@@ -62,7 +62,7 @@ class _TransactionState extends State<Transaction> {
                               .firstWhere((value) => value['period'] == selectedPeriodValue);
                         });
                       },
-                      values: InformationUtil.periodicValues(context).map<DropdownMenuItem<String>>((String period) {
+                      values: InformationUtil.periodicValuesWithoutTranslation().map<DropdownMenuItem<String>>((String period) {
                         return DropdownMenuItem<String>(
                           value: period,
                           child: Container(

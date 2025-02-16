@@ -17,7 +17,7 @@ class NewTransactionAmountWidget extends StatefulWidget {
   });
 
   final Function(int step) updateTransactionStepIndex;
-  final Function({String? amountIcon, double? amount}) updateFields;
+  final Function({required String selectedAmountIcon, required double selectedAmount}) updateFields;
 
   @override
   State<NewTransactionAmountWidget> createState() => _NewTransactionAmountWidgetState();
@@ -34,6 +34,19 @@ class _NewTransactionAmountWidgetState extends State<NewTransactionAmountWidget>
       selectedAmountIcon = amountIcon;
       showAmountIcons = false;
     });
+  }
+
+  void nextStep() {
+    if (amountValueController.text.trim() == "") {
+      showSnackBar(context, "Enter amount !");
+      return;
+    }
+    if (selectedAmountIcon == null) {
+      showSnackBar(context, "Select icon !");
+      return;
+    }
+    widget.updateFields(selectedAmount: double.parse(amountValueController.text.trim()), selectedAmountIcon: selectedAmountIcon!);
+    widget.updateTransactionStepIndex(2);
   }
 
   @override
@@ -149,13 +162,7 @@ class _NewTransactionAmountWidgetState extends State<NewTransactionAmountWidget>
                 title: AppLocalizations.of(context).next,
                 textStyle: Theme.of(context).textTheme.headlineSmall,
                 onTap: () {
-                  if (amountValueController.text == "") {
-                    showSnackBar(context, "Enter the value of amount !");
-                  } else if (selectedAmountIcon == null) {
-                    showSnackBar(context, "Select icon for your transaction !");
-                  } else {
-                    widget.updateTransactionStepIndex(2);
-                  }
+                  nextStep();
                 },
                 padding: const EdgeInsets.all(SizeUtil.md),
                 color: ColorsUtils.primary_5,

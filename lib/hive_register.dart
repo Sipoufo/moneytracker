@@ -8,6 +8,8 @@ import 'package:moneytracker/features/budget/data/models/budget.model.dart';
 import 'package:moneytracker/features/setting/data/models/theme/setting_theme.model.dart';
 import 'package:moneytracker/features/setting/data/models/user/setting_user.model.dart';
 import 'package:moneytracker/features/setting/data/models/wallet/setting_wallet.model.dart';
+import 'package:moneytracker/features/transaction/data/models/transaction.model.dart';
+import 'package:moneytracker/features/transaction/data/models/transaction_category.model.dart';
 import 'package:moneytracker/init_dependencies.main.dart';
 
 class HiveRegister {
@@ -20,6 +22,8 @@ class HiveRegister {
     Hive.registerAdapter<CurrencyModel>(CurrencyModelAdapter());
     Hive.registerAdapter<CategoryModel>(CategoryModelAdapter());
     Hive.registerAdapter<BudgetModel>(BudgetModelAdapter());
+    Hive.registerAdapter<TransactionModel>(TransactionModelAdapter());
+    Hive.registerAdapter<TransactionCategoryModel>(TransactionCategoryModelAdapter());
   }
 
   static Future<void> openAllBoxes() async {
@@ -31,6 +35,8 @@ class HiveRegister {
     await Hive.openBox<CurrencyModel>("CurrencyModel");
     await Hive.openBox<CategoryModel>("CategoryModel");
     await Hive.openBox<BudgetModel>("BudgetModel");
+    await Hive.openBox<TransactionModel>("TransactionModel");
+    await Hive.openBox<TransactionCategoryModel>("TransactionCategoryModel");
   }
 
   static void initDependencies() {
@@ -42,5 +48,7 @@ class HiveRegister {
     serviceLocator.registerFactory<Box<CurrencyModel>>(() => Hive.box<CurrencyModel>("CurrencyModel"));
     serviceLocator.registerFactory<Box<CategoryModel>>(() => Hive.box<CategoryModel>("CategoryModel"));
     serviceLocator.registerFactory<Box<BudgetModel>>(() => Hive.box<BudgetModel>("BudgetModel"));
+    serviceLocator.registerFactory<Box<TransactionModel>>(() => Hive.box<TransactionModel>("TransactionModel"));
+    serviceLocator.registerFactory<Box<TransactionCategoryModel>>(() => Hive.box<TransactionCategoryModel>("TransactionCategoryModel"));
   }
 }

@@ -16,9 +16,11 @@ class MyBudgetWidget extends StatelessWidget {
   const MyBudgetWidget({
     super.key,
     required this.budget,
+    required this.currencySymbol,
   });
 
   final BudgetEntity budget;
+  final String currencySymbol;
 
   @override
   Widget build(BuildContext context) {
@@ -142,13 +144,13 @@ class MyBudgetWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
-                            FormatterUtils.formatCurrencyCompact(budget.currentAmount),
+                            FormatterUtils.formatCurrencyCompact(budget.currentAmount, symbol: currencySymbol),
                             style: Theme.of(context).textTheme.displayLarge?.copyWith(
                                   color: ColorsUtils.primary_6,
                                 ),
                           ),
                           Text(
-                            "/${FormatterUtils.formatCurrencyCompact(budget.amount)}",
+                            "/${FormatterUtils.formatCurrencyCompact(budget.amount, symbol: currencySymbol)}",
                             style: Theme.of(context).textTheme.displayLarge?.copyWith(
                                   color: Theme.of(context).colorScheme.tertiaryContainer,
                                 ),

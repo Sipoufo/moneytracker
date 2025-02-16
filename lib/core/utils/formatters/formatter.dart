@@ -11,12 +11,12 @@ class FormatterUtils {
     return DateFormat('h:mm aaa').format(date); // Customize the date format as needed
   }
 
-  static String formatCurrency(double amount) {
-    return NumberFormat.currency(locale: 'en_US', symbol: '\$').format(amount); // Customize the currency locale and symbol as needed
+  static String formatCurrency(double amount, {String symbol = '\$'}) {
+    return NumberFormat.currency(locale: 'en_US', symbol: "$symbol ").format(amount); // Customize the currency locale and symbol as needed
   }
 
-  static String formatCurrencyCompact(double amount) {
-    return NumberFormat.compactCurrency(locale: 'en_US', symbol: '\$').format(amount); // Customize the currency locale and symbol as needed
+  static String formatCurrencyCompact(double amount, {String symbol = '\$'}) {
+    return NumberFormat.compactCurrency(locale: 'en_US', symbol: "$symbol ").format(amount); // Customize the currency locale and symbol as needed
   }
 
   static String formatPhoneNumber(String phoneNumber) {

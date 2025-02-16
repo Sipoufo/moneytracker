@@ -6,6 +6,9 @@ import 'package:moneytracker/core/utils/constants/icons.util.dart';
 import 'package:moneytracker/core/utils/constants/init_values.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
 import 'package:moneytracker/core/widgets/header.widget.dart';
+import 'package:moneytracker/features/setting/domain/entities/wallet/setting_wallet.entity.dart';
+import 'package:moneytracker/features/transaction/data/models/transaction_category.model.dart';
+import 'package:moneytracker/features/transaction/domain/entities/transaction.entity.dart';
 import 'package:moneytracker/features/transaction/presentation/widgets/new_transaction/amount/new_transaction_amount.widget.dart';
 import 'package:moneytracker/features/transaction/presentation/widgets/new_transaction/date&time/new_transaction_date_time.widget.dart';
 import 'package:moneytracker/features/transaction/presentation/widgets/new_transaction/new_transaction_name_note.widget.dart';
@@ -23,22 +26,31 @@ class _NewTransactionWidgetState extends State<NewTransactionWidget> {
   double? containWidgetHeight;
   int transactionStepIndex = 0;
   bool editCategory = false;
+  String currencySymbol = "";
 
   // Attributes of new transaction part
   // Part 1 : Wallet
-  String? wallet;
-  String? typeCategory;
-  String? category;
+  SettingWalletEntity? wallet;
+  String typeCategory = "";
+  String category = "";
 
   // Part 2 : Amount
-  String? amountIcon;
-  String? amount;
+  String amountIcon = "";
+  double amount = 0;
+
+  // Part 3 : DateTime
+  DateTime dateTime = DateTime.now();
+
+  // Part 2 : Name and note
+  String name = "";
+  String note = "";
 
   List<Widget> transactionStepWidget = [];
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    loadCurrencySymbol();
     transactionStepWidget = [
       NewTransactionWalletCategoriesWidget(
         selectedWallet: "apple wall",
@@ -50,60 +62,90 @@ class _NewTransactionWidgetState extends State<NewTransactionWidget> {
         updateTransactionStepIndex: updateTransactionStepIndex,
       ),
       NewTransactionDateTimeWidget(
+        updateFields: updateFieldsPart3,
         updateTransactionStepIndex: updateTransactionStepIndex,
       ),
       NewTransactionNameNoteWidget(
-        updateTransactionStepIndex: updateTransactionStepIndex,
-      ),
-      NewTransactionReviewsWidget(
+        updateFields: updateFieldsPart4,
         updateTransactionStepIndex: updateTransactionStepIndex,
       ),
     ];
   }
 
-  void updateFieldsPart1({String? selectWallet, String? selectTypeCategory, String? selectCategory}) {
+  void updateFieldsPart1(
+      {required SettingWalletEntity selectWallet, required String selectTypeCategory, required String selectCategory}) {
     // Update wallet value
-    if (selectWallet != null) {
-      setState(() {
-        wallet = selectWallet;
-      });
-    }
+    setState(() {
+      wallet = selectWallet;
+    });
 
     // Update type of category value
-    if (selectTypeCategory != null) {
-      setState(() {
-        typeCategory = selectTypeCategory;
-      });
-    }
+    setState(() {
+      typeCategory = selectTypeCategory;
+    });
 
     // Update category value
-    if (selectCategory != null) {
-      setState(() {
-        category = selectCategory;
-      });
-    }
+    setState(() {
+      category = selectCategory;
+    });
   }
 
-  void updateFieldsPart2({String? amountIcon, double? amount}) {
-    // Update amountIcon value
-    if (amountIcon != null) {
-      setState(() {
-        amountIcon = amountIcon;
-      });
-    }
-
+  void updateFieldsPart2({required String selectedAmountIcon, required double selectedAmount}) {
     // Update amount value
-    if (amount != null) {
-      setState(() {
-        amount = amount;
-      });
-    }
+    setState(() {
+      amount = selectedAmount;
+    });
+    // Update amountIcon value
+    setState(() {
+      amountIcon = selectedAmountIcon;
+    });
+  }
+
+  void updateFieldsPart3({required DateTime selectedDateTime}) {
+    // Update dateTime value
+    setState(() {
+      dateTime = selectedDateTime;
+    });
+  }
+
+  void updateFieldsPart4({required String selectedName, required String selectedNote}) {
+    // Update name value
+    setState(() {
+      name = selectedName;
+    });
+    // Update note value
+    setState(() {
+      note = selectedNote;
+    });
+
+    transactionStepWidget.add(
+      NewTransactionReviewsWidget(
+        currencySymbol: currencySymbol,
+        transactionEntity: TransactionEntity(
+          name: name,
+          wallet: wallet!,
+          category: TransactionCategoryModel(name: category, type: typeCategory),
+          amount: amount,
+          amountIcon: amountIcon,
+          dateTime: dateTime,
+          note: note,
+        ),
+        updateTransactionStepIndex: updateTransactionStepIndex,
+      ),
+    );
   }
 
   // Update step
   void updateTransactionStepIndex(int step) {
     setState(() {
       transactionStepIndex = step;
+    });
+  }
+
+  loadCurrencySymbol() async {
+    final prefs = await InitValuesUtil.sharedPreferences;
+    setState(() {
+      currencySymbol = prefs.getString("currency") ?? "";
     });
   }
 

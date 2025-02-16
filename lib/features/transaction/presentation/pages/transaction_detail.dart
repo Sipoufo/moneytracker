@@ -35,7 +35,7 @@ class _TransactionDetailState extends State<TransactionDetail> {
                 child: Column(
                   children: [
                     // Transaction resume
-                    TransactionResumeWidget(),
+                    // TransactionResumeWidget(),
 
                     // Shortcut
                     ShortcutWidget(),

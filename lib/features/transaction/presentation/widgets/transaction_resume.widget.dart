@@ -5,11 +5,17 @@ import 'package:moneytracker/core/utils/formatters/formatter.dart';
 import 'package:moneytracker/core/widgets/tag.widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
+import 'package:moneytracker/features/transaction/domain/entities/transaction.entity.dart';
 
 class TransactionResumeWidget extends StatelessWidget {
   const TransactionResumeWidget({
     super.key,
+    required this.currencySymbol,
+    required this.transactionEntity,
   });
+
+  final String currencySymbol;
+  final TransactionEntity transactionEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +75,7 @@ class TransactionResumeWidget extends StatelessWidget {
                     Expanded(
                       flex: 1,
                       child: Text(
-                        "Stock Dividend",
+                        transactionEntity.name,
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
@@ -78,7 +84,7 @@ class TransactionResumeWidget extends StatelessWidget {
                       width: SizeUtil.sm,
                     ),
                     TagWidget(
-                      name: AppLocalizations.of(context).income,
+                      name: transactionEntity.category.type,
                       textStyle:
                           Theme.of(context).textTheme.labelLarge!.copyWith(
                                 color: ColorsUtils.text_black,
@@ -112,7 +118,7 @@ class TransactionResumeWidget extends StatelessWidget {
                     ),
               ),
               Text(
-                FormatterUtils.formatCurrency(120000),
+                FormatterUtils.formatCurrency(transactionEntity.amount, symbol: currencySymbol),
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                       color: ColorsUtils.primary_5,
@@ -157,7 +163,7 @@ class TransactionResumeWidget extends StatelessWidget {
 
               Expanded(
                 child: Text(
-                  "Investment",
+                  transactionEntity.category.name,
                   textAlign: TextAlign.end,
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
@@ -191,7 +197,7 @@ class TransactionResumeWidget extends StatelessWidget {
 
               Expanded(
                 child: Text(
-                  "Manual",
+                  transactionEntity.category.type,
                   textAlign: TextAlign.end,
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
@@ -225,7 +231,7 @@ class TransactionResumeWidget extends StatelessWidget {
 
               Expanded(
                 child: Text(
-                  FormatterUtils.formatDate(),
+                  FormatterUtils.formatDate(date: transactionEntity.dateTime),
                   textAlign: TextAlign.end,
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
@@ -259,7 +265,7 @@ class TransactionResumeWidget extends StatelessWidget {
 
               Expanded(
                 child: Text(
-                  FormatterUtils.formatTime(),
+                  FormatterUtils.formatTime(date: transactionEntity.dateTime),
                   textAlign: TextAlign.end,
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
@@ -293,7 +299,7 @@ class TransactionResumeWidget extends StatelessWidget {
 
               Expanded(
                 child: Text(
-                  "Dividend from AAPL stock",
+                  transactionEntity.note,
                   textAlign: TextAlign.end,
                   style: Theme.of(context).textTheme.titleSmall,
                 ),

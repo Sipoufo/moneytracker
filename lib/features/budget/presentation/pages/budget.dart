@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:moneytracker/core/utils/constants/colors.util.dart';
 import 'package:moneytracker/core/utils/constants/icons.util.dart';
+import 'package:moneytracker/core/utils/constants/init_values.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
 import 'package:moneytracker/core/widgets/button.widget.dart';
 import 'package:moneytracker/core/widgets/header.widget.dart';
 import 'package:moneytracker/core/widgets/loading.widget.dart';
+import 'package:moneytracker/core/widgets/show_snackbar.widget.dart';
 import 'package:moneytracker/features/budget/domain/entries/budget.entity.dart';
 import 'package:moneytracker/features/budget/presentation/arguments/budget_create_update.argument.dart';
 import 'package:moneytracker/features/budget/presentation/blocs/budget.bloc.dart';
@@ -25,11 +27,20 @@ class Budget extends StatefulWidget {
 
 class _BudgetState extends State<Budget> {
   List<BudgetEntity> budgets = [];
+  String currencySymbol = "";
 
   @override
   void initState() {
     context.read<BudgetBloc>().add(BudgetFetchAllEvent());
+    loadCurrencySymbol();
     super.initState();
+  }
+
+  loadCurrencySymbol() async {
+    final prefs = await InitValuesUtil.sharedPreferences;
+    setState(() {
+      currencySymbol = prefs.getString("currency") ?? "";
+    });
   }
 
   @override
@@ -39,6 +50,9 @@ class _BudgetState extends State<Budget> {
       body: SafeArea(
         child: BlocConsumer<BudgetBloc, BudgetState>(
           listener: (context, state) {
+            if (state is BudgetSuccessSaveOneState) {
+              showSnackBar(context, "Budget successful created !", isError: false);
+            }
             if (state is BudgetSuccessFetchAllState) {
               setState(() {
                 budgets = state.budgets;
@@ -106,7 +120,7 @@ class _BudgetState extends State<Budget> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 spacing: SizeUtil.spaceBtwItems_12,
                                 children: budgets.map((budget) {
-                                  return MyBudgetWidget(budget: budget);
+                                  return MyBudgetWidget(budget: budget, currencySymbol: currencySymbol,);
                                 }).toList(),
                               )
                             ]

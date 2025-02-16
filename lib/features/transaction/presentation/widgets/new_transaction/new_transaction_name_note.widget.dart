@@ -9,10 +9,12 @@ import 'package:moneytracker/core/widgets/show_snackbar.widget.dart';
 class NewTransactionNameNoteWidget extends StatefulWidget {
   const NewTransactionNameNoteWidget({
     super.key,
+    required this.updateFields,
     required this.updateTransactionStepIndex,
   });
 
   final Function(int step) updateTransactionStepIndex;
+  final Function({required String selectedName, required String selectedNote}) updateFields;
 
   @override
   State<NewTransactionNameNoteWidget> createState() => _NewTransactionNameNoteWidgetState();
@@ -21,6 +23,15 @@ class NewTransactionNameNoteWidget extends StatefulWidget {
 class _NewTransactionNameNoteWidgetState extends State<NewTransactionNameNoteWidget> {
   final TextEditingController transactionNameController = TextEditingController();
   final TextEditingController transactionNoteController = TextEditingController();
+
+  void nextStep() {
+    if (transactionNameController.text == "") {
+      showSnackBar(context, "Enter the name of transaction !");
+      return;
+    }
+    widget.updateFields(selectedName: transactionNameController.text.trim(), selectedNote: transactionNoteController.text.trim());
+    widget.updateTransactionStepIndex(4);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,11 +99,7 @@ class _NewTransactionNameNoteWidgetState extends State<NewTransactionNameNoteWid
                 title: AppLocalizations.of(context).next,
                 textStyle: Theme.of(context).textTheme.headlineSmall,
                 onTap: () {
-                  if (transactionNameController.text == "") {
-                    showSnackBar(context, "Enter the name of transaction !");
-                  } else {
-                    widget.updateTransactionStepIndex(4);
-                  }
+                  nextStep();
                 },
                 padding: const EdgeInsets.all(SizeUtil.md),
                 color: ColorsUtils.primary_5,

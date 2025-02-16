@@ -13,10 +13,12 @@ import 'package:moneytracker/features/transaction/presentation/widgets/new_trans
 class NewTransactionDateTimeWidget extends StatefulWidget {
   const NewTransactionDateTimeWidget({
     super.key,
+    required this.updateFields,
     required this.updateTransactionStepIndex,
   });
 
   final Function(int step) updateTransactionStepIndex;
+  final Function({required DateTime selectedDateTime}) updateFields;
 
   @override
   State<NewTransactionDateTimeWidget> createState() => _NewTransactionDateTimeWidgetState();
@@ -58,6 +60,19 @@ class _NewTransactionDateTimeWidgetState extends State<NewTransactionDateTimeWid
     setState(() {
       openDateModal = value;
     });
+  }
+
+  void nextStep() {
+    if (date == null) {
+      showSnackBar(context, "Enter date !");
+      return;
+    }
+    date!.copyWith(
+      hour: dailySegment == "AM" ? int.parse(minute) : (int.parse(minute) + 12),
+      minute: int.parse(minute),
+    );
+    widget.updateFields(selectedDateTime: date!);
+    widget.updateTransactionStepIndex(2);
   }
 
   @override
