@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moneytracker/core/utils/constants/colors.util.dart';
 import 'package:moneytracker/core/utils/constants/icons.util.dart';
+import 'package:moneytracker/core/utils/constants/init_values.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
 import 'package:moneytracker/core/utils/formatters/formatter.dart';
 import 'package:moneytracker/core/widgets/card.widget.dart';
@@ -16,6 +17,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  String currentCurrency = "";
+
+  getCurrentCurrency() async {
+    final prefs = await InitValuesUtil.sharedPreferences;
+    setState(() {
+      currentCurrency = prefs.getString("currency") ?? "";
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -98,7 +107,7 @@ class _HomeState extends State<Home> {
         ),
 
         // Transaction section of home page
-        const TransactionHome(),
+        TransactionHome(currency: currentCurrency,),
       ],
     );
   }

@@ -9,7 +9,7 @@ class TransactionEntity {
   final String name;
   final SettingWalletEntity wallet;
   final TransactionCategoryModel category;
-  final double amount;
+  double amount;
   final String amountIcon;
   final DateTime dateTime;
   final String note;

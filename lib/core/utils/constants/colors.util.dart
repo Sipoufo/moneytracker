@@ -49,8 +49,21 @@ class ColorsUtils {
   static const Color text_white = Color.fromRGBO(255, 255, 255, 1);
   static const Color text_black = Color.fromRGBO(51, 51, 51, 1);
   // Other
+  static const Color cardinal = Color.fromRGBO(173, 52, 62, 1);
   static const Color malibu = Color.fromRGBO(74, 188, 252, 1);
   static const Color gossip = Color.fromRGBO(199, 249, 187, 1);
   static const Color broom = Color.fromRGBO(255, 232, 22, 1);
+  static const Color atomic_tangerine = Color.fromRGBO(250, 163, 129, 1);
+  static const Color reseda_green = Color.fromRGBO(115, 135, 123, 1);
+  static const Color puce = Color.fromRGBO(180, 134, 159, 1);
+  static const Color china_rose = Color.fromRGBO(152, 95, 111, 1);
+  static const Color orchid_pink = Color.fromRGBO(242, 186, 201, 1);
+  static const Color dark_purple = Color.fromRGBO(48, 1, 30, 1);
+  static const Color payne_gray = Color.fromRGBO(71, 106, 111, 1);
+  static const Color tea_rose = Color.fromRGBO(236, 190, 180, 1);
+  static const Color royal_blue = Color.fromRGBO(3, 37, 108, 1);
+  static const Color black_bean = Color.fromRGBO(61, 12, 17, 1);
+  static const Color red_cmyk = Color.fromRGBO(237, 28, 36, 1);
+  static const Color lapis_lazuli = Color.fromRGBO(35, 87, 137, 1);
   static const Color shadow = Color.fromRGBO(0, 0, 0, 0.1);
 }

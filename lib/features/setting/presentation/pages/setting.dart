@@ -136,23 +136,27 @@ class _SettingState extends State<Setting> {
                             label: AppLocalizations.of(context).darkMode,
                             icon: const Icon(
                               Icons.nightlight,
+                              size: 16.0,
                               color: ColorsUtils.grayscale_gray_light_gray,
                             ),
-                            secondIcon: Switch(
-                              activeColor: ColorsUtils.grayscale_white_white,
-                              activeTrackColor: ColorsUtils.grayscale_gray_shaded_gray,
-                              inactiveThumbColor: ColorsUtils.grayscale_white_white,
-                              inactiveTrackColor: ColorsUtils.grayscale_white_shaded_white,
-                              value: isDark,
-                              onChanged: (value) => setState(() {
-                                context.read<SettingThemeBloc>().add(
-                                  SettingUpdateCurrentThemeEvent(
-                                    SettingThemeEntity(
-                                      themeMode: !isDark ? ThemeMode.dark : ThemeMode.light,
+                            secondIcon: Transform.scale(
+                              scale: 0.75,
+                              child: Switch(
+                                activeColor: ColorsUtils.grayscale_white_white,
+                                activeTrackColor: ColorsUtils.grayscale_gray_shaded_gray,
+                                inactiveThumbColor: ColorsUtils.grayscale_white_white,
+                                inactiveTrackColor: ColorsUtils.grayscale_white_shaded_white,
+                                value: isDark,
+                                onChanged: (value) => setState(() {
+                                  context.read<SettingThemeBloc>().add(
+                                    SettingUpdateCurrentThemeEvent(
+                                      SettingThemeEntity(
+                                        themeMode: !isDark ? ThemeMode.dark : ThemeMode.light,
+                                      ),
                                     ),
-                                  ),
-                                );
-                              }),
+                                  );
+                                }),
+                              ),
                             ),
                             onTap: () {},
                           );

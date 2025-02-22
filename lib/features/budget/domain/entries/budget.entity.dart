@@ -1,5 +1,6 @@
-import 'package:moneytracker/core/utils/models/category.model.dart';
+import 'package:moneytracker/core/utils/enums/category_emoji.enum.dart';
 import 'package:moneytracker/features/budget/data/models/budget.model.dart';
+import 'package:moneytracker/features/transaction/data/models/transaction.model.dart';
 
 class BudgetEntity {
   int id;
@@ -7,7 +8,8 @@ class BudgetEntity {
   final double amount;
   final double currentAmount;
   final DateTime achievementDate;
-  final CategoryModel category;
+  final CategoryEnum category;
+  List<TransactionModel> transactions = [];
 
   BudgetEntity({
     this.id = 0,
@@ -19,7 +21,7 @@ class BudgetEntity {
   });
 
   factory BudgetEntity.map(BudgetModel budget) {
-    return BudgetEntity(
+    BudgetEntity budgetEntity = BudgetEntity(
       id: budget.id,
       name: budget.name,
       amount: budget.amount,
@@ -27,5 +29,7 @@ class BudgetEntity {
       achievementDate: budget.achievementDate,
       category: budget.category,
     );
+    budgetEntity.transactions = budget.transactions;
+    return budgetEntity;
   }
 }

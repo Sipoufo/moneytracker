@@ -1,6 +1,7 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:moneytracker/core/services/local_data/local_data.service.dart';
 import 'package:moneytracker/core/services/local_data/local_data.service.impl.dart';
+import 'package:moneytracker/features/budget/data/models/budget.model.dart';
 import 'package:moneytracker/features/transaction/data/models/transaction.model.dart';
 import 'package:moneytracker/features/transaction/data/repositories/transaction.repository_imple.dart';
 import 'package:moneytracker/features/transaction/data/services/transaction.service.dart';
@@ -8,6 +9,7 @@ import 'package:moneytracker/features/transaction/data/services/transaction.serv
 import 'package:moneytracker/features/transaction/domain/repositoies/transaction.repository.dart';
 import 'package:moneytracker/features/transaction/domain/uses_cases/transaction_delete_one.use_case.dart';
 import 'package:moneytracker/features/transaction/domain/uses_cases/transaction_fetch_all.use_case.dart';
+import 'package:moneytracker/features/transaction/domain/uses_cases/transaction_fetch_all_by_dates.use_case.dart';
 import 'package:moneytracker/features/transaction/domain/uses_cases/transaction_fetch_one.use_case.dart';
 import 'package:moneytracker/features/transaction/domain/uses_cases/transaction_save_one.use_case.dart';
 import 'package:moneytracker/features/transaction/domain/uses_cases/transaction_update_one.use_case.dart';
@@ -19,38 +21,45 @@ class TransactionInjection {
   static void transactionInjection() {
     serviceLocator
       ..registerFactory<LocalDataService<TransactionModel>>(
-            () => LocalDataServiceImpl<TransactionModel>(
+        () => LocalDataServiceImpl<TransactionModel>(
           serviceLocator<Box<TransactionModel>>(),
         ),
       )
       ..registerFactory<TransactionService>(
-            () => TransactionServiceImpl(serviceLocator<LocalDataService<TransactionModel>>()),
+        () => TransactionServiceImpl(
+          serviceLocator<LocalDataService<TransactionModel>>(),
+          serviceLocator<LocalDataService<BudgetModel>>(),
+        ),
       )
       ..registerFactory<TransactionRepository>(
-            () => TransactionRepositoryImpl(serviceLocator<TransactionService>()),
+        () => TransactionRepositoryImpl(serviceLocator<TransactionService>()),
       )
       ..registerFactory<TransactionFetchAllUseCase>(
-            () => TransactionFetchAllUseCase(serviceLocator<TransactionRepository>()),
+        () => TransactionFetchAllUseCase(serviceLocator<TransactionRepository>()),
+      )
+      ..registerFactory<TransactionFetchAllByDatesUseCase>(
+        () => TransactionFetchAllByDatesUseCase(serviceLocator<TransactionRepository>()),
       )
       ..registerFactory<TransactionFetchOneUseCase>(
-            () => TransactionFetchOneUseCase(serviceLocator<TransactionRepository>()),
+        () => TransactionFetchOneUseCase(serviceLocator<TransactionRepository>()),
       )
       ..registerFactory<TransactionSaveOneUseCase>(
-            () => TransactionSaveOneUseCase(serviceLocator<TransactionRepository>()),
+        () => TransactionSaveOneUseCase(serviceLocator<TransactionRepository>()),
       )
       ..registerFactory<TransactionUpdateOneUseCase>(
-            () => TransactionUpdateOneUseCase(serviceLocator<TransactionRepository>()),
+        () => TransactionUpdateOneUseCase(serviceLocator<TransactionRepository>()),
       )
       ..registerFactory<TransactionDeleteOneUseCase>(
-            () => TransactionDeleteOneUseCase(serviceLocator<TransactionRepository>()),
+        () => TransactionDeleteOneUseCase(serviceLocator<TransactionRepository>()),
       )
       ..registerFactory<TransactionBloc>(
-            () => TransactionBloc(
-                transactionFetchAllUseCase : serviceLocator<TransactionFetchAllUseCase>(),
-                transactionFetchOneUseCase : serviceLocator<TransactionFetchOneUseCase>(),
-                transactionSaveOneUseCase : serviceLocator<TransactionSaveOneUseCase>(),
-                transactionUpdateOneUseCase : serviceLocator<TransactionUpdateOneUseCase>(),
-                transactionDeleteOneUseCase : serviceLocator<TransactionDeleteOneUseCase>(),
+        () => TransactionBloc(
+          transactionFetchAllUseCase: serviceLocator<TransactionFetchAllUseCase>(),
+          transactionFetchAllByDatesUseCase: serviceLocator<TransactionFetchAllByDatesUseCase>(),
+          transactionFetchOneUseCase: serviceLocator<TransactionFetchOneUseCase>(),
+          transactionSaveOneUseCase: serviceLocator<TransactionSaveOneUseCase>(),
+          transactionUpdateOneUseCase: serviceLocator<TransactionUpdateOneUseCase>(),
+          transactionDeleteOneUseCase: serviceLocator<TransactionDeleteOneUseCase>(),
         ),
       );
   }

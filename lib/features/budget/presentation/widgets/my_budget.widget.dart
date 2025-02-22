@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:moneytracker/core/utils/constants/colors.util.dart';
 import 'package:moneytracker/core/utils/constants/icons.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
+import 'package:moneytracker/core/utils/enums/category_emoji.enum.dart';
 import 'package:moneytracker/core/utils/formatters/formatter.dart';
 import 'package:moneytracker/core/widgets/separator.widget.dart';
 import 'package:moneytracker/features/budget/domain/entries/budget.entity.dart';
@@ -50,18 +51,21 @@ class MyBudgetWidget extends StatelessWidget {
               spacing: SizeUtil.spaceBtwItems_12,
               children: [
                 Container(
-                  width: 50,
-                  height: 50,
+                  width: SizeUtil.iconXl,
+                  height: SizeUtil.iconXl,
                   padding: const EdgeInsets.all(SizeUtil.sm),
                   decoration: BoxDecoration(
-                    color: Color(budget.category.backgroundColor),
+                    color: budget.category.backgroundColor,
                     borderRadius: BorderRadius.circular(1000),
                   ),
-                  child: Image.asset(
-                    budget.category.picture,
-                    height: double.infinity,
-                    width: double.infinity,
-                    fit: BoxFit.contain,
+                  child: Center(
+                    child: Text(
+                      budget.category.emoji,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: SizeUtil.iconMd,
+                      ),
+                    ),
                   ),
                 ),
 
@@ -184,7 +188,7 @@ class MyBudgetWidget extends StatelessWidget {
                       bottom: 0,
                       child: Center(
                         child: Text(
-                          "${budget.currentAmount == 0 ? budget.currentAmount : budget.amount / budget.currentAmount}%",
+                          "${budget.currentAmount == 0 ? budget.currentAmount : FormatterUtils.formatCurrency((budget.currentAmount / budget.amount) * 100, symbol: "")}%",
                           style: Theme.of(context).textTheme.displayLarge?.copyWith(
                               color: budget.currentAmount / budget.amount > 0.7
                                   ? Theme.of(context).colorScheme.surface

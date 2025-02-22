@@ -1,3 +1,4 @@
+import 'package:moneytracker/core/utils/enums/enums.dart';
 import 'package:moneytracker/features/transaction/data/models/transaction.model.dart';
 
 abstract interface class TransactionService {
@@ -5,7 +6,7 @@ abstract interface class TransactionService {
   List<TransactionModel> fetchAllTransactions();
 
   // Use to fetch all transactions with start and end date filter
-  List<TransactionModel> fetchAllTransactionsByDates(DateTime startDate, DateTime? endDate, String type);
+  List<TransactionModel> fetchAllTransactionsByDates(DateTime startDate, DateTime? endDate, TransactionFindTypeEnum transactionFindTypeEnum);
 
   // Use to fetch one transaction
   TransactionModel fetchOneTransaction(int id);

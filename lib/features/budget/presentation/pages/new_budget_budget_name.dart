@@ -5,8 +5,7 @@ import 'package:moneytracker/core/utils/constants/colors.util.dart';
 import 'package:moneytracker/core/utils/constants/icons.util.dart';
 import 'package:moneytracker/core/utils/constants/init_values.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
-import 'package:moneytracker/core/utils/models/category.model.dart';
-import 'package:moneytracker/core/widgets/button.widget.dart';
+import 'package:moneytracker/core/utils/enums/category_emoji.enum.dart';
 import 'package:moneytracker/core/widgets/header.widget.dart';
 import 'package:moneytracker/features/budget/domain/entries/budget.entity.dart';
 import 'package:moneytracker/features/budget/presentation/blocs/budget.bloc.dart';
@@ -26,7 +25,7 @@ class NewBudget extends StatefulWidget {
 
 class _NewBudgetState extends State<NewBudget> {
   PageController pageController = PageController(
-    viewportFraction: 0.35,
+    viewportFraction: 0.4,
     initialPage: 0,
   );
   int actualCategoryIndex = 0;
@@ -34,7 +33,6 @@ class _NewBudgetState extends State<NewBudget> {
 
   final List<Widget> pageFormContain = [];
   int pageFormContainIndex = 0;
-  List<CategoryModel> categories = [];
 
   // Fields
   String name = "";
@@ -56,12 +54,6 @@ class _NewBudgetState extends State<NewBudget> {
 
   @override
   void initState() {
-    Future.delayed(Duration.zero,() {
-      setState(() {
-        categories = InitValuesUtil.categories(context);
-      });
-    });
-
     // If it's updated
     setState(() {
       if (widget.budget != null) {
@@ -69,8 +61,8 @@ class _NewBudgetState extends State<NewBudget> {
         amount = widget.budget!.amount;
         dateTime = widget.budget!.achievementDate;
         actualCategoryIndex = 0;
-        for (int i = 0; i < categories.length; i++) {
-          if (categories[i].name == widget.budget!.category.name) {
+        for (int i = 0; i < CategoryEnum.values.length; i++) {
+          if (CategoryEnum.values[i].name == widget.budget!.category.name) {
             actualCategoryIndex = i;
             pageController = PageController(
               viewportFraction: 0.35,
@@ -118,22 +110,24 @@ class _NewBudgetState extends State<NewBudget> {
   void save() {
     // If budget is pass as parameter so we consider that is update section
     if (widget.budget != null) {
-      context.read<BudgetBloc>().add(BudgetUpdateOneEvent(widget.budget!.id, BudgetEntity(
-        name: name,
-        amount: amount,
-        currentAmount: 0,
-        achievementDate: dateTime,
-        category: categories[actualCategoryIndex],
-      )));
+      context.read<BudgetBloc>().add(BudgetUpdateOneEvent(
+          widget.budget!.id,
+          BudgetEntity(
+            name: name,
+            amount: amount,
+            currentAmount: 0,
+            achievementDate: dateTime,
+            category: CategoryEnum.values[actualCategoryIndex],
+          )));
       context.read<BudgetBloc>().add(BudgetFetchAllEvent());
     } else {
       context.read<BudgetBloc>().add(BudgetSaveOneEvent(BudgetEntity(
-        name: name,
-        amount: amount,
-        currentAmount: 0,
-        achievementDate: dateTime,
-        category: categories[actualCategoryIndex],
-      )));
+            name: name,
+            amount: amount,
+            currentAmount: 0,
+            achievementDate: dateTime,
+            category: CategoryEnum.values[actualCategoryIndex],
+          )));
       context.read<BudgetBloc>().add(BudgetFetchAllEvent());
     }
     Navigator.pop(context);
@@ -157,91 +151,90 @@ class _NewBudgetState extends State<NewBudget> {
                 ),
 
                 // Categories
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: SizeUtil.md, vertical: SizeUtil.sm_12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: SizeUtil.spaceBtwItems_24,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: SizeUtil.md, vertical: SizeUtil.sm_12),
+                      child: Text(
                         AppLocalizations.of(context).categories,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
+                    ),
 
-                      // Spacing
-                      const SizedBox(
-                        height: SizeUtil.spaceBtwItems_24,
-                      ),
-
-                      SizedBox(
-                        height: 160,
-                        width: double.infinity,
-                        child: PageView.builder(
-                          controller: pageController,
-                          itemCount: categories.length,
-                          onPageChanged: (int pageIndex) {
-                            setState(() {
-                              actualCategoryIndex = pageIndex;
-                              pageController.jumpToPage(pageIndex);
-                            });
-                          },
-                          itemBuilder: (BuildContext context, int itemIndex) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: SizeUtil.sm_12),
-                              child: Column(
-                                children: [
-                                  Opacity(
-                                    opacity: actualCategoryIndex == itemIndex ? 1 : 0.4,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: actualCategoryIndex == itemIndex
-                                            ? Color(categories[itemIndex].backgroundColor)
-                                            : Theme.of(context).colorScheme.tertiary,
-                                        borderRadius: const BorderRadius.all(Radius.circular(10000)),
-                                        image: DecorationImage(
-                                          image: AssetImage(categories[itemIndex].picture),
+                    SizedBox(
+                      height: 200,
+                      width: double.infinity,
+                      child: PageView.builder(
+                        controller: pageController,
+                        itemCount: CategoryEnum.values.length,
+                        onPageChanged: (int pageIndex) {
+                          setState(() {
+                            actualCategoryIndex = pageIndex;
+                            pageController.jumpToPage(pageIndex);
+                          });
+                        },
+                        itemBuilder: (BuildContext context, int itemIndex) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: SizeUtil.sm_12),
+                            child: Column(
+                              spacing: SizeUtil.spaceBtwItems_24,
+                              children: [
+                                Opacity(
+                                  opacity: actualCategoryIndex == itemIndex ? 1 : 0.4,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: actualCategoryIndex == itemIndex
+                                          ? CategoryEnum.values[itemIndex].backgroundColor
+                                          : Theme.of(context).colorScheme.tertiary,
+                                      borderRadius: const BorderRadius.all(Radius.circular(10000)),
+                                    ),
+                                    height: actualCategoryIndex == itemIndex ? 120 : 100,
+                                    width: actualCategoryIndex == itemIndex ? 120 : 100,
+                                    child: Center(
+                                      child: Text(
+                                        CategoryEnum.values[itemIndex].emoji,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize:
+                                              actualCategoryIndex == itemIndex ? SizeUtil.iconXl : SizeUtil.iconLg,
                                         ),
                                       ),
-                                      height: actualCategoryIndex == itemIndex ? 100 : 70,
-                                      width: actualCategoryIndex == itemIndex ? 100 : 70,
                                     ),
                                   ),
+                                ),
 
-                                  // Spacing
-                                  const SizedBox(
-                                    height: SizeUtil.spaceBtwItems_24,
+                                if (actualCategoryIndex == itemIndex)
+                                  Text(
+                                    CategoryEnum.values[itemIndex].name,
+                                    style: Theme.of(context).textTheme.headlineSmall,
                                   ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
 
-                                  if (actualCategoryIndex == itemIndex)
-                                    Text(
-                                      categories[itemIndex].name,
-                                      style: Theme.of(context).textTheme.headlineSmall,
-                                    ),
-                                ],
-                              ),
-                            );
-                          },
+                    // Spacing
+                    const SizedBox(
+                      height: SizeUtil.spaceBtwItems_24,
+                    ),
+
+                    // Dots of category part
+                    Center(
+                      child: SmoothPageIndicator(
+                        count: 5,
+                        controller: pageController,
+                        effect: const ExpandingDotsEffect(
+                          activeDotColor: ColorsUtils.primary_5,
+                          dotColor: ColorsUtils.grayscale_white_white,
+                          dotHeight: 6.0,
                         ),
                       ),
-
-                      // Spacing
-                      const SizedBox(
-                        height: SizeUtil.spaceBtwItems_24,
-                      ),
-
-                      // Dots of category part
-                      Center(
-                        child: SmoothPageIndicator(
-                          count: 5,
-                          controller: pageController,
-                          effect: const ExpandingDotsEffect(
-                            activeDotColor: ColorsUtils.primary_5,
-                            dotColor: ColorsUtils.grayscale_white_white,
-                            dotHeight: 6.0,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
             ),

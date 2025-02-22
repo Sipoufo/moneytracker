@@ -1,8 +1,10 @@
 import 'package:hive/hive.dart';
-import 'package:moneytracker/core/utils/models/category.model.dart';
+import 'package:moneytracker/core/utils/enums/category_emoji.enum.dart';
 import 'package:moneytracker/features/budget/domain/entries/budget.entity.dart';
+import 'package:moneytracker/features/transaction/data/models/transaction.model.dart';
 
 part 'budget.model.g.dart';
+
 /// Model for category of financial depends
 /// [name] represent the name of budget
 /// [amount] represent the amount of budget
@@ -18,9 +20,11 @@ class BudgetModel {
   @HiveField(03)
   final DateTime achievementDate;
   @HiveField(04)
-  final double currentAmount;
+  double currentAmount;
   @HiveField(05)
-  final CategoryModel category;
+  final CategoryEnum category;
+  @HiveField(06)
+  List<TransactionModel> transactions = [];
 
   BudgetModel({
     this.id = 0,
@@ -32,7 +36,7 @@ class BudgetModel {
   });
 
   factory BudgetModel.map(BudgetEntity budget) {
-    return BudgetModel(
+    BudgetModel budgetModel = BudgetModel(
       id: budget.id,
       name: budget.name,
       amount: budget.amount,
@@ -40,5 +44,7 @@ class BudgetModel {
       achievementDate: budget.achievementDate,
       category: budget.category,
     );
+    budgetModel.transactions = budget.transactions;
+    return budgetModel;
   }
 }

@@ -4,25 +4,28 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:moneytracker/core/utils/constants/colors.util.dart';
 import 'package:moneytracker/core/utils/formatters/formatter.dart';
 import 'package:moneytracker/core/utils/helpers/functions.helper.dart';
+import 'package:moneytracker/features/transaction/data/models/transaction_category_type.enum.dart';
+import 'package:moneytracker/features/transaction/domain/entities/transaction.entity.dart';
+import 'package:moneytracker/features/transaction/presentation/arguments/transaction_detail.argument.dart';
 
 class TransactionItemWidget extends StatelessWidget {
   const TransactionItemWidget({
     super.key,
-    required this.transactionType,
-    required this.transactionCategory,
-    required this.transactionName,
-    required this.amount,
+    required this.transaction,
+    required this.currency,
   });
 
-  final String transactionType;
-  final String transactionCategory;
-  final String transactionName;
-  final double amount;
+  final TransactionEntity transaction;
+  final String currency;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, "/transaction/transaction-detail"),
+      onTap: () => Navigator.pushNamed(
+        context,
+        "/transaction/transaction-detail",
+        arguments: TransactionDetailArgument(currency: currency, transaction: transaction)
+      ),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
@@ -47,9 +50,10 @@ class TransactionItemWidget extends StatelessWidget {
               Container(
                 width: 10,
                 decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.horizontal(
-                      left: Radius.circular(SizeUtil.borderRadiusMd)),
-                  color: transactionType == "income" ? ColorsUtils.primary_5 : ColorsUtils.danger_4,
+                  borderRadius: const BorderRadius.horizontal(left: Radius.circular(SizeUtil.borderRadiusMd)),
+                  color: transaction.category.type == TransactionCategoryTypeEnum.income
+                      ? ColorsUtils.primary_5
+                      : ColorsUtils.danger_4,
                 ),
               ),
               Expanded(
@@ -67,27 +71,30 @@ class TransactionItemWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            AppLocalizations.of(context).investment,
-                            style:
-                                Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      color: !HelperFunctions.isDarkMode(context)
-                                          ? ColorsUtils.grayscale_gray_light_gray
-                                          : ColorsUtils.grayscale_gray_pale_gray,
-                                    ),
+                            AppLocalizations.of(context).localeName == "en"
+                                ? transaction.category.category.nameEn
+                                : transaction.category.category.nameFr,
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  color: !HelperFunctions.isDarkMode(context)
+                                      ? ColorsUtils.grayscale_gray_light_gray
+                                      : ColorsUtils.grayscale_gray_pale_gray,
+                                ),
                           ),
                           const SizedBox(
                             height: SizeUtil.xs,
                           ),
                           Text(
-                            "Food Sales",
+                            transaction.name,
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
                         ],
                       ),
                       Text(
-                        "${transactionType == "income" ? "+" : "-"} ${FormatterUtils.formatCurrency(amount)}",
+                        "${transaction.category.type == TransactionCategoryTypeEnum.income ? "+" : "-"} ${FormatterUtils.formatCurrency(transaction.amount, symbol: currency)}",
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: transactionType == "income" ? ColorsUtils.primary_5 : ColorsUtils.danger_4,
+                              color: transaction.category.type == TransactionCategoryTypeEnum.income
+                                  ? ColorsUtils.primary_5
+                                  : ColorsUtils.danger_4,
                             ),
                       ),
                     ],

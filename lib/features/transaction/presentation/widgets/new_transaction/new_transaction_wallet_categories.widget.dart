@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:moneytracker/core/utils/constants/colors.util.dart';
-import 'package:moneytracker/core/utils/constants/information.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
+import 'package:moneytracker/core/utils/enums/category_emoji.enum.dart';
 import 'package:moneytracker/core/widgets/button.widget.dart';
 import 'package:moneytracker/core/widgets/drop_down_button.widget.dart';
 import 'package:moneytracker/core/widgets/show_snackbar.widget.dart';
@@ -12,6 +12,7 @@ import 'package:moneytracker/features/setting/domain/entities/wallet/setting_wal
 import 'package:moneytracker/features/setting/presentation/blocs/wallet/setting_wallet.bloc.dart';
 import 'package:moneytracker/features/setting/presentation/blocs/wallet/setting_wallet.event.dart';
 import 'package:moneytracker/features/setting/presentation/blocs/wallet/setting_wallet.state.dart';
+import 'package:moneytracker/features/transaction/data/models/transaction_category_type.enum.dart';
 
 class NewTransactionWalletCategoriesWidget extends StatefulWidget {
   const NewTransactionWalletCategoriesWidget({
@@ -22,7 +23,7 @@ class NewTransactionWalletCategoriesWidget extends StatefulWidget {
   });
 
   final String? selectedWallet;
-  final Function({required SettingWalletEntity selectWallet, required String selectTypeCategory, required String selectCategory}) updateFields;
+  final Function({required SettingWalletEntity selectWallet, required TransactionCategoryTypeEnum selectTypeCategory, required CategoryEnum selectCategory}) updateFields;
   final Function(int step) updateTransactionStepIndex;
 
   @override
@@ -30,10 +31,10 @@ class NewTransactionWalletCategoriesWidget extends StatefulWidget {
 }
 
 class _NewTransactionWalletCategoriesWidgetState extends State<NewTransactionWalletCategoriesWidget> {
-  String? category;
+  CategoryEnum? category;
   SettingWalletEntity? selectedWallet;
   double? containWidgetHeight;
-  String? selectedTypeCategory;
+  TransactionCategoryTypeEnum? selectedTypeCategory;
   bool loadWallet = true;
 
   List<SettingWalletEntity> wallets = [];
@@ -167,7 +168,7 @@ class _NewTransactionWalletCategoriesWidgetState extends State<NewTransactionWal
                                 child: GestureDetector(
                                   onTap: () {
                                     setState(() {
-                                      selectedTypeCategory = AppLocalizations.of(context).income;
+                                      selectedTypeCategory = TransactionCategoryTypeEnum.income;
                                     });
                                   },
                                   child: Container(
@@ -175,7 +176,7 @@ class _NewTransactionWalletCategoriesWidgetState extends State<NewTransactionWal
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10.0),
                                       border: Border.all(
-                                        color: selectedTypeCategory == AppLocalizations.of(context).income
+                                        color: selectedTypeCategory == TransactionCategoryTypeEnum.income
                                             ? ColorsUtils.primary_5
                                             : Theme.of(context).colorScheme.secondaryContainer,
                                       ),
@@ -219,7 +220,7 @@ class _NewTransactionWalletCategoriesWidgetState extends State<NewTransactionWal
                                 child: GestureDetector(
                                   onTap: () {
                                     setState(() {
-                                      selectedTypeCategory = AppLocalizations.of(context).expenses;
+                                      selectedTypeCategory = TransactionCategoryTypeEnum.expenses;
                                     });
                                   },
                                   child: Container(
@@ -227,7 +228,7 @@ class _NewTransactionWalletCategoriesWidgetState extends State<NewTransactionWal
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10.0),
                                       border: Border.all(
-                                        color: selectedTypeCategory == AppLocalizations.of(context).expenses
+                                        color: selectedTypeCategory == TransactionCategoryTypeEnum.expenses
                                             ? ColorsUtils.primary_5
                                             : Theme.of(context).colorScheme.secondaryContainer,
                                       ),
@@ -280,7 +281,7 @@ class _NewTransactionWalletCategoriesWidgetState extends State<NewTransactionWal
                                 Row(
                                   children: [
                                     Text(
-                                      category ?? "",
+                                      "${category!.emoji} ${AppLocalizations.of(context).localeName == "en" ? category!.nameEn : category!.nameFr}",
                                       style: Theme.of(context).textTheme.titleSmall,
                                       textAlign: TextAlign.left,
                                     ),
@@ -288,7 +289,7 @@ class _NewTransactionWalletCategoriesWidgetState extends State<NewTransactionWal
                                       width: SizeUtil.sm,
                                     ),
                                     TagWidget(
-                                      name: selectedTypeCategory ?? "",
+                                      name: (AppLocalizations.of(context).localeName == "en" ? selectedTypeCategory?.valueEn : selectedTypeCategory?.valueFr) ?? "",
                                       textStyle: Theme.of(context).textTheme.labelLarge!.copyWith(
                                             color: ColorsUtils.text_black,
                                             fontWeight: FontWeight.w700,
@@ -422,7 +423,7 @@ class _NewTransactionWalletCategoriesWidgetState extends State<NewTransactionWal
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TagWidget(
-                              name: selectedTypeCategory!,
+                              name: (AppLocalizations.of(context).localeName == "en" ? selectedTypeCategory?.valueEn : selectedTypeCategory?.valueFr) ?? "",
                               textStyle: Theme.of(context).textTheme.labelLarge!.copyWith(
                                     color: ColorsUtils.text_black,
                                     fontWeight: FontWeight.w700,
@@ -437,76 +438,40 @@ class _NewTransactionWalletCategoriesWidgetState extends State<NewTransactionWal
 
                             // list of categories
                             Column(
-                              children: InformationUtil.categoriesTypes(context).map((categoryType) {
-                                return GestureDetector(
-                                  child: SizedBox(
-                                    width: double.infinity,
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          categoryType["type"],
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headlineSmall
-                                              ?.copyWith(color: Theme.of(context).colorScheme.tertiaryContainer),
+                              children: CategoryEnum.values.map((CategoryEnum categoryEnum) {
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: SizeUtil.xs_6),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        category = categoryEnum;
+                                      });
+                                    },
+                                    child: Container(
+                                      clipBehavior: Clip.hardEdge,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(SizeUtil.borderRadiusMd),
+                                        border: Border.all(
+                                          color: Theme.of(context).colorScheme.secondaryContainer,
                                         ),
-
-                                        // Spacing
-                                        const SizedBox(
-                                          height: SizeUtil.sm,
-                                        ),
-
-                                        SizedBox(
-                                          width: double.infinity,
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: categoryType["values"].map<Widget>((value) {
-                                              return Padding(
-                                                padding: const EdgeInsets.symmetric(vertical: SizeUtil.xs_6),
-                                                child: GestureDetector(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      category = value;
-                                                    });
-                                                  },
-                                                  child: Container(
-                                                    clipBehavior: Clip.hardEdge,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(SizeUtil.borderRadiusMd),
-                                                      border: Border.all(
-                                                        color: Theme.of(context).colorScheme.secondaryContainer,
-                                                      ),
-                                                      color: Theme.of(context).colorScheme.primaryContainer,
-                                                    ),
-                                                    child: IntrinsicHeight(
-                                                      child: Row(
-                                                        children: [
-                                                          Container(width: SizeUtil.sm, color: ColorsUtils.primary_5),
-                                                          Expanded(
-                                                            child: Padding(
-                                                              padding: const EdgeInsets.all(SizeUtil.sm_12),
-                                                              child: Text(
-                                                                value,
-                                                                style: Theme.of(context).textTheme.titleSmall,
-                                                              ),
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
+                                        color: Theme.of(context).colorScheme.primaryContainer,
+                                      ),
+                                      child: IntrinsicHeight(
+                                        child: Row(
+                                          children: [
+                                            Container(width: SizeUtil.sm, color: ColorsUtils.primary_5),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(SizeUtil.sm_12),
+                                                child: Text(
+                                                  "${categoryEnum.emoji} ${AppLocalizations.of(context).localeName == "en" ? categoryEnum.nameEn : categoryEnum.nameFr}",
+                                                  style: Theme.of(context).textTheme.titleSmall,
                                                 ),
-                                              );
-                                            }).toList(),
-                                          ),
+                                              ),
+                                            )
+                                          ],
                                         ),
-
-                                        // Spacing
-                                        const SizedBox(
-                                          height: SizeUtil.md_18,
-                                        ),
-                                      ],
+                                      ),
                                     ),
                                   ),
                                 );

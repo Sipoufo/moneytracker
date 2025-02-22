@@ -25,8 +25,8 @@ class NewTransactionDateTimeWidget extends StatefulWidget {
 }
 
 class _NewTransactionDateTimeWidgetState extends State<NewTransactionDateTimeWidget> {
-  String hour = "06";
-  String minute = "30";
+  String hour = "${DateTime.now().hour}";
+  String minute = "${DateTime.now().minute}";
   String dailySegment = "AM";
   double? containWidgetHeight;
   DateTime? date;

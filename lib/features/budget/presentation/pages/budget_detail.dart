@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:moneytracker/core/utils/constants/colors.util.dart';
 import 'package:moneytracker/core/utils/constants/icons.util.dart';
+import 'package:moneytracker/core/utils/constants/init_values.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
 import 'package:moneytracker/core/utils/formatters/formatter.dart';
 import 'package:moneytracker/core/widgets/header.widget.dart';
@@ -25,11 +26,20 @@ class BudgetDetail extends StatefulWidget {
 class _BudgetDetailState extends State<BudgetDetail> {
   double? containWidgetHeight;
   BudgetEntity? budget;
+  String currentCurrency = "";
 
   @override
   void initState() {
     context.read<BudgetBloc>().add(BudgetFetchOneEvent(widget.id));
+    getCurrentCurrency();
     super.initState();
+  }
+
+  getCurrentCurrency() async {
+    final prefs = await InitValuesUtil.sharedPreferences;
+    setState(() {
+      currentCurrency = prefs.getString("currency") ?? "";
+    });
   }
 
   @override
@@ -68,14 +78,15 @@ class _BudgetDetailState extends State<BudgetDetail> {
                               height: 100,
                               padding: const EdgeInsets.all(SizeUtil.sm),
                               decoration: BoxDecoration(
-                                color: Color(state.budget.category.backgroundColor),
+                                color: state.budget.category.backgroundColor,
                                 borderRadius: BorderRadius.circular(1000),
                               ),
-                              child: Image.asset(
-                                state.budget.category.picture,
-                                height: double.infinity,
-                                width: double.infinity,
-                                fit: BoxFit.contain,
+                              child: Text(
+                                state.budget.category.emoji,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: SizeUtil.iconXl,
+                                ),
                               ),
                             ),
 
@@ -328,7 +339,7 @@ class _BudgetDetailState extends State<BudgetDetail> {
                                                           bottom: 0,
                                                           child: Center(
                                                             child: Text(
-                                                              "${state.budget.currentAmount == 0 ? state.budget.currentAmount : state.budget.amount / state.budget.currentAmount}%",
+                                                              "${state.budget.currentAmount == 0 ? state.budget.currentAmount : FormatterUtils.formatCurrency((state.budget.currentAmount / state.budget.amount) * 100, symbol: "")}%",
                                                               style: Theme.of(context).textTheme.displayLarge?.copyWith(
                                                                   color: state.budget.currentAmount / state.budget.amount > 0.7
                                                                       ? Theme.of(context).colorScheme.surface
@@ -385,189 +396,196 @@ class _BudgetDetailState extends State<BudgetDetail> {
                                             AppLocalizations.of(context).moreDetails,
                                             style: Theme.of(context).textTheme.titleLarge,
                                           ),
-                                          Container(
-                                            padding: const EdgeInsets.all(SizeUtil.md),
-                                            width: double.infinity,
-                                            decoration: BoxDecoration(
-                                              color: Theme.of(context).colorScheme.primaryContainer,
-                                              borderRadius: BorderRadius.circular(SizeUtil.borderRadiusMd),
-                                              border: Border.all(
-                                                color: Theme.of(context).colorScheme.secondaryContainer,
-                                              ),
-                                            ),
-                                            child: Column(
-                                              spacing: SizeUtil.defaultSpace,
-                                              children: [
-                                                // Amount
-                                                Column(
-                                                  spacing: SizeUtil.sm,
-                                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      AppLocalizations.of(context).amount,
-                                                      textAlign: TextAlign.center,
-                                                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                                        color: Theme.of(context).colorScheme.tertiaryContainer,
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      FormatterUtils.formatCurrency(state.budget.currentAmount),
-                                                      textAlign: TextAlign.center,
-                                                      style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                                                        color: ColorsUtils.primary_5,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
 
-                                                // Separator
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                      color: Theme.of(context).colorScheme.secondaryContainer,
-                                                    ),
+                                          // List of transaction
+                                          Column(
+                                            spacing: SizeUtil.spaceBtwItems_12,
+                                            children: state.budget.transactions.map((transaction) {
+                                              return Container(
+                                                padding: const EdgeInsets.all(SizeUtil.md),
+                                                width: double.infinity,
+                                                decoration: BoxDecoration(
+                                                  color: Theme.of(context).colorScheme.primaryContainer,
+                                                  borderRadius: BorderRadius.circular(SizeUtil.borderRadiusMd),
+                                                  border: Border.all(
+                                                    color: Theme.of(context).colorScheme.secondaryContainer,
                                                   ),
                                                 ),
-
-                                                // Categories
-                                                Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                  spacing: SizeUtil.sm,
+                                                child: Column(
+                                                  spacing: SizeUtil.defaultSpace,
                                                   children: [
-                                                    Expanded(
-                                                      child: Text(
-                                                        AppLocalizations.of(context).categories,
-                                                        textAlign: TextAlign.start,
-                                                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                                          color: Theme.of(context).colorScheme.tertiaryContainer,
+                                                    // Amount
+                                                    Column(
+                                                      spacing: SizeUtil.sm,
+                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                      children: [
+                                                        Text(
+                                                          AppLocalizations.of(context).amount,
+                                                          textAlign: TextAlign.center,
+                                                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                                            color: Theme.of(context).colorScheme.tertiaryContainer,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          FormatterUtils.formatCurrency(transaction.amount, symbol: currentCurrency),
+                                                          textAlign: TextAlign.center,
+                                                          style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                                                            color: ColorsUtils.primary_5,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+
+                                                    // Separator
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color: Theme.of(context).colorScheme.secondaryContainer,
                                                         ),
                                                       ),
                                                     ),
 
-                                                    Expanded(
-                                                      child: Text(
-                                                        state.budget.category.name,
-                                                        textAlign: TextAlign.end,
-                                                        style: Theme.of(context).textTheme.titleSmall,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-
-                                                // Categories
-                                                Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                  spacing: SizeUtil.sm,
-                                                  children: [
-                                                    Expanded(
-                                                      child: Text(
-                                                        AppLocalizations.of(context).type,
-                                                        textAlign: TextAlign.start,
-                                                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                                          color: Theme.of(context).colorScheme.tertiaryContainer,
+                                                    // Category
+                                                    Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      spacing: SizeUtil.sm,
+                                                      children: [
+                                                        Expanded(
+                                                          child: Text(
+                                                            AppLocalizations.of(context).category,
+                                                            textAlign: TextAlign.start,
+                                                            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                                              color: Theme.of(context).colorScheme.tertiaryContainer,
+                                                            ),
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ),
 
-                                                    Expanded(
-                                                      child: Text(
-                                                        "Manual",
-                                                        textAlign: TextAlign.end,
-                                                        style: Theme.of(context).textTheme.titleSmall,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-
-                                                // Categories
-                                                Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                  children: [
-                                                    Expanded(
-                                                      child: Text(
-                                                        AppLocalizations.of(context).date,
-                                                        textAlign: TextAlign.start,
-                                                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                                          color: Theme.of(context).colorScheme.tertiaryContainer,
+                                                        Expanded(
+                                                          child: Text(
+                                                            AppLocalizations.of(context).localeName == "en" ? transaction.category.category.nameEn : transaction.category.category.nameFr,
+                                                            textAlign: TextAlign.end,
+                                                            style: Theme.of(context).textTheme.titleSmall,
+                                                          ),
                                                         ),
-                                                      ),
+                                                      ],
                                                     ),
 
-                                                    // Spacing
-                                                    const SizedBox(
-                                                      width: SizeUtil.sm,
-                                                    ),
-
-                                                    Expanded(
-                                                      child: Text(
-                                                        FormatterUtils.formatDate(),
-                                                        textAlign: TextAlign.end,
-                                                        style: Theme.of(context).textTheme.titleSmall,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-
-                                                // Categories
-                                                Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                  children: [
-                                                    Expanded(
-                                                      child: Text(
-                                                        AppLocalizations.of(context).time,
-                                                        textAlign: TextAlign.start,
-                                                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                                          color: Theme.of(context).colorScheme.tertiaryContainer,
+                                                    // Category type
+                                                    Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      spacing: SizeUtil.sm,
+                                                      children: [
+                                                        Expanded(
+                                                          child: Text(
+                                                            AppLocalizations.of(context).type,
+                                                            textAlign: TextAlign.start,
+                                                            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                                              color: Theme.of(context).colorScheme.tertiaryContainer,
+                                                            ),
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ),
 
-                                                    // Spacing
-                                                    const SizedBox(
-                                                      width: SizeUtil.sm,
-                                                    ),
-
-                                                    Expanded(
-                                                      child: Text(
-                                                        FormatterUtils.formatTime(),
-                                                        textAlign: TextAlign.end,
-                                                        style: Theme.of(context).textTheme.titleSmall,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-
-                                                // Categories
-                                                Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                  children: [
-                                                    Expanded(
-                                                      child: Text(
-                                                        AppLocalizations.of(context).note,
-                                                        textAlign: TextAlign.start,
-                                                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                                          color: Theme.of(context).colorScheme.tertiaryContainer,
+                                                        Expanded(
+                                                          child: Text(
+                                                            AppLocalizations.of(context).localeName == "en" ? transaction.category.type.valueEn : transaction.category.type.valueFr,
+                                                            textAlign: TextAlign.end,
+                                                            style: Theme.of(context).textTheme.titleSmall,
+                                                          ),
                                                         ),
-                                                      ),
+                                                      ],
                                                     ),
 
-                                                    // Spacing
-                                                    const SizedBox(
-                                                      width: SizeUtil.sm,
+                                                    // Date
+                                                    Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        Expanded(
+                                                          child: Text(
+                                                            AppLocalizations.of(context).date,
+                                                            textAlign: TextAlign.start,
+                                                            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                                              color: Theme.of(context).colorScheme.tertiaryContainer,
+                                                            ),
+                                                          ),
+                                                        ),
+
+                                                        // Spacing
+                                                        const SizedBox(
+                                                          width: SizeUtil.sm,
+                                                        ),
+
+                                                        Expanded(
+                                                          child: Text(
+                                                            FormatterUtils.formatDate(date: transaction.dateTime),
+                                                            textAlign: TextAlign.end,
+                                                            style: Theme.of(context).textTheme.titleSmall,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
 
-                                                    Expanded(
-                                                      child: Text(
-                                                        "Dividend from AAPL stock",
-                                                        textAlign: TextAlign.end,
-                                                        style: Theme.of(context).textTheme.titleSmall,
-                                                      ),
+                                                    // Time
+                                                    Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        Expanded(
+                                                          child: Text(
+                                                            AppLocalizations.of(context).time,
+                                                            textAlign: TextAlign.start,
+                                                            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                                              color: Theme.of(context).colorScheme.tertiaryContainer,
+                                                            ),
+                                                          ),
+                                                        ),
+
+                                                        // Spacing
+                                                        const SizedBox(
+                                                          width: SizeUtil.sm,
+                                                        ),
+
+                                                        Expanded(
+                                                          child: Text(
+                                                            FormatterUtils.formatTime(date: transaction.dateTime),
+                                                            textAlign: TextAlign.end,
+                                                            style: Theme.of(context).textTheme.titleSmall,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+
+                                                    // Note
+                                                    Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        Expanded(
+                                                          child: Text(
+                                                            AppLocalizations.of(context).note,
+                                                            textAlign: TextAlign.start,
+                                                            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                                              color: Theme.of(context).colorScheme.tertiaryContainer,
+                                                            ),
+                                                          ),
+                                                        ),
+
+                                                        // Spacing
+                                                        const SizedBox(
+                                                          width: SizeUtil.sm,
+                                                        ),
+
+                                                        Expanded(
+                                                          child: Text(
+                                                            transaction.note,
+                                                            textAlign: TextAlign.end,
+                                                            style: Theme.of(context).textTheme.titleSmall,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ],
                                                 ),
-                                              ],
-                                            ),
-                                          )
+                                              );
+                                            }).toList(),
+                                          ),
                                         ],
                                       ),
                                     ],

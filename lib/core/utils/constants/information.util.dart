@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:moneytracker/core/utils/enums/enums.dart';
 import 'package:moneytracker/core/utils/helpers/functions.helper.dart';
 import 'package:moneytracker/core/utils/models/country_infos.model.dart';
 
@@ -39,19 +40,10 @@ class InformationUtil {
 
   // List of values of all periodic with translation effect
   static List<String> periodicValues(BuildContext context) {
-
     return [
       AppLocalizations.of(context).daily,
       AppLocalizations.of(context).monthly,
       AppLocalizations.of(context).annually,
-    ];
-  }
-  static List<String> periodicValuesWithoutTranslation() {
-
-    return [
-      "daily",
-      "monthly",
-      "annually",
     ];
   }
 
@@ -62,25 +54,22 @@ class InformationUtil {
 
     return [
       {
-        "period": AppLocalizations.of(context).daily,
-        "values": InformationUtil.dayValues(context),
+        "period": TransactionFindTypeEnum.daily,
+        "values": List<int>.generate(nextDate.difference(now).inDays, (day) => day + 1),
       },
       {
-        "period": AppLocalizations.of(context).monthly,
-        "values": List<int>.generate(
-          nextDate.difference(now).inDays,
-          (day) => day + 1,
-        ),
+        "period": TransactionFindTypeEnum.monthly,
+        "values": DateTimeEnum.values.where((datetime) => datetime.type == TransactionFindTypeEnum.monthly).toList(),
       },
       {
-        "period": AppLocalizations.of(context).annually,
-        "values": InformationUtil.monthValues(context),
+        "period": TransactionFindTypeEnum.annually,
+        "values": List<int>.generate(6, (item) => (DateTime.now().year - 5) + item),
       },
     ];
   }
 
   // List of values of categories types
-  static List<Map<String, dynamic>> categoriesTypes(BuildContext context) {
+  /*static List<Map<String, dynamic>> categoriesTypes(BuildContext context) {
     return [
       {
         "type": AppLocalizations.of(context).earnedIncome,
@@ -115,7 +104,7 @@ class InformationUtil {
         ]
       },
     ];
-  }
+  }*/
 
   // List of hours
   static List<String> hours = List.generate(12, (index) {
@@ -138,7 +127,7 @@ class InformationUtil {
     List<CountryInfos> result = [];
     dynamic countriesJson = await HelperFunctions.readJson("assets/json/country_currency_flag_phone_code.json");
 
-    for(dynamic country in countriesJson) {
+    for (dynamic country in countriesJson) {
       result.add(CountryInfos.fromJson(country));
     }
 

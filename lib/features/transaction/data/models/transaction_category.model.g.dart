@@ -18,8 +18,8 @@ class TransactionCategoryModelAdapter
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TransactionCategoryModel(
-      name: fields[0] as String,
-      type: fields[1] as String,
+      category: fields[0] as CategoryEnum,
+      type: fields[1] as TransactionCategoryTypeEnum,
     );
   }
 
@@ -28,7 +28,7 @@ class TransactionCategoryModelAdapter
     writer
       ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.name)
+      ..write(obj.category)
       ..writeByte(1)
       ..write(obj.type);
   }

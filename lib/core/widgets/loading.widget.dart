@@ -5,14 +5,11 @@ class LoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).colorScheme.primary,
-      child: Image.asset(
-        "assets/pictures/loading/loading.gif",
-        height: 200,
-        width: 200,
-        fit: BoxFit.contain,
-      ),
+    return Image.asset(
+      "assets/pictures/loading/loading.gif",
+      height: 200,
+      width: 200,
+      fit: BoxFit.contain,
     );
   }
 }

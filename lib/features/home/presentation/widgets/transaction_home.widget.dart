@@ -8,21 +8,23 @@ import 'package:moneytracker/core/widgets/separator.widget.dart';
 import 'package:moneytracker/features/navigation/cubit/application_navigation_cubit.cubit.dart';
 
 class TransactionHome extends StatelessWidget {
-  const TransactionHome({super.key});
+  const TransactionHome({
+    super.key,
+    required this.currency,
+  });
+
+  final String currency;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.symmetric(
-                horizontal: SizeUtil.md, vertical: SizeUtil.lg)
-            .copyWith(
+        padding: const EdgeInsets.symmetric(horizontal: SizeUtil.md, vertical: SizeUtil.lg).copyWith(
           bottom: 0.0,
         ),
         height: 100,
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.vertical(
-              top: Radius.circular(SizeUtil.borderRadiusXl)),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(SizeUtil.borderRadiusXl)),
           color: Theme.of(context).colorScheme.primary,
           boxShadow: const [
             BoxShadow(
@@ -46,8 +48,7 @@ class TransactionHome extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 TextButton(
-                  onPressed: () =>
-                      context.read<ApplicationNavigationCubit>().changePage(1),
+                  onPressed: () => context.read<ApplicationNavigationCubit>().changePage(1),
                   child: Text(
                     AppLocalizations.of(context).seeMore,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -72,7 +73,8 @@ class TransactionHome extends StatelessWidget {
                     // Today transaction
                     DailyTransactionWidget(
                       title: AppLocalizations.of(context).today,
-                      dateTime: DateTime.now(),
+                      transactions: [],
+                      currency: currency,
                     ),
 
                     // Separator
@@ -81,9 +83,8 @@ class TransactionHome extends StatelessWidget {
                     // Yesterday transaction
                     DailyTransactionWidget(
                       title: AppLocalizations.of(context).yesterday,
-                      dateTime: DateTime.now().copyWith(
-                        day: DateTime.now().day - 1,
-                      ),
+                      transactions: [],
+                      currency: currency,
                     ),
 
                     // Spacing

@@ -156,6 +156,7 @@
     "connectBankAndOtherFinancialService": "Connecter les banques et autres services financiers",
     "currency": "Monnaie",
     "changeCurrency": "Changer de monnaie",
+    "changeCategory": "Changer de catégorie",
     "theme": "Thème",
     "darkMode": "Thème sombre",
     "security": "Sécurité",

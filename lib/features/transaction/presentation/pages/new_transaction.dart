@@ -1,13 +1,17 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:moneytracker/core/utils/constants/colors.util.dart';
 import 'package:moneytracker/core/utils/constants/icons.util.dart';
 import 'package:moneytracker/core/utils/constants/init_values.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
+import 'package:moneytracker/core/utils/enums/category_emoji.enum.dart';
 import 'package:moneytracker/core/widgets/header.widget.dart';
+import 'package:moneytracker/features/navigation/cubit/application_navigation_cubit.cubit.dart';
 import 'package:moneytracker/features/setting/domain/entities/wallet/setting_wallet.entity.dart';
 import 'package:moneytracker/features/transaction/data/models/transaction_category.model.dart';
+import 'package:moneytracker/features/transaction/data/models/transaction_category_type.enum.dart';
 import 'package:moneytracker/features/transaction/domain/entities/transaction.entity.dart';
 import 'package:moneytracker/features/transaction/presentation/widgets/new_transaction/amount/new_transaction_amount.widget.dart';
 import 'package:moneytracker/features/transaction/presentation/widgets/new_transaction/date&time/new_transaction_date_time.widget.dart';
@@ -31,8 +35,8 @@ class _NewTransactionWidgetState extends State<NewTransactionWidget> {
   // Attributes of new transaction part
   // Part 1 : Wallet
   SettingWalletEntity? wallet;
-  String typeCategory = "";
-  String category = "";
+  TransactionCategoryTypeEnum? typeCategory;
+  CategoryEnum? category;
 
   // Part 2 : Amount
   String amountIcon = "";
@@ -73,7 +77,9 @@ class _NewTransactionWidgetState extends State<NewTransactionWidget> {
   }
 
   void updateFieldsPart1(
-      {required SettingWalletEntity selectWallet, required String selectTypeCategory, required String selectCategory}) {
+      {required SettingWalletEntity selectWallet,
+      required TransactionCategoryTypeEnum selectTypeCategory,
+      required CategoryEnum selectCategory}) {
     // Update wallet value
     setState(() {
       wallet = selectWallet;
@@ -124,7 +130,7 @@ class _NewTransactionWidgetState extends State<NewTransactionWidget> {
         transactionEntity: TransactionEntity(
           name: name,
           wallet: wallet!,
-          category: TransactionCategoryModel(name: category, type: typeCategory),
+          category: TransactionCategoryModel(category: category!, type: typeCategory!),
           amount: amount,
           amountIcon: amountIcon,
           dateTime: dateTime,
@@ -161,7 +167,12 @@ class _NewTransactionWidgetState extends State<NewTransactionWidget> {
                 // Header of transaction detail page
                 HeaderWidget(
                   title: AppLocalizations.of(context).newTransaction,
-                  firstIcon: IconsUtils.back(context: context, onTap: () => Navigator.pop(context)),
+                  firstIcon: IconsUtils.back(
+                      context: context,
+                      onTap: () {
+                        context.read<ApplicationNavigationCubit>().changePage(0);
+                        Navigator.pop(context);
+                      }),
                 ),
 
                 Expanded(

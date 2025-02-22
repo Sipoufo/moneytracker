@@ -22,14 +22,14 @@ class BudgetModelAdapter extends TypeAdapter<BudgetModel> {
       amount: fields[2] as double,
       currentAmount: fields[4] as double,
       achievementDate: fields[3] as DateTime,
-      category: fields[5] as CategoryModel,
-    );
+      category: fields[5] as CategoryEnum,
+    )..transactions = (fields[6] as List).cast<TransactionModel>();
   }
 
   @override
   void write(BinaryWriter writer, BudgetModel obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -41,7 +41,9 @@ class BudgetModelAdapter extends TypeAdapter<BudgetModel> {
       ..writeByte(4)
       ..write(obj.currentAmount)
       ..writeByte(5)
-      ..write(obj.category);
+      ..write(obj.category)
+      ..writeByte(6)
+      ..write(obj.transactions);
   }
 
   @override

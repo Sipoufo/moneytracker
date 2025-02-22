@@ -1,67 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:moneytracker/core/utils/constants/colors.util.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:moneytracker/features/transaction/presentation/widgets/transaction_rank.widget.dart';
+import 'package:moneytracker/features/transaction/domain/entities/transaction.entity.dart';
 
-class TransactionCategoriesWidget extends StatefulWidget {
-  const TransactionCategoriesWidget({super.key});
+class TransactionCategoriesWidget extends StatelessWidget {
+  const TransactionCategoriesWidget({
+    super.key,
+    required this.totalAmount,
+    required this.transactions,
+  });
 
-  @override
-  State<TransactionCategoriesWidget> createState() => _TransactionCategoriesWidgetState();
-}
-
-class _TransactionCategoriesWidgetState extends State<TransactionCategoriesWidget> {
+  final double totalAmount;
+  final List<TransactionEntity> transactions;
 
   List<PieChartSectionData> showingSections() {
-    return [
-      PieChartSectionData(
-        color: ColorsUtils.broom,
-        value: 10,
-        title: 'Food & Drink',
-        radius: 60,
-        titleStyle: const TextStyle(
-          color: Colors.transparent,
+    List<PieChartSectionData> result = [];
+
+    for (TransactionEntity transaction in transactions) {
+      result.add(
+        PieChartSectionData(
+          color: transaction.category.category.backgroundColor,
+          value: (transaction.amount <= 0 || totalAmount <= 0) ? 0 : transaction.amount / totalAmount,
+          title: transaction.category.category.nameFr,
+          radius: 60,
+          titleStyle: const TextStyle(
+            color: Colors.transparent,
+          ),
+          badgeWidget: Center(
+            child: Text(
+              transaction.category.category.emoji,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: SizeUtil.iconMd,
+              ),
+            ),
+          ),
         ),
-        badgeWidget: Image.asset(
-          "assets/pictures/categories/food.png",
-          height: 30,
-          width: 30,
-          fit: BoxFit.contain,
-        ),
-      ),
-      PieChartSectionData(
-        color: ColorsUtils.malibu,
-        value: 20,
-        title: 'Vehicle',
-        radius: 60,
-        titleStyle: const TextStyle(
-          color: Colors.transparent,
-        ),
-        badgeWidget: Image.asset(
-          "assets/pictures/categories/vehicle.png",
-          height: 30,
-          width: 30,
-          fit: BoxFit.contain,
-        ),
-      ),
-      PieChartSectionData(
-        color: ColorsUtils.gossip,
-        value: 70,
-        title: 'Investment',
-        radius: 60,
-        titleStyle: const TextStyle(
-          color: Colors.transparent,
-        ),
-        badgeWidget: Image.asset(
-          "assets/pictures/categories/investment.png",
-          height: 30,
-          width: 30,
-          fit: BoxFit.contain,
-        ),
-      ),
-    ];
+      );
+    }
+
+    return result;
   }
 
   @override
@@ -137,7 +116,7 @@ class _TransactionCategoriesWidgetState extends State<TransactionCategoriesWidge
           ),
 
           // Rank
-          const TransactionRankWidget()
+          // TransactionRankWidget(totalAmount: widget.totalAmount, transactions: widget.transactions),
         ],
       ),
     );

@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:moneytracker/core/utils/constants/size.util.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:moneytracker/core/widgets/daily_transaction.widget.dart';
+import 'package:moneytracker/features/transaction/domain/entities/transaction.entity.dart';
 
 class TransactionListWidget extends StatelessWidget {
   const TransactionListWidget({
     super.key,
+    required this.currency,
+    required this.transactions,
   });
+
+  final List<TransactionEntity> transactions;
+  final String currency;
 
   @override
   Widget build(BuildContext context) {
@@ -30,19 +36,8 @@ class TransactionListWidget extends StatelessWidget {
               top: SizeUtil.md,
             ),
             child: DailyTransactionWidget(
-              dateTime: DateTime.now().copyWith(
-                day: DateTime.now().day - 2,
-              ),
-            ),
-          ),
-
-          // Today transaction
-          Padding(
-            padding: const EdgeInsets.only(
-              top: SizeUtil.md,
-            ),
-            child: DailyTransactionWidget(
-              dateTime: DateTime.now(),
+              transactions: transactions,
+              currency: currency,
             ),
           ),
         ],

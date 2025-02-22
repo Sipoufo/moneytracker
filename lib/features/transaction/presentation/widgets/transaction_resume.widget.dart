@@ -52,19 +52,18 @@ class TransactionResumeWidget extends StatelessWidget {
                 child: Row(
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(SizeUtil.md),
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ColorsUtils.primary_2,
+                      width: SizeUtil.iconXl,
+                      height: SizeUtil.iconXl,
+                      decoration: BoxDecoration(
+                        color: transactionEntity.category.category.backgroundColor,
+                        borderRadius: BorderRadius.circular(1000),
                       ),
-                      child: Container(
-                        width: SizeUtil.defaultSpace,
-                        height: SizeUtil.defaultSpace,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("assets/pictures/logo/logo.png"),
-                            alignment: Alignment.center,
-                            fit: BoxFit.contain,
+                      child: Center(
+                        child: Text(
+                          transactionEntity.category.category.emoji,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: SizeUtil.iconMd,
                           ),
                         ),
                       ),
@@ -84,7 +83,7 @@ class TransactionResumeWidget extends StatelessWidget {
                       width: SizeUtil.sm,
                     ),
                     TagWidget(
-                      name: transactionEntity.category.type,
+                      name: AppLocalizations.of(context).localeName == "en" ? transactionEntity.category.type.valueEn : transactionEntity.category.type.valueFr,
                       textStyle:
                           Theme.of(context).textTheme.labelLarge!.copyWith(
                                 color: ColorsUtils.text_black,
@@ -163,7 +162,7 @@ class TransactionResumeWidget extends StatelessWidget {
 
               Expanded(
                 child: Text(
-                  transactionEntity.category.name,
+                  AppLocalizations.of(context).localeName == "en" ? transactionEntity.category.category.nameEn : transactionEntity.category.category.nameFr,
                   textAlign: TextAlign.end,
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
@@ -197,7 +196,7 @@ class TransactionResumeWidget extends StatelessWidget {
 
               Expanded(
                 child: Text(
-                  transactionEntity.category.type,
+                  AppLocalizations.of(context).localeName == "en" ? transactionEntity.category.type.valueEn : transactionEntity.category.type.valueFr,
                   textAlign: TextAlign.end,
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
