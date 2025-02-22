@@ -3,7 +3,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:moneytracker/core/services/local_data/local_data.service.dart';
 import 'package:moneytracker/core/utils/enums/enums.dart';
 import 'package:moneytracker/features/budget/data/models/budget.model.dart';
-import 'package:moneytracker/features/setting/data/models/wallet/setting_wallet.model.dart';
+import 'package:moneytracker/features/home/data/models/home.model.dart';
 import 'package:moneytracker/features/transaction/data/models/transaction.model.dart';
 import 'package:moneytracker/features/transaction/data/models/transaction_category_type.enum.dart';
 import 'package:moneytracker/features/transaction/data/services/transaction.service.dart';
@@ -18,6 +18,42 @@ class TransactionServiceImpl implements TransactionService {
   List<TransactionModel> fetchAllTransactions() {
     List<TransactionModel> transactions = localDataService.loadData();
     return transactions;
+  }
+
+  @override
+  HomeModel fetchAllTransactionsOfTodayAndYesterday() {
+    List<TransactionModel> transactionOfToday = [];
+    List<TransactionModel> transactionOfYesterday = [];
+    double netBalance = 0;
+    double totalIncomeAmount = 0;
+    double totalExpenseAmount = 0;
+    DateTime today = DateTime.now();
+    DateTime yesterday = DateTime.now().subtract(const Duration(days: 1));
+
+    for (TransactionModel transaction in localDataService.loadData()) {
+      netBalance += transaction.amount;
+      if (transaction.category.type == TransactionCategoryTypeEnum.income) {
+        totalIncomeAmount += transaction.amount;
+      }
+      if (transaction.category.type == TransactionCategoryTypeEnum.expenses) {
+        totalExpenseAmount += transaction.amount;
+      }
+
+      if (transaction.dateTime.eqvYearMonthDay(today)) {
+        transactionOfToday.add(transaction);
+      }
+      if (transaction.dateTime.eqvYearMonthDay(yesterday)) {
+        transactionOfYesterday.add(transaction);
+      }
+    }
+
+    return HomeModel(
+      netBalance: netBalance,
+      totalIncomeAmount: totalIncomeAmount,
+      totalExpenseAmount: totalExpenseAmount,
+      transactionOfToday: transactionOfToday,
+      transactionOfYesterday: transactionOfYesterday,
+    );
   }
 
   @override
@@ -98,13 +134,12 @@ class TransactionServiceImpl implements TransactionService {
     try {
       List<BudgetModel> budgets = localDataServiceBudgetModel.loadData();
 
-
       // If transaction category type is expense
       if (transaction.category.type == TransactionCategoryTypeEnum.expenses) {
         // Check if transaction can be subscribe to one wallet
         BudgetModel? budget = budgets.firstWhereOrNull(
-              (budget) =>
-          budget.achievementDate.isAfter(transaction.dateTime) && budget.category == transaction.category.category,
+          (budget) =>
+              budget.achievementDate.isAfter(transaction.dateTime) && budget.category == transaction.category.category,
         );
         if (budget != null && budget.amount > budget.currentAmount) {
           budget.currentAmount += transaction.amount;

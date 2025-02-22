@@ -6,14 +6,19 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:moneytracker/core/widgets/daily_transaction.widget.dart';
 import 'package:moneytracker/core/widgets/separator.widget.dart';
 import 'package:moneytracker/features/navigation/cubit/application_navigation_cubit.cubit.dart';
+import 'package:moneytracker/features/transaction/domain/entities/transaction.entity.dart';
 
 class TransactionHome extends StatelessWidget {
   const TransactionHome({
     super.key,
     required this.currency,
+    required this.transactionOfToday,
+    required this.transactionOfYesterday,
   });
 
   final String currency;
+  final List<TransactionEntity> transactionOfToday;
+  final List<TransactionEntity> transactionOfYesterday;
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +78,7 @@ class TransactionHome extends StatelessWidget {
                     // Today transaction
                     DailyTransactionWidget(
                       title: AppLocalizations.of(context).today,
-                      transactions: [],
+                      transactions: transactionOfToday,
                       currency: currency,
                     ),
 
@@ -83,7 +88,7 @@ class TransactionHome extends StatelessWidget {
                     // Yesterday transaction
                     DailyTransactionWidget(
                       title: AppLocalizations.of(context).yesterday,
-                      transactions: [],
+                      transactions: transactionOfYesterday,
                       currency: currency,
                     ),
 

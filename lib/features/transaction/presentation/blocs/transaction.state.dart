@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moneytracker/features/home/domain/entities/home.entity.dart';
 import 'package:moneytracker/features/transaction/domain/entities/transaction.entity.dart';
 
 @immutable
@@ -12,6 +13,12 @@ class TransactionSuccessFetchAllState extends TransactionState {
   final List<TransactionEntity> transactions;
 
   TransactionSuccessFetchAllState(this.transactions);
+}
+
+class TransactionSuccessFetchHomeDataState extends TransactionState {
+  final HomeEntity homeEntity;
+
+  TransactionSuccessFetchHomeDataState(this.homeEntity);
 }
 
 class TransactionSuccessFetchOneState extends TransactionState {

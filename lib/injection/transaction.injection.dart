@@ -10,6 +10,7 @@ import 'package:moneytracker/features/transaction/domain/repositoies/transaction
 import 'package:moneytracker/features/transaction/domain/uses_cases/transaction_delete_one.use_case.dart';
 import 'package:moneytracker/features/transaction/domain/uses_cases/transaction_fetch_all.use_case.dart';
 import 'package:moneytracker/features/transaction/domain/uses_cases/transaction_fetch_all_by_dates.use_case.dart';
+import 'package:moneytracker/features/transaction/domain/uses_cases/transaction_fetch_all_today_and_yesterday.use_case.dart';
 import 'package:moneytracker/features/transaction/domain/uses_cases/transaction_fetch_one.use_case.dart';
 import 'package:moneytracker/features/transaction/domain/uses_cases/transaction_save_one.use_case.dart';
 import 'package:moneytracker/features/transaction/domain/uses_cases/transaction_update_one.use_case.dart';
@@ -52,6 +53,9 @@ class TransactionInjection {
       ..registerFactory<TransactionDeleteOneUseCase>(
         () => TransactionDeleteOneUseCase(serviceLocator<TransactionRepository>()),
       )
+      ..registerFactory<TransactionFetchAllOfTodayAndYesterdayUseCase>(
+            () => TransactionFetchAllOfTodayAndYesterdayUseCase(serviceLocator<TransactionRepository>()),
+      )
       ..registerFactory<TransactionBloc>(
         () => TransactionBloc(
           transactionFetchAllUseCase: serviceLocator<TransactionFetchAllUseCase>(),
@@ -60,6 +64,7 @@ class TransactionInjection {
           transactionSaveOneUseCase: serviceLocator<TransactionSaveOneUseCase>(),
           transactionUpdateOneUseCase: serviceLocator<TransactionUpdateOneUseCase>(),
           transactionDeleteOneUseCase: serviceLocator<TransactionDeleteOneUseCase>(),
+          transactionFetchAllOfTodayAndYesterdayUseCase: serviceLocator<TransactionFetchAllOfTodayAndYesterdayUseCase>(),
         ),
       );
   }

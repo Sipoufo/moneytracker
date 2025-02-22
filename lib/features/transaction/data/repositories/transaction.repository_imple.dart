@@ -1,6 +1,7 @@
 import 'package:fpdart/src/either.dart';
 import 'package:moneytracker/core/errors/failure.dart';
 import 'package:moneytracker/core/utils/enums/enums.dart';
+import 'package:moneytracker/features/home/domain/entities/home.entity.dart';
 import 'package:moneytracker/features/transaction/data/models/transaction.model.dart';
 import 'package:moneytracker/features/transaction/data/services/transaction.service.dart';
 import 'package:moneytracker/features/transaction/domain/entities/transaction.entity.dart';
@@ -16,6 +17,15 @@ class TransactionRepositoryImpl implements TransactionRepository {
     try {
       return right(
           transactionService.fetchAllTransactions().map((transaction) => TransactionEntity.map(transaction)).toList());
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
+
+  @override
+  Either<Failure, HomeEntity> fetchAllTransactionsOfTodayAndYesterday() {
+    try {
+      return right(HomeEntity.map(transactionService.fetchAllTransactionsOfTodayAndYesterday()));
     } catch (e) {
       return left(Failure(e.toString()));
     }

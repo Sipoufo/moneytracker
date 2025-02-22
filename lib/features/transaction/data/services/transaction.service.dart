@@ -1,9 +1,13 @@
 import 'package:moneytracker/core/utils/enums/enums.dart';
+import 'package:moneytracker/features/home/data/models/home.model.dart';
 import 'package:moneytracker/features/transaction/data/models/transaction.model.dart';
 
 abstract interface class TransactionService {
   // Use to fetch all transactions
   List<TransactionModel> fetchAllTransactions();
+
+  // Use to fetch all transactions of today and yesterday
+  HomeModel fetchAllTransactionsOfTodayAndYesterday();
 
   // Use to fetch all transactions with start and end date filter
   List<TransactionModel> fetchAllTransactionsByDates(DateTime startDate, DateTime? endDate, TransactionFindTypeEnum transactionFindTypeEnum);

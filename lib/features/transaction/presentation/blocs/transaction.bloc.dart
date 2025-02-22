@@ -3,6 +3,7 @@ import 'package:moneytracker/core/uses_cases/use_case.dart';
 import 'package:moneytracker/features/transaction/domain/uses_cases/transaction_delete_one.use_case.dart';
 import 'package:moneytracker/features/transaction/domain/uses_cases/transaction_fetch_all.use_case.dart';
 import 'package:moneytracker/features/transaction/domain/uses_cases/transaction_fetch_all_by_dates.use_case.dart';
+import 'package:moneytracker/features/transaction/domain/uses_cases/transaction_fetch_all_today_and_yesterday.use_case.dart';
 import 'package:moneytracker/features/transaction/domain/uses_cases/transaction_fetch_one.use_case.dart';
 import 'package:moneytracker/features/transaction/domain/uses_cases/transaction_save_one.use_case.dart';
 import 'package:moneytracker/features/transaction/domain/uses_cases/transaction_update_one.use_case.dart';
@@ -16,6 +17,7 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
   final TransactionSaveOneUseCase transactionSaveOneUseCase;
   final TransactionUpdateOneUseCase transactionUpdateOneUseCase;
   final TransactionDeleteOneUseCase transactionDeleteOneUseCase;
+  final TransactionFetchAllOfTodayAndYesterdayUseCase transactionFetchAllOfTodayAndYesterdayUseCase;
 
   TransactionBloc({
     required this.transactionFetchAllUseCase,
@@ -24,6 +26,7 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
     required this.transactionSaveOneUseCase,
     required this.transactionUpdateOneUseCase,
     required this.transactionDeleteOneUseCase,
+    required this.transactionFetchAllOfTodayAndYesterdayUseCase,
   }) : super(TransactionInitialState()) {
     on<TransactionFetchAllEvent>(_onFetchAll);
     on<TransactionFetchAllByDatesEvent>(_onFetchAllByDates);
@@ -31,6 +34,7 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
     on<TransactionSaveOneEvent>(_onSaveOne);
     on<TransactionUpdateOneEvent>(_onUpdateOne);
     on<TransactionDeleteOneEvent>(_onDeleteOne);
+    on<TransactionFetchAllOfTodayAndYesterdayEvent>(_onFetchAllTodayAndYesterday);
     on<TransactionEvent>((_, emit) {
       emit(TransactionLoadingState());
     });
@@ -41,6 +45,14 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
     res.fold(
       (l) => emit(TransactionFailureState(l.message)),
       (r) => emit(TransactionSuccessFetchAllState(r)),
+    );
+  }
+
+  void _onFetchAllTodayAndYesterday(TransactionFetchAllOfTodayAndYesterdayEvent event, Emitter<TransactionState> emit) async {
+    final res = await transactionFetchAllOfTodayAndYesterdayUseCase(NoParams());
+    res.fold(
+          (l) => emit(TransactionFailureState(l.message)),
+          (r) => emit(TransactionSuccessFetchHomeDataState(r)),
     );
   }
 

@@ -7,6 +7,8 @@ sealed class TransactionEvent {}
 
 class TransactionFetchAllEvent extends TransactionEvent {}
 
+class TransactionFetchAllOfTodayAndYesterdayEvent extends TransactionEvent {}
+
 class TransactionFetchAllByDatesEvent extends TransactionEvent {
   final DateTime startDate;
   final DateTime? endDate;
